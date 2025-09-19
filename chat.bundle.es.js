@@ -13461,7 +13461,7 @@ function B7(e, t) {
     }, null, -1)
   ]));
 }
-const $7 = { name: "mdi-chevron-down", render: B7 }, z7 = { class: "fixed z-50 bottom-4 right-4 h-full w-full flex flex-col items-end justify-end gap-4 md:mx-auto md:my-auto md:max-h-[52rem] md:max-w-[28rem]" }, U7 = { class: "h-full w-full overflow-hidden border-[1px] border-zinc-100 md:rounded-[20px]" }, H7 = ["src"], j7 = /* @__PURE__ */ Ft({
+const $7 = { name: "mdi-chevron-down", render: B7 }, z7 = { class: "fixed z-50 bottom-4 right-4 h-full w-full flex flex-col items-end justify-end gap-4 md:mx-auto md:my-auto md:max-h-[52rem] md:max-w-[36rem]" }, U7 = { class: "h-full w-full overflow-hidden border-[1px] border-zinc-100 md:rounded-[20px]" }, H7 = ["src"], j7 = /* @__PURE__ */ Ft({
   __name: "ChatWindow",
   setup(e) {
     const t = tt(!1), { options: n } = Rn(), s = at(() => n != null && n.showAvatar && typeof n.showAvatar == "string" && n.showAvatar.trim() !== "" ? n.showAvatar : null);
