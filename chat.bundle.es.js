@@ -199,7 +199,7 @@ class of {
 function cf() {
   return it;
 }
-let Re;
+let Te;
 const sr = /* @__PURE__ */ new WeakSet();
 class Ua {
   constructor(t) {
@@ -221,12 +221,12 @@ class Ua {
     if (!(this.flags & 1))
       return this.fn();
     this.flags |= 2, Ai(this), Va(this);
-    const t = Re, n = mt;
-    Re = this, mt = !0;
+    const t = Te, n = mt;
+    Te = this, mt = !0;
     try {
       return this.fn();
     } finally {
-      Ka(this), Re = t, mt = n, this.flags &= -3;
+      Ka(this), Te = t, mt = n, this.flags &= -3;
     }
   }
   stop() {
@@ -243,10 +243,10 @@ class Ua {
    * @internal
    */
   runIfDirty() {
-    Ro(this) && this.run();
+    To(this) && this.run();
   }
   get dirty() {
-    return Ro(this);
+    return To(this);
   }
 }
 let Ha = 0, $n, zn;
@@ -298,7 +298,7 @@ function Ka(e) {
   }
   e.deps = t, e.depsTail = n;
 }
-function Ro(e) {
+function To(e) {
   for (let t = e.deps; t; t = t.nextDep)
     if (t.dep.version !== t.version || t.dep.computed && (Ga(t.dep.computed) || t.dep.version !== t.version))
       return !0;
@@ -309,12 +309,12 @@ function Ga(e) {
     return;
   e.globalVersion = jn;
   const t = e.dep;
-  if (e.flags |= 2, t.version > 0 && !e.isSSR && e.deps && !Ro(e)) {
+  if (e.flags |= 2, t.version > 0 && !e.isSSR && e.deps && !To(e)) {
     e.flags &= -3;
     return;
   }
-  const n = Re, s = mt;
-  Re = e, mt = !0;
+  const n = Te, s = mt;
+  Te = e, mt = !0;
   try {
     Va(e);
     const r = e.fn(e._value);
@@ -322,7 +322,7 @@ function Ga(e) {
   } catch (r) {
     throw t.version++, r;
   } finally {
-    Re = n, mt = s, Ka(e), e.flags &= -3;
+    Te = n, mt = s, Ka(e), e.flags &= -3;
   }
 }
 function Vo(e, t = !1) {
@@ -350,12 +350,12 @@ function Xt() {
 function Ai(e) {
   const { cleanup: t } = e;
   if (e.cleanup = void 0, t) {
-    const n = Re;
-    Re = void 0;
+    const n = Te;
+    Te = void 0;
     try {
       t();
     } finally {
-      Re = n;
+      Te = n;
     }
   }
 }
@@ -370,14 +370,14 @@ class Ko {
     this.computed = t, this.version = 0, this.activeLink = void 0, this.subs = void 0, this.map = void 0, this.key = void 0, this.sc = 0;
   }
   track(t) {
-    if (!Re || !mt || Re === this.computed)
+    if (!Te || !mt || Te === this.computed)
       return;
     let n = this.activeLink;
-    if (n === void 0 || n.sub !== Re)
-      n = this.activeLink = new lf(Re, this), Re.deps ? (n.prevDep = Re.depsTail, Re.depsTail.nextDep = n, Re.depsTail = n) : Re.deps = Re.depsTail = n, Wa(n);
+    if (n === void 0 || n.sub !== Te)
+      n = this.activeLink = new lf(Te, this), Te.deps ? (n.prevDep = Te.depsTail, Te.depsTail.nextDep = n, Te.depsTail = n) : Te.deps = Te.depsTail = n, Wa(n);
     else if (n.version === -1 && (n.version = this.version, n.nextDep)) {
       const s = n.nextDep;
-      s.prevDep = n.prevDep, n.prevDep && (n.prevDep.nextDep = s), n.prevDep = Re.depsTail, n.nextDep = void 0, Re.depsTail.nextDep = n, Re.depsTail = n, Re.deps === n && (Re.deps = s);
+      s.prevDep = n.prevDep, n.prevDep && (n.prevDep.nextDep = s), n.prevDep = Te.depsTail, n.nextDep = void 0, Te.depsTail.nextDep = n, Te.depsTail = n, Te.deps === n && (Te.deps = s);
     }
     return n;
   }
@@ -408,13 +408,13 @@ function Wa(e) {
 }
 const ks = /* @__PURE__ */ new WeakMap(), un = Symbol(
   ""
-), To = Symbol(
+), Ro = Symbol(
   ""
 ), Vn = Symbol(
   ""
 );
 function Ge(e, t, n) {
-  if (mt && Re) {
+  if (mt && Te) {
     let s = ks.get(e);
     s || ks.set(e, s = /* @__PURE__ */ new Map());
     let r = s.get(n);
@@ -442,10 +442,10 @@ function Nt(e, t, n, s, r, o) {
     } else
       switch ((n !== void 0 || i.has(void 0)) && c(i.get(n)), u && c(i.get(Vn)), t) {
         case "add":
-          a ? u && c(i.get("length")) : (c(i.get(un)), yn(e) && c(i.get(To)));
+          a ? u && c(i.get("length")) : (c(i.get(un)), yn(e) && c(i.get(Ro)));
           break;
         case "delete":
-          a || (c(i.get(un)), yn(e) && c(i.get(To)));
+          a || (c(i.get(un)), yn(e) && c(i.get(Ro)));
           break;
         case "set":
           yn(e) && c(i.get(un));
@@ -479,26 +479,26 @@ const ff = {
     return rr(this, "entries", (e) => (e[1] = Ze(e[1]), e));
   },
   every(e, t) {
-    return Tt(this, "every", e, t, void 0, arguments);
+    return Rt(this, "every", e, t, void 0, arguments);
   },
   filter(e, t) {
-    return Tt(this, "filter", e, t, (n) => n.map(Ze), arguments);
+    return Rt(this, "filter", e, t, (n) => n.map(Ze), arguments);
   },
   find(e, t) {
-    return Tt(this, "find", e, t, Ze, arguments);
+    return Rt(this, "find", e, t, Ze, arguments);
   },
   findIndex(e, t) {
-    return Tt(this, "findIndex", e, t, void 0, arguments);
+    return Rt(this, "findIndex", e, t, void 0, arguments);
   },
   findLast(e, t) {
-    return Tt(this, "findLast", e, t, Ze, arguments);
+    return Rt(this, "findLast", e, t, Ze, arguments);
   },
   findLastIndex(e, t) {
-    return Tt(this, "findLastIndex", e, t, void 0, arguments);
+    return Rt(this, "findLastIndex", e, t, void 0, arguments);
   },
   // flat, flatMap could benefit from ARRAY_ITERATE but are not straight-forward to implement
   forEach(e, t) {
-    return Tt(this, "forEach", e, t, void 0, arguments);
+    return Rt(this, "forEach", e, t, void 0, arguments);
   },
   includes(...e) {
     return or(this, "includes", e);
@@ -514,7 +514,7 @@ const ff = {
     return or(this, "lastIndexOf", e);
   },
   map(e, t) {
-    return Tt(this, "map", e, t, void 0, arguments);
+    return Rt(this, "map", e, t, void 0, arguments);
   },
   pop() {
     return Nn(this, "pop");
@@ -533,7 +533,7 @@ const ff = {
   },
   // slice could use ARRAY_ITERATE but also seems to beg for range tracking
   some(e, t) {
-    return Tt(this, "some", e, t, void 0, arguments);
+    return Rt(this, "some", e, t, void 0, arguments);
   },
   splice(...e) {
     return Nn(this, "splice", e);
@@ -562,7 +562,7 @@ function rr(e, t, n) {
   }), r;
 }
 const hf = Array.prototype;
-function Tt(e, t, n, s, r, o) {
+function Rt(e, t, n, s, r, o) {
   const i = Ps(e), c = i !== e && !dt(e), a = i[t];
   if (a !== hf[t]) {
     const f = a.apply(e, o);
@@ -697,7 +697,7 @@ function vf(e, t, n) {
     return !t && Ge(
       o,
       "iterate",
-      a ? To : un
+      a ? Ro : un
     ), {
       // iterator protocol
       next() {
@@ -882,7 +882,7 @@ function me(e) {
   const t = e && e.__v_raw;
   return t ? me(t) : e;
 }
-function Rf(e) {
+function Tf(e) {
   return !ve(e, "__v_skip") && Object.isExtensible(e) && Pa(e, "__v_skip", !0), e;
 }
 const Ze = (e) => De(e) ? Zo(e) : e, Mo = (e) => De(e) ? nl(e) : e;
@@ -890,9 +890,9 @@ function $e(e) {
   return e ? e.__v_isRef === !0 : !1;
 }
 function tt(e) {
-  return Tf(e, !1);
+  return Rf(e, !1);
 }
-function Tf(e, t) {
+function Rf(e, t) {
   return $e(e) ? e : new Df(e, t);
 }
 class Df {
@@ -954,7 +954,7 @@ class Lf {
    */
   notify() {
     if (this.flags |= 16, !(this.flags & 8) && // avoid infinite self recursion
-    Re !== this)
+    Te !== this)
       return ja(this, !0), !0;
   }
   get value() {
@@ -1161,7 +1161,7 @@ function ol() {
 function zf(e) {
   ne(e) ? En.push(...e) : zt && e.id === -1 ? zt.splice(bn + 1, 0, e) : e.flags & 1 || (En.push(e), e.flags |= 1), ol();
 }
-function Ri(e, t, n = kt + 1) {
+function Ti(e, t, n = kt + 1) {
   for (; n < Qe.length; n++) {
     const s = Qe[n];
     if (s && s.flags & 2) {
@@ -1309,7 +1309,7 @@ const ht = [Function, Array], fl = {
       const o = dl(r), i = me(e), { mode: c } = i;
       if (s.isLeaving)
         return ir(o);
-      const a = Ti(o);
+      const a = Ri(o);
       if (!a)
         return ir(o);
       let u = Io(
@@ -1321,7 +1321,7 @@ const ht = [Function, Array], fl = {
         (f) => u = f
       );
       a.type !== nt && Gn(a, u);
-      let l = n.subTree && Ti(n.subTree);
+      let l = n.subTree && Ri(n.subTree);
       if (l && l.type !== nt && !ln(a, l) && hl(n).type !== nt) {
         let f = Io(
           l,
@@ -1383,24 +1383,24 @@ function Io(e, t, n, s, r) {
     onAppear: v,
     onAfterAppear: k,
     onAppearCancelled: b
-  } = t, p = String(e.key), E = pl(n, e), w = (S, T) => {
+  } = t, p = String(e.key), E = pl(n, e), w = (S, R) => {
     S && _t(
       S,
       s,
       9,
-      T
+      R
     );
-  }, B = (S, T) => {
-    const P = T[1];
-    w(S, T), ne(S) ? S.every((I) => I.length <= 1) && P() : S.length <= 1 && P();
+  }, B = (S, R) => {
+    const P = R[1];
+    w(S, R), ne(S) ? S.every((I) => I.length <= 1) && P() : S.length <= 1 && P();
   }, C = {
     mode: i,
     persisted: c,
     beforeEnter(S) {
-      let T = a;
+      let R = a;
       if (!n.isMounted)
         if (o)
-          T = A || a;
+          R = A || a;
         else
           return;
       S[Ut] && S[Ut](
@@ -1408,44 +1408,44 @@ function Io(e, t, n, s, r) {
         /* cancelled */
       );
       const P = E[p];
-      P && ln(e, P) && P.el[Ut] && P.el[Ut](), w(T, [S]);
+      P && ln(e, P) && P.el[Ut] && P.el[Ut](), w(R, [S]);
     },
     enter(S) {
-      let T = u, P = l, I = f;
+      let R = u, P = l, I = f;
       if (!n.isMounted)
         if (o)
-          T = v || u, P = k || l, I = b || f;
+          R = v || u, P = k || l, I = b || f;
         else
           return;
       let te = !1;
       const D = S[hs] = (oe) => {
         te || (te = !0, oe ? w(I, [S]) : w(P, [S]), C.delayedLeave && C.delayedLeave(), S[hs] = void 0);
       };
-      T ? B(T, [S, D]) : D();
+      R ? B(R, [S, D]) : D();
     },
-    leave(S, T) {
+    leave(S, R) {
       const P = String(e.key);
       if (S[hs] && S[hs](
         !0
         /* cancelled */
       ), n.isUnmounting)
-        return T();
+        return R();
       w(d, [S]);
       let I = !1;
       const te = S[Ut] = (D) => {
-        I || (I = !0, T(), D ? w(y, [S]) : w(_, [S]), S[Ut] = void 0, E[P] === e && delete E[P]);
+        I || (I = !0, R(), D ? w(y, [S]) : w(_, [S]), S[Ut] = void 0, E[P] === e && delete E[P]);
       };
       E[P] = e, h ? B(h, [S, te]) : te();
     },
     clone(S) {
-      const T = Io(
+      const R = Io(
         S,
         t,
         n,
         s,
         r
       );
-      return r && r(T), T;
+      return r && r(R), R;
     }
   };
   return C;
@@ -1454,7 +1454,7 @@ function ir(e) {
   if ($s(e))
     return e = Wt(e), e.children = null, e;
 }
-function Ti(e) {
+function Ri(e) {
   if (!$s(e))
     return ul(e.type) && e.children ? dl(e.children) : e;
   const { shapeFlag: t, children: n } = e;
@@ -1800,7 +1800,7 @@ function oh(e) {
     errorCaptured: C,
     serverPrefetch: S,
     // public API
-    expose: T,
+    expose: R,
     inheritAttrs: P,
     // assets
     components: I,
@@ -1842,10 +1842,10 @@ function oh(e) {
   function Q(le, G) {
     ne(G) ? G.forEach((fe) => le(fe.bind(n))) : G && le(G.bind(n));
   }
-  if (Q(Wf, f), Q(dn, d), Q(Jf, h), Q(Yf, _), Q(Kf, y), Q(Gf, A), Q(th, C), Q(eh, w), Q(Qf, B), Q(Xo, k), Q(Qo, p), Q(Xf, S), ne(T))
-    if (T.length) {
+  if (Q(Wf, f), Q(dn, d), Q(Jf, h), Q(Yf, _), Q(Kf, y), Q(Gf, A), Q(th, C), Q(eh, w), Q(Qf, B), Q(Xo, k), Q(Qo, p), Q(Xf, S), ne(R))
+    if (R.length) {
       const le = e.exposed || (e.exposed = {});
-      T.forEach((G) => {
+      R.forEach((G) => {
         Object.defineProperty(le, G, {
           get: () => n[G],
           set: (fe) => n[G] = fe
@@ -2270,15 +2270,15 @@ function Sl(e, t, n = !1) {
 function qi(e) {
   return e[0] !== "$" && !Bn(e);
 }
-const Rl = (e) => e[0] === "_" || e === "$stable", ei = (e) => ne(e) ? e.map(Et) : [Et(e)], mh = (e, t, n) => {
+const Tl = (e) => e[0] === "_" || e === "$stable", ei = (e) => ne(e) ? e.map(Et) : [Et(e)], mh = (e, t, n) => {
   if (t._n)
     return t;
   const s = Vt((...r) => ei(t(...r)), n);
   return s._c = !1, s;
-}, Tl = (e, t, n) => {
+}, Rl = (e, t, n) => {
   const s = e._ctx;
   for (const r in e) {
-    if (Rl(r)) continue;
+    if (Tl(r)) continue;
     const o = e[r];
     if (ae(o))
       t[r] = mh(r, o, s);
@@ -2297,18 +2297,18 @@ const Rl = (e) => e[0] === "_" || e === "$stable", ei = (e) => ne(e) ? e.map(Et)
   const s = e.slots = wl();
   if (e.vnode.shapeFlag & 32) {
     const r = t._;
-    r ? (Ml(s, t, n), n && Pa(s, "_", r, !0)) : Tl(t, s);
+    r ? (Ml(s, t, n), n && Pa(s, "_", r, !0)) : Rl(t, s);
   } else t && Dl(e, t);
 }, bh = (e, t, n) => {
   const { vnode: s, slots: r } = e;
   let o = !0, i = Ce;
   if (s.shapeFlag & 32) {
     const c = t._;
-    c ? n && c === 1 ? o = !1 : Ml(r, t, n) : (o = !t.$stable, Tl(t, r)), i = t;
+    c ? n && c === 1 ? o = !1 : Ml(r, t, n) : (o = !t.$stable, Rl(t, r)), i = t;
   } else t && (Dl(e, t), i = { default: 1 });
   if (o)
     for (const c in r)
-      !Rl(c) && i[c] == null && delete r[c];
+      !Tl(c) && i[c] == null && delete r[c];
 }, ot = Ih;
 function vh(e) {
   return xh(e);
@@ -2329,26 +2329,26 @@ function xh(e, t) {
     nextSibling: d,
     setScopeId: h = St,
     insertStaticContent: _
-  } = e, y = (g, x, R, L = null, N = null, O = null, H = void 0, z = null, $ = !!x.dynamicChildren) => {
+  } = e, y = (g, x, T, L = null, N = null, O = null, H = void 0, z = null, $ = !!x.dynamicChildren) => {
     if (g === x)
       return;
     g && !ln(g, x) && (L = pn(g), we(g, N, O, !0), g = null), x.patchFlag === -2 && ($ = !1, x.dynamicChildren = null);
     const { type: F, ref: ee, shapeFlag: V } = x;
     switch (F) {
       case Hs:
-        A(g, x, R, L);
+        A(g, x, T, L);
         break;
       case nt:
-        v(g, x, R, L);
+        v(g, x, T, L);
         break;
       case lr:
-        g == null && k(x, R, L, H);
+        g == null && k(x, T, L, H);
         break;
       case We:
         I(
           g,
           x,
-          R,
+          T,
           L,
           N,
           O,
@@ -2361,7 +2361,7 @@ function xh(e, t) {
         V & 1 ? E(
           g,
           x,
-          R,
+          T,
           L,
           N,
           O,
@@ -2371,7 +2371,7 @@ function xh(e, t) {
         ) : V & 6 ? te(
           g,
           x,
-          R,
+          T,
           L,
           N,
           O,
@@ -2381,7 +2381,7 @@ function xh(e, t) {
         ) : (V & 64 || V & 128) && F.process(
           g,
           x,
-          R,
+          T,
           L,
           N,
           O,
@@ -2392,46 +2392,46 @@ function xh(e, t) {
         );
     }
     ee != null && N && As(ee, g && g.ref, O, x || g, !x);
-  }, A = (g, x, R, L) => {
+  }, A = (g, x, T, L) => {
     if (g == null)
       s(
         x.el = c(x.children),
-        R,
+        T,
         L
       );
     else {
       const N = x.el = g.el;
       x.children !== g.children && u(N, x.children);
     }
-  }, v = (g, x, R, L) => {
+  }, v = (g, x, T, L) => {
     g == null ? s(
       x.el = a(x.children || ""),
-      R,
+      T,
       L
     ) : x.el = g.el;
-  }, k = (g, x, R, L) => {
+  }, k = (g, x, T, L) => {
     [g.el, g.anchor] = _(
       g.children,
       x,
-      R,
+      T,
       L,
       g.el,
       g.anchor
     );
-  }, b = ({ el: g, anchor: x }, R, L) => {
+  }, b = ({ el: g, anchor: x }, T, L) => {
     let N;
     for (; g && g !== x; )
-      N = d(g), s(g, R, L), g = N;
-    s(x, R, L);
+      N = d(g), s(g, T, L), g = N;
+    s(x, T, L);
   }, p = ({ el: g, anchor: x }) => {
-    let R;
+    let T;
     for (; g && g !== x; )
-      R = d(g), r(g), g = R;
+      T = d(g), r(g), g = T;
     r(x);
-  }, E = (g, x, R, L, N, O, H, z, $) => {
+  }, E = (g, x, T, L, N, O, H, z, $) => {
     x.type === "svg" ? H = "svg" : x.type === "math" && (H = "mathml"), g == null ? w(
       x,
-      R,
+      T,
       L,
       N,
       O,
@@ -2447,7 +2447,7 @@ function xh(e, t) {
       z,
       $
     );
-  }, w = (g, x, R, L, N, O, H, z) => {
+  }, w = (g, x, T, L, N, O, H, z) => {
     let $, F;
     const { props: ee, shapeFlag: V, transition: W, dirs: se } = g;
     if ($ = g.el = i(
@@ -2471,11 +2471,11 @@ function xh(e, t) {
     }
     se && nn(g, null, L, "beforeMount");
     const he = yh(N, W);
-    he && W.beforeEnter($), s($, x, R), ((F = ee && ee.onVnodeMounted) || he || se) && ot(() => {
+    he && W.beforeEnter($), s($, x, T), ((F = ee && ee.onVnodeMounted) || he || se) && ot(() => {
       F && yt(F, L, g), he && W.enter($), se && nn(g, null, L, "mounted");
     }, N);
-  }, B = (g, x, R, L, N) => {
-    if (R && h(g, R), L)
+  }, B = (g, x, T, L, N) => {
+    if (T && h(g, T), L)
       for (let O = 0; O < L.length; O++)
         h(g, L[O]);
     if (N) {
@@ -2491,14 +2491,14 @@ function xh(e, t) {
         );
       }
     }
-  }, C = (g, x, R, L, N, O, H, z, $ = 0) => {
+  }, C = (g, x, T, L, N, O, H, z, $ = 0) => {
     for (let F = $; F < g.length; F++) {
       const ee = g[F] = z ? Ht(g[F]) : Et(g[F]);
       y(
         null,
         ee,
         x,
-        R,
+        T,
         L,
         N,
         O,
@@ -2506,17 +2506,17 @@ function xh(e, t) {
         z
       );
     }
-  }, S = (g, x, R, L, N, O, H) => {
+  }, S = (g, x, T, L, N, O, H) => {
     const z = x.el = g.el;
     let { patchFlag: $, dynamicChildren: F, dirs: ee } = x;
     $ |= g.patchFlag & 16;
     const V = g.props || Ce, W = x.props || Ce;
     let se;
-    if (R && sn(R, !1), (se = W.onVnodeBeforeUpdate) && yt(se, R, x, g), ee && nn(x, g, R, "beforeUpdate"), R && sn(R, !0), (V.innerHTML && W.innerHTML == null || V.textContent && W.textContent == null) && l(z, ""), F ? T(
+    if (T && sn(T, !1), (se = W.onVnodeBeforeUpdate) && yt(se, T, x, g), ee && nn(x, g, T, "beforeUpdate"), T && sn(T, !0), (V.innerHTML && W.innerHTML == null || V.textContent && W.textContent == null) && l(z, ""), F ? R(
       g.dynamicChildren,
       F,
       z,
-      R,
+      T,
       L,
       ar(x, N),
       O
@@ -2525,27 +2525,27 @@ function xh(e, t) {
       x,
       z,
       null,
-      R,
+      T,
       L,
       ar(x, N),
       O,
       !1
     ), $ > 0) {
       if ($ & 16)
-        P(z, V, W, R, N);
+        P(z, V, W, T, N);
       else if ($ & 2 && V.class !== W.class && o(z, "class", null, W.class, N), $ & 4 && o(z, "style", V.style, W.style, N), $ & 8) {
         const he = x.dynamicProps;
         for (let _e = 0; _e < he.length; _e++) {
           const ge = he[_e], Je = V[ge], Ve = W[ge];
-          (Ve !== Je || ge === "value") && o(z, ge, Je, Ve, N, R);
+          (Ve !== Je || ge === "value") && o(z, ge, Je, Ve, N, T);
         }
       }
       $ & 1 && g.children !== x.children && l(z, x.children);
-    } else !H && F == null && P(z, V, W, R, N);
+    } else !H && F == null && P(z, V, W, T, N);
     ((se = W.onVnodeUpdated) || ee) && ot(() => {
-      se && yt(se, R, x, g), ee && nn(x, g, R, "updated");
+      se && yt(se, T, x, g), ee && nn(x, g, T, "updated");
     }, L);
-  }, T = (g, x, R, L, N, O, H) => {
+  }, R = (g, x, T, L, N, O, H) => {
     for (let z = 0; z < x.length; z++) {
       const $ = g[z], F = x[z], ee = (
         // oldVNode may be an errored async setup() component inside Suspense
@@ -2558,7 +2558,7 @@ function xh(e, t) {
         $.shapeFlag & 70) ? f($.el) : (
           // In other cases, the parent container is not actually used so we
           // just pass the block element here to avoid a DOM parentNode call.
-          R
+          T
         )
       );
       y(
@@ -2573,11 +2573,11 @@ function xh(e, t) {
         !0
       );
     }
-  }, P = (g, x, R, L, N) => {
-    if (x !== R) {
+  }, P = (g, x, T, L, N) => {
+    if (x !== T) {
       if (x !== Ce)
         for (const O in x)
-          !Bn(O) && !(O in R) && o(
+          !Bn(O) && !(O in T) && o(
             g,
             O,
             x[O],
@@ -2585,23 +2585,23 @@ function xh(e, t) {
             N,
             L
           );
-      for (const O in R) {
+      for (const O in T) {
         if (Bn(O)) continue;
-        const H = R[O], z = x[O];
+        const H = T[O], z = x[O];
         H !== z && O !== "value" && o(g, O, z, H, N, L);
       }
-      "value" in R && o(g, "value", x.value, R.value, N);
+      "value" in T && o(g, "value", x.value, T.value, N);
     }
-  }, I = (g, x, R, L, N, O, H, z, $) => {
+  }, I = (g, x, T, L, N, O, H, z, $) => {
     const F = x.el = g ? g.el : c(""), ee = x.anchor = g ? g.anchor : c("");
     let { patchFlag: V, dynamicChildren: W, slotScopeIds: se } = x;
-    se && (z = z ? z.concat(se) : se), g == null ? (s(F, R, L), s(ee, R, L), C(
+    se && (z = z ? z.concat(se) : se), g == null ? (s(F, T, L), s(ee, T, L), C(
       // #10007
       // such fragment like `<></>` will be compiled into
       // a fragment which doesn't have a children.
       // In this case fallback to an empty array
       x.children || [],
-      R,
+      T,
       ee,
       N,
       O,
@@ -2610,10 +2610,10 @@ function xh(e, t) {
       $
     )) : V > 0 && V & 64 && W && // #2715 the previous fragment could've been a BAILed one as a result
     // of renderSlot() with no valid children
-    g.dynamicChildren ? (T(
+    g.dynamicChildren ? (R(
       g.dynamicChildren,
       W,
-      R,
+      T,
       N,
       O,
       H,
@@ -2630,7 +2630,7 @@ function xh(e, t) {
     )) : G(
       g,
       x,
-      R,
+      T,
       ee,
       N,
       O,
@@ -2638,23 +2638,23 @@ function xh(e, t) {
       z,
       $
     );
-  }, te = (g, x, R, L, N, O, H, z, $) => {
+  }, te = (g, x, T, L, N, O, H, z, $) => {
     x.slotScopeIds = z, g == null ? x.shapeFlag & 512 ? N.ctx.activate(
       x,
-      R,
+      T,
       L,
       H,
       $
     ) : D(
       x,
-      R,
+      T,
       L,
       N,
       O,
       H,
       $
     ) : oe(g, x, $);
-  }, D = (g, x, R, L, N, O, H) => {
+  }, D = (g, x, T, L, N, O, H) => {
     const z = g.component = Bh(
       g,
       L,
@@ -2663,29 +2663,29 @@ function xh(e, t) {
     if ($s(g) && (z.ctx.renderer = bt), zh(z, !1, H), z.asyncDep) {
       if (N && N.registerDep(z, Q, H), !g.el) {
         const $ = z.subTree = Le(nt);
-        v(null, $, x, R);
+        v(null, $, x, T);
       }
     } else
       Q(
         z,
         g,
         x,
-        R,
+        T,
         N,
         O,
         H
       );
-  }, oe = (g, x, R) => {
+  }, oe = (g, x, T) => {
     const L = x.component = g.component;
-    if (Dh(g, x, R))
+    if (Dh(g, x, T))
       if (L.asyncDep && !L.asyncResolved) {
-        le(L, x, R);
+        le(L, x, T);
         return;
       } else
         L.next = x, L.update();
     else
       x.el = g.el, L.vnode = x;
-  }, Q = (g, x, R, L, N, O, H) => {
+  }, Q = (g, x, T, L, N, O, H) => {
     const z = () => {
       if (g.isMounted) {
         let { next: V, bu: W, u: se, parent: he, vnode: _e } = g;
@@ -2725,7 +2725,7 @@ function xh(e, t) {
           y(
             null,
             ut,
-            R,
+            T,
             L,
             g,
             N,
@@ -2739,7 +2739,7 @@ function xh(e, t) {
             N
           );
         }
-        (x.shapeFlag & 256 || ge && wn(ge.vnode) && ge.vnode.shapeFlag & 256) && g.a && ot(g.a, N), g.isMounted = !0, x = R = L = null;
+        (x.shapeFlag & 256 || ge && wn(ge.vnode) && ge.vnode.shapeFlag & 256) && g.a && ot(g.a, N), g.isMounted = !0, x = T = L = null;
       }
     };
     g.scope.on();
@@ -2747,18 +2747,18 @@ function xh(e, t) {
     g.scope.off();
     const F = g.update = $.run.bind($), ee = g.job = $.runIfDirty.bind($);
     ee.i = g, ee.id = g.uid, $.scheduler = () => Yo(ee), sn(g, !0), F();
-  }, le = (g, x, R) => {
+  }, le = (g, x, T) => {
     x.component = g;
     const L = g.vnode.props;
-    g.vnode = x, g.next = null, ph(g, x.props, L, R), bh(g, x.children, R), Yt(), Ri(g), Xt();
-  }, G = (g, x, R, L, N, O, H, z, $ = !1) => {
+    g.vnode = x, g.next = null, ph(g, x.props, L, T), bh(g, x.children, T), Yt(), Ti(g), Xt();
+  }, G = (g, x, T, L, N, O, H, z, $ = !1) => {
     const F = g && g.children, ee = g ? g.shapeFlag : 0, V = x.children, { patchFlag: W, shapeFlag: se } = x;
     if (W > 0) {
       if (W & 128) {
         Z(
           F,
           V,
-          R,
+          T,
           L,
           N,
           O,
@@ -2771,7 +2771,7 @@ function xh(e, t) {
         fe(
           F,
           V,
-          R,
+          T,
           L,
           N,
           O,
@@ -2782,19 +2782,19 @@ function xh(e, t) {
         return;
       }
     }
-    se & 8 ? (ee & 16 && Qt(F, N, O), V !== F && l(R, V)) : ee & 16 ? se & 16 ? Z(
+    se & 8 ? (ee & 16 && Qt(F, N, O), V !== F && l(T, V)) : ee & 16 ? se & 16 ? Z(
       F,
       V,
-      R,
+      T,
       L,
       N,
       O,
       H,
       z,
       $
-    ) : Qt(F, N, O, !0) : (ee & 8 && l(R, ""), se & 16 && C(
+    ) : Qt(F, N, O, !0) : (ee & 8 && l(T, ""), se & 16 && C(
       V,
-      R,
+      T,
       L,
       N,
       O,
@@ -2802,7 +2802,7 @@ function xh(e, t) {
       z,
       $
     ));
-  }, fe = (g, x, R, L, N, O, H, z, $) => {
+  }, fe = (g, x, T, L, N, O, H, z, $) => {
     g = g || xn, x = x || xn;
     const F = g.length, ee = x.length, V = Math.min(F, ee);
     let W;
@@ -2811,7 +2811,7 @@ function xh(e, t) {
       y(
         g[W],
         se,
-        R,
+        T,
         null,
         N,
         O,
@@ -2829,7 +2829,7 @@ function xh(e, t) {
       V
     ) : C(
       x,
-      R,
+      T,
       L,
       N,
       O,
@@ -2838,7 +2838,7 @@ function xh(e, t) {
       $,
       V
     );
-  }, Z = (g, x, R, L, N, O, H, z, $) => {
+  }, Z = (g, x, T, L, N, O, H, z, $) => {
     let F = 0;
     const ee = x.length;
     let V = g.length - 1, W = ee - 1;
@@ -2848,7 +2848,7 @@ function xh(e, t) {
         y(
           se,
           he,
-          R,
+          T,
           null,
           N,
           O,
@@ -2866,7 +2866,7 @@ function xh(e, t) {
         y(
           se,
           he,
-          R,
+          T,
           null,
           N,
           O,
@@ -2885,7 +2885,7 @@ function xh(e, t) {
           y(
             null,
             x[F] = $ ? Ht(x[F]) : Et(x[F]),
-            R,
+            T,
             he,
             N,
             O,
@@ -2926,7 +2926,7 @@ function xh(e, t) {
         ft === void 0 ? we(Ye, N, O, !0) : (en[ft - he] = F + 1, ft >= ut ? ut = ft : lt = !0, y(
           Ye,
           x[ft],
-          R,
+          T,
           null,
           N,
           O,
@@ -2941,46 +2941,46 @@ function xh(e, t) {
         en[F] === 0 ? y(
           null,
           ft,
-          R,
+          T,
           ns,
           N,
           O,
           H,
           z,
           $
-        ) : lt && (ge < 0 || F !== Mn[ge] ? Ee(ft, R, ns, 2) : ge--);
+        ) : lt && (ge < 0 || F !== Mn[ge] ? Ee(ft, T, ns, 2) : ge--);
       }
     }
-  }, Ee = (g, x, R, L, N = null) => {
+  }, Ee = (g, x, T, L, N = null) => {
     const { el: O, type: H, transition: z, children: $, shapeFlag: F } = g;
     if (F & 6) {
-      Ee(g.component.subTree, x, R, L);
+      Ee(g.component.subTree, x, T, L);
       return;
     }
     if (F & 128) {
-      g.suspense.move(x, R, L);
+      g.suspense.move(x, T, L);
       return;
     }
     if (F & 64) {
-      H.move(g, x, R, bt);
+      H.move(g, x, T, bt);
       return;
     }
     if (H === We) {
-      s(O, x, R);
+      s(O, x, T);
       for (let V = 0; V < $.length; V++)
-        Ee($[V], x, R, L);
-      s(g.anchor, x, R);
+        Ee($[V], x, T, L);
+      s(g.anchor, x, T);
       return;
     }
     if (H === lr) {
-      b(g, x, R);
+      b(g, x, T);
       return;
     }
     if (L !== 2 && F & 1 && z)
       if (L === 0)
-        z.beforeEnter(O), s(O, x, R), ot(() => z.enter(O), N);
+        z.beforeEnter(O), s(O, x, T), ot(() => z.enter(O), N);
       else {
-        const { leave: V, delayLeave: W, afterLeave: se } = z, he = () => s(O, x, R), _e = () => {
+        const { leave: V, delayLeave: W, afterLeave: se } = z, he = () => s(O, x, T), _e = () => {
           V(O, () => {
             he(), se && se();
           });
@@ -2988,8 +2988,8 @@ function xh(e, t) {
         W ? W(O, he, _e) : _e();
       }
     else
-      s(O, x, R);
-  }, we = (g, x, R, L = !1, N = !1) => {
+      s(O, x, T);
+  }, we = (g, x, T, L = !1, N = !1) => {
     const {
       type: O,
       props: H,
@@ -3001,23 +3001,23 @@ function xh(e, t) {
       dirs: W,
       cacheIndex: se
     } = g;
-    if (V === -2 && (N = !1), z != null && As(z, null, R, g, !0), se != null && (x.renderCache[se] = void 0), ee & 256) {
+    if (V === -2 && (N = !1), z != null && As(z, null, T, g, !0), se != null && (x.renderCache[se] = void 0), ee & 256) {
       x.ctx.deactivate(g);
       return;
     }
     const he = ee & 1 && W, _e = !wn(g);
     let ge;
     if (_e && (ge = H && H.onVnodeBeforeUnmount) && yt(ge, x, g), ee & 6)
-      Ks(g.component, R, L);
+      Ks(g.component, T, L);
     else {
       if (ee & 128) {
-        g.suspense.unmount(R, L);
+        g.suspense.unmount(T, L);
         return;
       }
       he && nn(g, null, x, "beforeUnmount"), ee & 64 ? g.type.remove(
         g,
         x,
-        R,
+        T,
         bt,
         L
       ) : F && // #5154
@@ -3029,18 +3029,18 @@ function xh(e, t) {
       (O !== We || V > 0 && V & 64) ? Qt(
         F,
         x,
-        R,
+        T,
         !1,
         !0
-      ) : (O === We && V & 384 || !N && ee & 16) && Qt($, x, R), L && st(g);
+      ) : (O === We && V & 384 || !N && ee & 16) && Qt($, x, T), L && st(g);
     }
     (_e && (ge = H && H.onVnodeUnmounted) || he) && ot(() => {
       ge && yt(ge, x, g), he && nn(g, null, x, "unmounted");
-    }, R);
+    }, T);
   }, st = (g) => {
-    const { type: x, el: R, anchor: L, transition: N } = g;
+    const { type: x, el: T, anchor: L, transition: N } = g;
     if (x === We) {
-      Vs(R, L);
+      Vs(T, L);
       return;
     }
     if (x === lr) {
@@ -3048,36 +3048,36 @@ function xh(e, t) {
       return;
     }
     const O = () => {
-      r(R), N && !N.persisted && N.afterLeave && N.afterLeave();
+      r(T), N && !N.persisted && N.afterLeave && N.afterLeave();
     };
     if (g.shapeFlag & 1 && N && !N.persisted) {
-      const { leave: H, delayLeave: z } = N, $ = () => H(R, O);
+      const { leave: H, delayLeave: z } = N, $ = () => H(T, O);
       z ? z(g.el, O, $) : $();
     } else
       O();
   }, Vs = (g, x) => {
-    let R;
+    let T;
     for (; g !== x; )
-      R = d(g), r(g), g = R;
+      T = d(g), r(g), g = T;
     r(x);
-  }, Ks = (g, x, R) => {
+  }, Ks = (g, x, T) => {
     const { bum: L, scope: N, job: O, subTree: H, um: z, m: $, a: F } = g;
-    Pi($), Pi(F), L && _s(L), N.stop(), O && (O.flags |= 8, we(H, g, x, R)), z && ot(z, x), ot(() => {
+    Pi($), Pi(F), L && _s(L), N.stop(), O && (O.flags |= 8, we(H, g, x, T)), z && ot(z, x), ot(() => {
       g.isUnmounted = !0;
     }, x), x && x.pendingBranch && !x.isUnmounted && g.asyncDep && !g.asyncResolved && g.suspenseId === x.pendingId && (x.deps--, x.deps === 0 && x.resolve());
-  }, Qt = (g, x, R, L = !1, N = !1, O = 0) => {
+  }, Qt = (g, x, T, L = !1, N = !1, O = 0) => {
     for (let H = O; H < g.length; H++)
-      we(g[H], x, R, L, N);
+      we(g[H], x, T, L, N);
   }, pn = (g) => {
     if (g.shapeFlag & 6)
       return pn(g.component.subTree);
     if (g.shapeFlag & 128)
       return g.suspense.next();
-    const x = d(g.anchor || g.el), R = x && x[Uf];
-    return R ? d(R) : x;
+    const x = d(g.anchor || g.el), T = x && x[Uf];
+    return T ? d(T) : x;
   };
   let Dn = !1;
-  const Gs = (g, x, R) => {
+  const Gs = (g, x, T) => {
     g == null ? x._vnode && we(x._vnode, null, null, !0) : y(
       x._vnode || null,
       g,
@@ -3085,8 +3085,8 @@ function xh(e, t) {
       null,
       null,
       null,
-      R
-    ), x._vnode = g, Dn || (Dn = !0, Ri(), il(), Dn = !1);
+      T
+    ), x._vnode = g, Dn || (Dn = !0, Ti(), il(), Dn = !1);
   }, bt = {
     p: y,
     um: we,
@@ -3095,7 +3095,7 @@ function xh(e, t) {
     mt: D,
     mc: C,
     pc: G,
-    pbc: T,
+    pbc: R,
     n: pn,
     o: e
   };
@@ -3289,7 +3289,7 @@ function Bi(e) {
           f,
           null
         )
-      ), k = t.props ? c : Rh(c);
+      ), k = t.props ? c : Th(c);
     }
   } catch (p) {
     Hn.length = 0, Bs(p, e, 1), v = Le(nt);
@@ -3297,19 +3297,19 @@ function Bi(e) {
   let b = v;
   if (k && y !== !1) {
     const p = Object.keys(k), { shapeFlag: E } = b;
-    p.length && E & 7 && (o && p.some($o) && (k = Th(
+    p.length && E & 7 && (o && p.some($o) && (k = Rh(
       k,
       o
     )), b = Wt(b, k, !1, !0));
   }
   return n.dirs && (b = Wt(b, null, !1, !0), b.dirs = b.dirs ? b.dirs.concat(n.dirs) : n.dirs), n.transition && Gn(b, n.transition), v = b, Cs(A), v;
 }
-const Rh = (e) => {
+const Th = (e) => {
   let t;
   for (const n in e)
     (n === "class" || n === "style" || Is(n)) && ((t || (t = {}))[n] = e[n]);
   return t;
-}, Th = (e, t) => {
+}, Rh = (e, t) => {
   const n = {};
   for (const s in e)
     (!$o(s) || !(s.slice(9) in t)) && (n[s] = e[s]);
@@ -3375,7 +3375,7 @@ function zi(e, t = !1) {
 function Pl(e) {
   return e.dynamicChildren = Zn > 0 ? ct || xn : null, Nh(), Zn > 0 && ct && ct.push(e), e;
 }
-function Te(e, t, n, s, r, o) {
+function Re(e, t, n, s, r, o) {
   return Pl(
     be(
       e,
@@ -3483,7 +3483,7 @@ function Lh(e) {
   return e ? Jo(e) || Cl(e) ? ze({}, e) : e : null;
 }
 function Wt(e, t, n = !1, s = !1) {
-  const { props: r, ref: o, patchFlag: i, children: c, transition: a } = e, u = t ? Rs(r || {}, t) : r, l = {
+  const { props: r, ref: o, patchFlag: i, children: c, transition: a } = e, u = t ? Ts(r || {}, t) : r, l = {
     __v_isVNode: !0,
     __v_skip: !0,
     type: e.type,
@@ -3568,7 +3568,7 @@ function ti(e, t) {
   else ae(t) ? (t = { default: t, _ctx: Be }, n = 32) : (t = String(t), s & 64 ? (n = 16, t = [Fh(t)]) : n = 8);
   e.children = t, e.shapeFlag |= n;
 }
-function Rs(...e) {
+function Ts(...e) {
   const t = {};
   for (let n = 0; n < e.length; n++) {
     const s = e[n];
@@ -3673,7 +3673,7 @@ function Bh(e, t, n) {
 }
 let je = null;
 const $h = () => je || Be;
-let Ts, qo;
+let Rs, qo;
 {
   const e = Fs(), t = (n, s) => {
     let r;
@@ -3681,7 +3681,7 @@ let Ts, qo;
       r.length > 1 ? r.forEach((i) => i(o)) : r[0](o);
     };
   };
-  Ts = t(
+  Rs = t(
     "__VUE_INSTANCE_SETTERS__",
     (n) => je = n
   ), qo = t(
@@ -3691,11 +3691,11 @@ let Ts, qo;
 }
 const ts = (e) => {
   const t = je;
-  return Ts(e), e.scope.on(), () => {
-    e.scope.off(), Ts(t);
+  return Rs(e), e.scope.on(), () => {
+    e.scope.off(), Rs(t);
   };
 }, Ui = () => {
-  je && je.scope.off(), Ts(null);
+  je && je.scope.off(), Rs(null);
 };
 function $l(e) {
   return e.vnode.shapeFlag & 4;
@@ -3769,7 +3769,7 @@ function jh(e) {
   };
 }
 function js(e) {
-  return e.exposed ? e.exposeProxy || (e.exposeProxy = new Proxy(sl(Rf(e.exposed)), {
+  return e.exposed ? e.exposeProxy || (e.exposeProxy = new Proxy(sl(Tf(e.exposed)), {
     get(t, n) {
       if (n in t)
         return t[n];
@@ -3918,7 +3918,7 @@ function Qh(e) {
     onAppearCancelled: C = b
   } = t, S = (I, te, D, oe) => {
     I._enterCancelled = oe, on(I, te ? l : c), on(I, te ? u : i), D && D();
-  }, T = (I, te) => {
+  }, R = (I, te) => {
     I._isLeaving = !1, on(I, f), on(I, h), on(I, d), te && te();
   }, P = (I) => (te, D) => {
     const oe = I ? B : k, Q = () => S(te, I, D);
@@ -3937,7 +3937,7 @@ function Qh(e) {
     onAppear: P(!0),
     onLeave(I, te) {
       I._isLeaving = !0;
-      const D = () => T(I, te);
+      const D = () => R(I, te);
       Dt(I, f), I._enterCancelled ? (Dt(I, d), Xi()) : (Xi(), Dt(I, d)), Zi(() => {
         I._isLeaving && (on(I, f), Dt(I, h), Gi(p) || Wi(I, s, A, D));
       }), rn(p, [I, D]);
@@ -3949,7 +3949,7 @@ function Qh(e) {
       S(I, !0, void 0, !0), rn(C, [I]);
     },
     onLeaveCancelled(I) {
-      T(I), rn(E, [I]);
+      R(I), rn(E, [I]);
     }
   });
 }
@@ -4295,21 +4295,21 @@ function Ad() {
 const Sd = (...e) => {
   const t = Ad().createApp(...e), { mount: n } = t;
   return t.mount = (s) => {
-    const r = Td(s);
+    const r = Rd(s);
     if (!r) return;
     const o = t._component;
     !ae(o) && !o.render && !o.template && (o.template = r.innerHTML), r.nodeType === 1 && (r.textContent = "");
-    const i = n(r, !1, Rd(r));
+    const i = n(r, !1, Td(r));
     return r instanceof Element && (r.removeAttribute("v-cloak"), r.setAttribute("data-v-app", "")), i;
   }, t;
 };
-function Rd(e) {
+function Td(e) {
   if (e instanceof SVGElement)
     return "svg";
   if (typeof MathMLElement == "function" && e instanceof MathMLElement)
     return "mathml";
 }
-function Td(e) {
+function Rd(e) {
   return Me(e) ? document.querySelector(e) : e;
 }
 const Fn = {
@@ -4600,7 +4600,7 @@ class Gd {
   initializeRun(t, n) {
     const s = this.getRunKey(t, n);
     if (!this.nodeRuns.has(s)) {
-      const r = Rn();
+      const r = Tn();
       return this.nodeRuns.set(s, {
         content: "",
         isComplete: !1,
@@ -4658,7 +4658,7 @@ class Gd {
     this.nodeRuns.clear(), this.runOrder = [], this.activeRuns.clear();
   }
 }
-function Rn(e) {
+function Tn(e) {
   return {
     id: e ?? fn(),
     type: "text",
@@ -4682,7 +4682,7 @@ function Zd(e, t, n, s, r, o, i) {
       const a = n.addChunkToRun(t, e, i);
       a && hc(r.value, a.id, a);
     } else {
-      s.value || (s.value = Rn(), r.value.push(s.value));
+      s.value || (s.value = Tn(), r.value.push(s.value));
       const c = {
         ...s.value,
         text: s.value.text + e
@@ -4730,16 +4730,32 @@ function Qd(e) {
   const { receivedMessage: t, messages: n } = e;
   t.value && n.value.some(
     (r) => r.sender === "bot" && "text" in r && r.text.trim().length > 0
-  ) || (t.value = Rn(), n.value.push(t.value)), t.value.text = "[No response received. This could happen if streaming is enabled in the trigger but disabled in agent node(s)]";
+  ) || (t.value = Tn(), n.value.push(t.value)), t.value.text = "[No response received. This could happen if streaming is enabled in the trigger but disabled in agent node(s)]";
 }
 function ep(e) {
   const { error: t, receivedMessage: n, messages: s } = e;
-  n.value ?? (n.value = Rn()), n.value.text = "Error: Failed to receive response", s.value.includes(n.value) || s.value.push(n.value), console.error("Chat API error:", t);
+  n.value ?? (n.value = Tn()), n.value.text = "Error: Failed to receive response", s.value.includes(n.value) || s.value.push(n.value), console.error("Chat API error:", t);
 }
 async function tp(e) {
-  const { text: t, sessionId: n, options: s, messages: r, receivedMessage: o, streamingManager: i, waitingForResponse: c } = e, a = {
+  const {
+    text: t,
+    sessionId: n,
+    options: s,
+    messages: r,
+    receivedMessage: o,
+    streamingManager: i,
+    waitingForResponse: c
+  } = e, a = {
     onChunk: (l, f, d) => {
-      Zd(l, f, i, o, r, c, d);
+      Zd(
+        l,
+        f,
+        i,
+        o,
+        r,
+        c,
+        d
+      );
     },
     onBeginMessage: (l, f) => {
       Wd(l, i, f);
@@ -4760,7 +4776,7 @@ async function np(e) {
   const { text: t, sessionId: n, options: s } = e, r = await Bd(t, [], n, s);
   if (r != null && r.executionStarted)
     return { response: r };
-  const o = Rn();
+  const o = Tn();
   return o.text = Xd(r), { botMessage: o };
 }
 const sp = {
@@ -5096,7 +5112,7 @@ function op() {
       return J;
     }).map((ie) => `(${ie})`).join(M);
   }
-  const w = /\b\B/, B = "[a-zA-Z]\\w*", C = "[a-zA-Z_]\\w*", S = "\\b\\d+(\\.\\d+)?", T = "(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)", P = "\\b(0b[01]+)", I = "!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~", te = (m = {}) => {
+  const w = /\b\B/, B = "[a-zA-Z]\\w*", C = "[a-zA-Z_]\\w*", S = "\\b\\d+(\\.\\d+)?", R = "(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)", P = "\\b(0b[01]+)", I = "!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~", te = (m = {}) => {
     const M = /^#![ ]*\//;
     return m.binary && (m.begin = y(
       M,
@@ -5202,7 +5218,7 @@ function op() {
     relevance: 0
   }, st = {
     scope: "number",
-    begin: T,
+    begin: R,
     relevance: 0
   }, Vs = {
     scope: "number",
@@ -5244,7 +5260,7 @@ function op() {
     C_BLOCK_COMMENT_MODE: Z,
     C_LINE_COMMENT_MODE: fe,
     C_NUMBER_MODE: st,
-    C_NUMBER_RE: T,
+    C_NUMBER_RE: R,
     END_SAME_AS_BEGIN: function(m) {
       return Object.assign(
         m,
@@ -5284,7 +5300,7 @@ function op() {
   function x(m, M) {
     M && m.beginKeywords && (m.begin = "\\b(" + m.beginKeywords.split(" ").join("|") + ")(?!\\.)(?=\\b|\\s)", m.__beforeBegin = hi, m.keywords = m.keywords || m.beginKeywords, delete m.beginKeywords, m.relevance === void 0 && (m.relevance = 0));
   }
-  function R(m, M) {
+  function T(m, M) {
     Array.isArray(m.illegal) && (m.illegal = v(...m.illegal));
   }
   function L(m, M) {
@@ -5466,7 +5482,7 @@ function op() {
         x,
         // do this later so compiler extensions that come earlier have access to the
         // raw array if they wanted to perhaps manipulate it, etc.
-        R,
+        T,
         // default to 1 relevance if not specified
         N
       ].forEach((Oe) => Oe(J, K)), J.isCompiled = !0;
@@ -5563,11 +5579,11 @@ https://github.com/highlightjs/highlight.js/issues/2277`), Fe = q, Ae = X), pe =
           de += Se.substring(j, Y.index);
           const ke = xt.case_insensitive ? Y[0].toLowerCase() : Y[0], Ke = gt(ue, ke);
           if (Ke) {
-            const [Rt, Hu] = Ke;
-            if (Ue.addText(de), de = "", Fe[ke] = (Fe[ke] || 0) + 1, Fe[ke] <= Au && (cs += Hu), Rt.startsWith("_"))
+            const [Tt, Hu] = Ke;
+            if (Ue.addText(de), de = "", Fe[ke] = (Fe[ke] || 0) + 1, Fe[ke] <= Au && (cs += Hu), Tt.startsWith("_"))
               de += Y[0];
             else {
-              const ju = xt.classNameAliases[Rt] || Rt;
+              const ju = xt.classNameAliases[Tt] || Tt;
               vt(Y[0], ju);
             }
           } else
@@ -5604,8 +5620,8 @@ https://github.com/highlightjs/highlight.js/issues/2277`), Fe = q, Ae = X), pe =
             de++;
             continue;
           }
-          const Ke = xt.classNameAliases[j[de]] || j[de], Rt = Y[de];
-          Ke ? vt(Rt, Ke) : (Se = Rt, Bt(), Se = ""), de++;
+          const Ke = xt.classNameAliases[j[de]] || j[de], Tt = Y[de];
+          Ke ? vt(Tt, Ke) : (Se = Tt, Bt(), Se = ""), de++;
         }
       }
       function xi(j, Y) {
@@ -5632,8 +5648,8 @@ https://github.com/highlightjs/highlight.js/issues/2277`), Fe = q, Ae = X), pe =
       }
       function Bu(j) {
         const Y = j[0], de = j.rule, ke = new t(de), Ke = [de.__beforeBegin, de["on:begin"]];
-        for (const Rt of Ke)
-          if (Rt && (Rt(j, ke), ke.isMatchIgnored))
+        for (const Tt of Ke)
+          if (Tt && (Tt(j, ke), ke.isMatchIgnored))
             return Pu(Y);
         return de.skip ? Se += Y : (de.excludeBegin && (Se += Y), rt(), !de.returnBegin && !de.excludeBegin && (Se = Y)), xi(de, j), de.returnBegin ? 0 : Y.length;
       }
@@ -5801,10 +5817,10 @@ https://github.com/highlightjs/highlight.js/issues/2277`), Fe = q, Ae = X), pe =
         relevance: Fe.secondBest.relevance
       }), rs("after:highlightElement", { el: q, result: Fe, text: Ae });
     }
-    function Ru(q) {
+    function Tu(q) {
       K = di(K, q);
     }
-    const Tu = () => {
+    const Ru = () => {
       ss(), he("10.6.0", "initHighlighting() deprecated.  Use highlightAll() now.");
     };
     function Du() {
@@ -5888,8 +5904,8 @@ https://github.com/highlightjs/highlight.js/issues/2277`), Fe = q, Ae = X), pe =
       highlightElement: Ys,
       // TODO: Remove with v12 API
       highlightBlock: qu,
-      configure: Ru,
-      initHighlighting: Tu,
+      configure: Tu,
+      initHighlighting: Ru,
       initHighlightingOnLoad: Du,
       registerLanguage: Mu,
       unregisterLanguage: Iu,
@@ -6326,7 +6342,7 @@ function Ql(e) {
     className: "meta",
     relevance: 10,
     begin: /^\s*['"]use (strict|asm)['"]/
-  }, T = {
+  }, R = {
     variants: [
       {
         match: [
@@ -6525,7 +6541,7 @@ function Ql(e) {
           }
         ]
       },
-      T,
+      R,
       {
         // prevent this from getting swallowed up by function
         // since they appear "function like"
@@ -6795,7 +6811,7 @@ const fp = {
   height: "1.2em"
 };
 function hp(e, t) {
-  return ce(), Te("svg", fp, t[0] || (t[0] = [
+  return ce(), Re("svg", fp, t[0] || (t[0] = [
     be("path", {
       fill: "currentColor",
       d: "M22 14h-1c0-3.87-3.13-7-7-7h-1V5.73A2 2 0 1 0 10 4c0 .74.4 1.39 1 1.73V7h-1c-3.87 0-7 3.13-7 7H2c-.55 0-1 .45-1 1v3c0 .55.45 1 1 1h1v1a2 2 0 0 0 2 2h14c1.11 0 2-.89 2-2v-1h1c.55 0 1-.45 1-1v-3c0-.55-.45-1-1-1M8.68 17.04L7.5 15.86l-1.18 1.18l-1.18-1.18L7.5 13.5l2.36 2.36zm9 0l-1.18-1.18l-1.18 1.18l-1.18-1.18l2.36-2.36l2.36 2.36z"
@@ -6808,7 +6824,7 @@ const tu = { name: "mdi-robot-excited", render: hp }, dp = {
   height: "1.2em"
 };
 function pp(e, t) {
-  return ce(), Te("svg", dp, t[0] || (t[0] = [
+  return ce(), Re("svg", dp, t[0] || (t[0] = [
     be("path", {
       fill: "currentColor",
       d: "M17.65 6.35A7.958 7.958 0 0 0 12 4a8 8 0 0 0-8 8a8 8 0 0 0 8 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18a6 6 0 0 1-6-6a6 6 0 0 1 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4z"
@@ -6821,7 +6837,7 @@ const gp = { name: "mdi-refresh", render: pp }, mp = {
   height: "1.2em"
 };
 function _p(e, t) {
-  return ce(), Te("svg", mp, t[0] || (t[0] = [
+  return ce(), Re("svg", mp, t[0] || (t[0] = [
     be("path", {
       fill: "currentColor",
       d: "m2 21l21-9L2 3v7l15 2l-15 2z"
@@ -6832,13 +6848,13 @@ const bp = { name: "mdi-send", render: _p };
 function ri() {
   return An(Kl);
 }
-function Tn() {
+function Rn() {
   return {
     options: An(Gl)
   };
 }
 function nu() {
-  const { options: e } = Tn(), t = (e == null ? void 0 : e.defaultLanguage) ?? "en";
+  const { options: e } = Rn(), t = (e == null ? void 0 : e.defaultLanguage) ?? "en";
   function n(r) {
     var i, c;
     const o = (c = (i = e == null ? void 0 : e.i18n) == null ? void 0 : i[t]) == null ? void 0 : c[r];
@@ -6860,7 +6876,7 @@ const vp = {
   },
   emits: ["arrowKeyDown"],
   setup(e, { emit: t }) {
-    const n = e, { t: s } = nu(), r = t, { options: o } = Tn(), i = ri(), { waitingForResponse: c } = i, a = tt(null), u = tt(""), l = tt(!1), f = tt(null), d = tt(!1), h = at(() => {
+    const n = e, { t: s } = nu(), r = t, { options: o } = Rn(), i = ri(), { waitingForResponse: c } = i, a = tt(null), u = tt(""), l = tt(!1), f = tt(null), d = tt(!1), h = at(() => {
       var C;
       return d.value ? !1 : u.value === "" || xe(c) || ((C = o.disabled) == null ? void 0 : C.value) === !0;
     }), _ = at(() => {
@@ -6893,19 +6909,19 @@ const vp = {
             i.currentSessionId.value,
             !0
           );
-          i.ws = new WebSocket(S), i.ws.onmessage = (T) => {
+          i.ws = new WebSocket(S), i.ws.onmessage = (R) => {
             var I;
-            if (T.data === "n8n|heartbeat") {
+            if (R.data === "n8n|heartbeat") {
               (I = i.ws) == null || I.send("n8n|heartbeat-ack");
               return;
             }
-            if (T.data === "n8n|continue") {
+            if (R.data === "n8n|continue") {
               d.value = !1, i.waitingForResponse.value = !0;
               return;
             }
             const P = {
               id: fn(),
-              text: T.data,
+              text: R.data,
               sender: "bot"
             };
             i.messages.value.push(P), d.value = !0, i.waitingForResponse.value = !1;
@@ -6917,12 +6933,12 @@ const vp = {
         }
     }
     async function b(C, S) {
-      const T = {
+      const R = {
         id: fn(),
         text: S,
         sender: "user"
       };
-      i.messages.value.push(T), C.send(
+      i.messages.value.push(R), C.send(
         JSON.stringify({
           sessionId: i.currentSessionId.value,
           action: "sendMessage",
@@ -6938,8 +6954,8 @@ const vp = {
         await b(i.ws, S);
         return;
       }
-      const T = await i.sendMessage(S);
-      T != null && T.executionId && k(T.executionId), l.value = !1;
+      const R = await i.sendMessage(S);
+      R != null && R.executionId && k(R.executionId), l.value = !1;
     }
     async function E(C) {
       C.shiftKey || C.isComposing || (await p(C), B());
@@ -6957,17 +6973,17 @@ const vp = {
       const S = Math.min(C.scrollHeight, 480);
       C.style.height = `${S}px`;
     }
-    return (C, S) => (ce(), Te("div", {
+    return (C, S) => (ce(), Re("div", {
       class: "flex-row items-center px-4 py-2.5 relative z-50 mx-4 mb-4 flex min-h-13 rounded-2xl bg-white border-[1.5px] border-zinc-100 shadow-md focus-within:border-[1.5px] focus-within:border-zinc-950",
       onKeydown: kd(w, ["stop"])
     }, [
-      C.$slots.leftPanel ? (ce(), Te("div", vp, [
+      C.$slots.leftPanel ? (ce(), Re("div", vp, [
         Kt(C.$slots, "leftPanel")
       ])) : wt("", !0),
       ll(be("textarea", {
         ref_key: "chatTextArea",
         ref: a,
-        "onUpdate:modelValue": S[0] || (S[0] = (T) => u.value = T),
+        "onUpdate:modelValue": S[0] || (S[0] = (R) => u.value = R),
         "data-test-id": "chat-input",
         disabled: _.value,
         placeholder: xe(s)(n.placeholder),
@@ -6993,7 +7009,10 @@ const vp = {
       ])
     ], 32));
   }
-}), wp = { class: "group relative flex h-full flex-col bg-white shadow-lg backdrop-blur-sm" }, Cp = {
+}), wp = {
+  class: "group relative flex h-full flex-col bg-white shadow-lg backdrop-blur-sm",
+  "data-chat-widget": ""
+}, Cp = {
   key: 0,
   class: "relative flex items-center justify-between px-5 text-black"
 }, Ap = {
@@ -7002,40 +7021,53 @@ const vp = {
 }, Sp = {
   key: 3,
   class: "flex min-h-10 w-full max-w-full shrink-0 items-center justify-center gap-2 overflow-hidden text-nowrap px-4 pb-4 font-medium text-xs text-zinc-500 leading-[1.4]"
-}, Rp = /* @__PURE__ */ Ft({
+}, Tp = /* @__PURE__ */ Ft({
   __name: "Layout",
   setup(e) {
     const t = tt(null);
-    function n() {
-      const s = t.value;
-      s && (s.scrollTop = s.scrollHeight);
+    let n = null;
+    function s() {
+      n && clearTimeout(n), n = window.setTimeout(() => {
+        const r = t.value;
+        if (r && r.scrollHeight > r.clientHeight) {
+          if (r === document.body || r === document.documentElement) {
+            n = null;
+            return;
+          }
+          if (r.closest("[data-chat-widget]") || r.closest(".chat-container")) {
+            const o = window.getComputedStyle(r);
+            (o.overflowY === "auto" || o.overflowY === "scroll") && (r.scrollTop = r.scrollHeight);
+          }
+        }
+        n = null;
+      }, 50);
     }
     return dn(() => {
-      et.on("scrollToBottom", n), window.addEventListener("resize", n);
+      et.on("scrollToBottom", s), window.addEventListener("resize", s);
     }), Xo(() => {
-      et.off("scrollToBottom", n), window.removeEventListener("resize", n);
-    }), (s, r) => (ce(), Te("main", wp, [
-      s.$slots.header ? (ce(), Te("header", Cp, [
-        Kt(s.$slots, "header")
+      et.off("scrollToBottom", s), window.removeEventListener("resize", s), n && (clearTimeout(n), n = null);
+    }), (r, o) => (ce(), Re("main", wp, [
+      r.$slots.header ? (ce(), Re("header", Cp, [
+        Kt(r.$slots, "header")
       ])) : wt("", !0),
-      s.$slots.default ? (ce(), Te("div", {
+      r.$slots.default ? (ce(), Re("div", {
         key: 1,
         ref_key: "chatBodyRef",
         ref: t,
-        class: "-mb-2 relative flex-1 basis-full overflow-y-hidden scroll-smooth flex flex-col shadow-inner"
+        class: "-mb-2 relative flex-1 basis-full overflow-y-auto scroll-smooth flex flex-col shadow-inner"
       }, [
-        Kt(s.$slots, "default")
+        Kt(r.$slots, "default")
       ], 512)) : wt("", !0),
-      s.$slots.input ? (ce(), Te("div", Ap, [
-        Kt(s.$slots, "input")
+      r.$slots.input ? (ce(), Re("div", Ap, [
+        Kt(r.$slots, "input")
       ])) : wt("", !0),
-      s.$slots.footer ? (ce(), Te("footer", Sp, [
-        Kt(s.$slots, "footer")
+      r.$slots.footer ? (ce(), Re("footer", Sp, [
+        Kt(r.$slots, "footer")
       ])) : wt("", !0)
     ]));
   }
 });
-function Tp(e) {
+function Rp(e) {
   const t = e.regex, n = {}, s = {
     begin: /\$\{/,
     end: /\}/,
@@ -8213,7 +8245,7 @@ function Mp(e) {
     className: "meta",
     relevance: 10,
     begin: /^\s*['"]use (strict|asm)['"]/
-  }, T = {
+  }, R = {
     variants: [
       {
         match: [
@@ -8412,7 +8444,7 @@ function Mp(e) {
           }
         ]
       },
-      T,
+      R,
       {
         // prevent this from getting swallowed up by function
         // since they appear "function like"
@@ -8591,8 +8623,8 @@ function Np() {
 var Op = Np();
 const Lp = /* @__PURE__ */ si(Op);
 var _r = {};
-const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "∾̳", Hp = "Â", jp = "â", Vp = "´", Kp = "А", Gp = "а", Zp = "Æ", Wp = "æ", Jp = "⁡", Yp = "𝔄", Xp = "𝔞", Qp = "À", eg = "à", tg = "ℵ", ng = "ℵ", sg = "Α", rg = "α", og = "Ā", ig = "ā", cg = "⨿", ag = "&", lg = "&", ug = "⩕", fg = "⩓", hg = "∧", dg = "⩜", pg = "⩘", gg = "⩚", mg = "∠", _g = "⦤", bg = "∠", vg = "⦨", xg = "⦩", yg = "⦪", kg = "⦫", Eg = "⦬", wg = "⦭", Cg = "⦮", Ag = "⦯", Sg = "∡", Rg = "∟", Tg = "⊾", Dg = "⦝", Mg = "∢", Ig = "Å", Ng = "⍼", Og = "Ą", Lg = "ą", Fg = "𝔸", qg = "𝕒", Pg = "⩯", Bg = "≈", $g = "⩰", zg = "≊", Ug = "≋", Hg = "'", jg = "⁡", Vg = "≈", Kg = "≊", Gg = "Å", Zg = "å", Wg = "𝒜", Jg = "𝒶", Yg = "≔", Xg = "*", Qg = "≈", em = "≍", tm = "Ã", nm = "ã", sm = "Ä", rm = "ä", om = "∳", im = "⨑", cm = "≌", am = "϶", lm = "‵", um = "∽", fm = "⋍", hm = "∖", dm = "⫧", pm = "⊽", gm = "⌅", mm = "⌆", _m = "⌅", bm = "⎵", vm = "⎶", xm = "≌", ym = "Б", km = "б", Em = "„", wm = "∵", Cm = "∵", Am = "∵", Sm = "⦰", Rm = "϶", Tm = "ℬ", Dm = "ℬ", Mm = "Β", Im = "β", Nm = "ℶ", Om = "≬", Lm = "𝔅", Fm = "𝔟", qm = "⋂", Pm = "◯", Bm = "⋃", $m = "⨀", zm = "⨁", Um = "⨂", Hm = "⨆", jm = "★", Vm = "▽", Km = "△", Gm = "⨄", Zm = "⋁", Wm = "⋀", Jm = "⤍", Ym = "⧫", Xm = "▪", Qm = "▴", e_ = "▾", t_ = "◂", n_ = "▸", s_ = "␣", r_ = "▒", o_ = "░", i_ = "▓", c_ = "█", a_ = "=⃥", l_ = "≡⃥", u_ = "⫭", f_ = "⌐", h_ = "𝔹", d_ = "𝕓", p_ = "⊥", g_ = "⊥", m_ = "⋈", __ = "⧉", b_ = "┐", v_ = "╕", x_ = "╖", y_ = "╗", k_ = "┌", E_ = "╒", w_ = "╓", C_ = "╔", A_ = "─", S_ = "═", R_ = "┬", T_ = "╤", D_ = "╥", M_ = "╦", I_ = "┴", N_ = "╧", O_ = "╨", L_ = "╩", F_ = "⊟", q_ = "⊞", P_ = "⊠", B_ = "┘", $_ = "╛", z_ = "╜", U_ = "╝", H_ = "└", j_ = "╘", V_ = "╙", K_ = "╚", G_ = "│", Z_ = "║", W_ = "┼", J_ = "╪", Y_ = "╫", X_ = "╬", Q_ = "┤", e0 = "╡", t0 = "╢", n0 = "╣", s0 = "├", r0 = "╞", o0 = "╟", i0 = "╠", c0 = "‵", a0 = "˘", l0 = "˘", u0 = "¦", f0 = "𝒷", h0 = "ℬ", d0 = "⁏", p0 = "∽", g0 = "⋍", m0 = "⧅", _0 = "\\", b0 = "⟈", v0 = "•", x0 = "•", y0 = "≎", k0 = "⪮", E0 = "≏", w0 = "≎", C0 = "≏", A0 = "Ć", S0 = "ć", R0 = "⩄", T0 = "⩉", D0 = "⩋", M0 = "∩", I0 = "⋒", N0 = "⩇", O0 = "⩀", L0 = "ⅅ", F0 = "∩︀", q0 = "⁁", P0 = "ˇ", B0 = "ℭ", $0 = "⩍", z0 = "Č", U0 = "č", H0 = "Ç", j0 = "ç", V0 = "Ĉ", K0 = "ĉ", G0 = "∰", Z0 = "⩌", W0 = "⩐", J0 = "Ċ", Y0 = "ċ", X0 = "¸", Q0 = "¸", eb = "⦲", tb = "¢", nb = "·", sb = "·", rb = "𝔠", ob = "ℭ", ib = "Ч", cb = "ч", ab = "✓", lb = "✓", ub = "Χ", fb = "χ", hb = "ˆ", db = "≗", pb = "↺", gb = "↻", mb = "⊛", _b = "⊚", bb = "⊝", vb = "⊙", xb = "®", yb = "Ⓢ", kb = "⊖", Eb = "⊕", wb = "⊗", Cb = "○", Ab = "⧃", Sb = "≗", Rb = "⨐", Tb = "⫯", Db = "⧂", Mb = "∲", Ib = "”", Nb = "’", Ob = "♣", Lb = "♣", Fb = ":", qb = "∷", Pb = "⩴", Bb = "≔", $b = "≔", zb = ",", Ub = "@", Hb = "∁", jb = "∘", Vb = "∁", Kb = "ℂ", Gb = "≅", Zb = "⩭", Wb = "≡", Jb = "∮", Yb = "∯", Xb = "∮", Qb = "𝕔", ev = "ℂ", tv = "∐", nv = "∐", sv = "©", rv = "©", ov = "℗", iv = "∳", cv = "↵", av = "✗", lv = "⨯", uv = "𝒞", fv = "𝒸", hv = "⫏", dv = "⫑", pv = "⫐", gv = "⫒", mv = "⋯", _v = "⤸", bv = "⤵", vv = "⋞", xv = "⋟", yv = "↶", kv = "⤽", Ev = "⩈", wv = "⩆", Cv = "≍", Av = "∪", Sv = "⋓", Rv = "⩊", Tv = "⊍", Dv = "⩅", Mv = "∪︀", Iv = "↷", Nv = "⤼", Ov = "⋞", Lv = "⋟", Fv = "⋎", qv = "⋏", Pv = "¤", Bv = "↶", $v = "↷", zv = "⋎", Uv = "⋏", Hv = "∲", jv = "∱", Vv = "⌭", Kv = "†", Gv = "‡", Zv = "ℸ", Wv = "↓", Jv = "↡", Yv = "⇓", Xv = "‐", Qv = "⫤", ex = "⊣", tx = "⤏", nx = "˝", sx = "Ď", rx = "ď", ox = "Д", ix = "д", cx = "‡", ax = "⇊", lx = "ⅅ", ux = "ⅆ", fx = "⤑", hx = "⩷", dx = "°", px = "∇", gx = "Δ", mx = "δ", _x = "⦱", bx = "⥿", vx = "𝔇", xx = "𝔡", yx = "⥥", kx = "⇃", Ex = "⇂", wx = "´", Cx = "˙", Ax = "˝", Sx = "`", Rx = "˜", Tx = "⋄", Dx = "⋄", Mx = "⋄", Ix = "♦", Nx = "♦", Ox = "¨", Lx = "ⅆ", Fx = "ϝ", qx = "⋲", Px = "÷", Bx = "÷", $x = "⋇", zx = "⋇", Ux = "Ђ", Hx = "ђ", jx = "⌞", Vx = "⌍", Kx = "$", Gx = "𝔻", Zx = "𝕕", Wx = "¨", Jx = "˙", Yx = "⃜", Xx = "≐", Qx = "≑", ey = "≐", ty = "∸", ny = "∔", sy = "⊡", ry = "⌆", oy = "∯", iy = "¨", cy = "⇓", ay = "⇐", ly = "⇔", uy = "⫤", fy = "⟸", hy = "⟺", dy = "⟹", py = "⇒", gy = "⊨", my = "⇑", _y = "⇕", by = "∥", vy = "⤓", xy = "↓", yy = "↓", ky = "⇓", Ey = "⇵", wy = "̑", Cy = "⇊", Ay = "⇃", Sy = "⇂", Ry = "⥐", Ty = "⥞", Dy = "⥖", My = "↽", Iy = "⥟", Ny = "⥗", Oy = "⇁", Ly = "↧", Fy = "⊤", qy = "⤐", Py = "⌟", By = "⌌", $y = "𝒟", zy = "𝒹", Uy = "Ѕ", Hy = "ѕ", jy = "⧶", Vy = "Đ", Ky = "đ", Gy = "⋱", Zy = "▿", Wy = "▾", Jy = "⇵", Yy = "⥯", Xy = "⦦", Qy = "Џ", ek = "џ", tk = "⟿", nk = "É", sk = "é", rk = "⩮", ok = "Ě", ik = "ě", ck = "Ê", ak = "ê", lk = "≖", uk = "≕", fk = "Э", hk = "э", dk = "⩷", pk = "Ė", gk = "ė", mk = "≑", _k = "ⅇ", bk = "≒", vk = "𝔈", xk = "𝔢", yk = "⪚", kk = "È", Ek = "è", wk = "⪖", Ck = "⪘", Ak = "⪙", Sk = "∈", Rk = "⏧", Tk = "ℓ", Dk = "⪕", Mk = "⪗", Ik = "Ē", Nk = "ē", Ok = "∅", Lk = "∅", Fk = "◻", qk = "∅", Pk = "▫", Bk = " ", $k = " ", zk = " ", Uk = "Ŋ", Hk = "ŋ", jk = " ", Vk = "Ę", Kk = "ę", Gk = "𝔼", Zk = "𝕖", Wk = "⋕", Jk = "⧣", Yk = "⩱", Xk = "ε", Qk = "Ε", eE = "ε", tE = "ϵ", nE = "≖", sE = "≕", rE = "≂", oE = "⪖", iE = "⪕", cE = "⩵", aE = "=", lE = "≂", uE = "≟", fE = "⇌", hE = "≡", dE = "⩸", pE = "⧥", gE = "⥱", mE = "≓", _E = "ℯ", bE = "ℰ", vE = "≐", xE = "⩳", yE = "≂", kE = "Η", EE = "η", wE = "Ð", CE = "ð", AE = "Ë", SE = "ë", RE = "€", TE = "!", DE = "∃", ME = "∃", IE = "ℰ", NE = "ⅇ", OE = "ⅇ", LE = "≒", FE = "Ф", qE = "ф", PE = "♀", BE = "ﬃ", $E = "ﬀ", zE = "ﬄ", UE = "𝔉", HE = "𝔣", jE = "ﬁ", VE = "◼", KE = "▪", GE = "fj", ZE = "♭", WE = "ﬂ", JE = "▱", YE = "ƒ", XE = "𝔽", QE = "𝕗", e1 = "∀", t1 = "∀", n1 = "⋔", s1 = "⫙", r1 = "ℱ", o1 = "⨍", i1 = "½", c1 = "⅓", a1 = "¼", l1 = "⅕", u1 = "⅙", f1 = "⅛", h1 = "⅔", d1 = "⅖", p1 = "¾", g1 = "⅗", m1 = "⅜", _1 = "⅘", b1 = "⅚", v1 = "⅝", x1 = "⅞", y1 = "⁄", k1 = "⌢", E1 = "𝒻", w1 = "ℱ", C1 = "ǵ", A1 = "Γ", S1 = "γ", R1 = "Ϝ", T1 = "ϝ", D1 = "⪆", M1 = "Ğ", I1 = "ğ", N1 = "Ģ", O1 = "Ĝ", L1 = "ĝ", F1 = "Г", q1 = "г", P1 = "Ġ", B1 = "ġ", $1 = "≥", z1 = "≧", U1 = "⪌", H1 = "⋛", j1 = "≥", V1 = "≧", K1 = "⩾", G1 = "⪩", Z1 = "⩾", W1 = "⪀", J1 = "⪂", Y1 = "⪄", X1 = "⋛︀", Q1 = "⪔", ew = "𝔊", tw = "𝔤", nw = "≫", sw = "⋙", rw = "⋙", ow = "ℷ", iw = "Ѓ", cw = "ѓ", aw = "⪥", lw = "≷", uw = "⪒", fw = "⪤", hw = "⪊", dw = "⪊", pw = "⪈", gw = "≩", mw = "⪈", _w = "≩", bw = "⋧", vw = "𝔾", xw = "𝕘", yw = "`", kw = "≥", Ew = "⋛", ww = "≧", Cw = "⪢", Aw = "≷", Sw = "⩾", Rw = "≳", Tw = "𝒢", Dw = "ℊ", Mw = "≳", Iw = "⪎", Nw = "⪐", Ow = "⪧", Lw = "⩺", Fw = ">", qw = ">", Pw = "≫", Bw = "⋗", $w = "⦕", zw = "⩼", Uw = "⪆", Hw = "⥸", jw = "⋗", Vw = "⋛", Kw = "⪌", Gw = "≷", Zw = "≳", Ww = "≩︀", Jw = "≩︀", Yw = "ˇ", Xw = " ", Qw = "½", eC = "ℋ", tC = "Ъ", nC = "ъ", sC = "⥈", rC = "↔", oC = "⇔", iC = "↭", cC = "^", aC = "ℏ", lC = "Ĥ", uC = "ĥ", fC = "♥", hC = "♥", dC = "…", pC = "⊹", gC = "𝔥", mC = "ℌ", _C = "ℋ", bC = "⤥", vC = "⤦", xC = "⇿", yC = "∻", kC = "↩", EC = "↪", wC = "𝕙", CC = "ℍ", AC = "―", SC = "─", RC = "𝒽", TC = "ℋ", DC = "ℏ", MC = "Ħ", IC = "ħ", NC = "≎", OC = "≏", LC = "⁃", FC = "‐", qC = "Í", PC = "í", BC = "⁣", $C = "Î", zC = "î", UC = "И", HC = "и", jC = "İ", VC = "Е", KC = "е", GC = "¡", ZC = "⇔", WC = "𝔦", JC = "ℑ", YC = "Ì", XC = "ì", QC = "ⅈ", eA = "⨌", tA = "∭", nA = "⧜", sA = "℩", rA = "Ĳ", oA = "ĳ", iA = "Ī", cA = "ī", aA = "ℑ", lA = "ⅈ", uA = "ℐ", fA = "ℑ", hA = "ı", dA = "ℑ", pA = "⊷", gA = "Ƶ", mA = "⇒", _A = "℅", bA = "∞", vA = "⧝", xA = "ı", yA = "⊺", kA = "∫", EA = "∬", wA = "ℤ", CA = "∫", AA = "⊺", SA = "⋂", RA = "⨗", TA = "⨼", DA = "⁣", MA = "⁢", IA = "Ё", NA = "ё", OA = "Į", LA = "į", FA = "𝕀", qA = "𝕚", PA = "Ι", BA = "ι", $A = "⨼", zA = "¿", UA = "𝒾", HA = "ℐ", jA = "∈", VA = "⋵", KA = "⋹", GA = "⋴", ZA = "⋳", WA = "∈", JA = "⁢", YA = "Ĩ", XA = "ĩ", QA = "І", eS = "і", tS = "Ï", nS = "ï", sS = "Ĵ", rS = "ĵ", oS = "Й", iS = "й", cS = "𝔍", aS = "𝔧", lS = "ȷ", uS = "𝕁", fS = "𝕛", hS = "𝒥", dS = "𝒿", pS = "Ј", gS = "ј", mS = "Є", _S = "є", bS = "Κ", vS = "κ", xS = "ϰ", yS = "Ķ", kS = "ķ", ES = "К", wS = "к", CS = "𝔎", AS = "𝔨", SS = "ĸ", RS = "Х", TS = "х", DS = "Ќ", MS = "ќ", IS = "𝕂", NS = "𝕜", OS = "𝒦", LS = "𝓀", FS = "⇚", qS = "Ĺ", PS = "ĺ", BS = "⦴", $S = "ℒ", zS = "Λ", US = "λ", HS = "⟨", jS = "⟪", VS = "⦑", KS = "⟨", GS = "⪅", ZS = "ℒ", WS = "«", JS = "⇤", YS = "⤟", XS = "←", QS = "↞", eR = "⇐", tR = "⤝", nR = "↩", sR = "↫", rR = "⤹", oR = "⥳", iR = "↢", cR = "⤙", aR = "⤛", lR = "⪫", uR = "⪭", fR = "⪭︀", hR = "⤌", dR = "⤎", pR = "❲", gR = "{", mR = "[", _R = "⦋", bR = "⦏", vR = "⦍", xR = "Ľ", yR = "ľ", kR = "Ļ", ER = "ļ", wR = "⌈", CR = "{", AR = "Л", SR = "л", RR = "⤶", TR = "“", DR = "„", MR = "⥧", IR = "⥋", NR = "↲", OR = "≤", LR = "≦", FR = "⟨", qR = "⇤", PR = "←", BR = "←", $R = "⇐", zR = "⇆", UR = "↢", HR = "⌈", jR = "⟦", VR = "⥡", KR = "⥙", GR = "⇃", ZR = "⌊", WR = "↽", JR = "↼", YR = "⇇", XR = "↔", QR = "↔", eT = "⇔", tT = "⇆", nT = "⇋", sT = "↭", rT = "⥎", oT = "↤", iT = "⊣", cT = "⥚", aT = "⋋", lT = "⧏", uT = "⊲", fT = "⊴", hT = "⥑", dT = "⥠", pT = "⥘", gT = "↿", mT = "⥒", _T = "↼", bT = "⪋", vT = "⋚", xT = "≤", yT = "≦", kT = "⩽", ET = "⪨", wT = "⩽", CT = "⩿", AT = "⪁", ST = "⪃", RT = "⋚︀", TT = "⪓", DT = "⪅", MT = "⋖", IT = "⋚", NT = "⪋", OT = "⋚", LT = "≦", FT = "≶", qT = "≶", PT = "⪡", BT = "≲", $T = "⩽", zT = "≲", UT = "⥼", HT = "⌊", jT = "𝔏", VT = "𝔩", KT = "≶", GT = "⪑", ZT = "⥢", WT = "↽", JT = "↼", YT = "⥪", XT = "▄", QT = "Љ", eD = "љ", tD = "⇇", nD = "≪", sD = "⋘", rD = "⌞", oD = "⇚", iD = "⥫", cD = "◺", aD = "Ŀ", lD = "ŀ", uD = "⎰", fD = "⎰", hD = "⪉", dD = "⪉", pD = "⪇", gD = "≨", mD = "⪇", _D = "≨", bD = "⋦", vD = "⟬", xD = "⇽", yD = "⟦", kD = "⟵", ED = "⟵", wD = "⟸", CD = "⟷", AD = "⟷", SD = "⟺", RD = "⟼", TD = "⟶", DD = "⟶", MD = "⟹", ID = "↫", ND = "↬", OD = "⦅", LD = "𝕃", FD = "𝕝", qD = "⨭", PD = "⨴", BD = "∗", $D = "_", zD = "↙", UD = "↘", HD = "◊", jD = "◊", VD = "⧫", KD = "(", GD = "⦓", ZD = "⇆", WD = "⌟", JD = "⇋", YD = "⥭", XD = "‎", QD = "⊿", eM = "‹", tM = "𝓁", nM = "ℒ", sM = "↰", rM = "↰", oM = "≲", iM = "⪍", cM = "⪏", aM = "[", lM = "‘", uM = "‚", fM = "Ł", hM = "ł", dM = "⪦", pM = "⩹", gM = "<", mM = "<", _M = "≪", bM = "⋖", vM = "⋋", xM = "⋉", yM = "⥶", kM = "⩻", EM = "◃", wM = "⊴", CM = "◂", AM = "⦖", SM = "⥊", RM = "⥦", TM = "≨︀", DM = "≨︀", MM = "¯", IM = "♂", NM = "✠", OM = "✠", LM = "↦", FM = "↦", qM = "↧", PM = "↤", BM = "↥", $M = "▮", zM = "⨩", UM = "М", HM = "м", jM = "—", VM = "∺", KM = "∡", GM = " ", ZM = "ℳ", WM = "𝔐", JM = "𝔪", YM = "℧", XM = "µ", QM = "*", eI = "⫰", tI = "∣", nI = "·", sI = "⊟", rI = "−", oI = "∸", iI = "⨪", cI = "∓", aI = "⫛", lI = "…", uI = "∓", fI = "⊧", hI = "𝕄", dI = "𝕞", pI = "∓", gI = "𝓂", mI = "ℳ", _I = "∾", bI = "Μ", vI = "μ", xI = "⊸", yI = "⊸", kI = "∇", EI = "Ń", wI = "ń", CI = "∠⃒", AI = "≉", SI = "⩰̸", RI = "≋̸", TI = "ŉ", DI = "≉", MI = "♮", II = "ℕ", NI = "♮", OI = " ", LI = "≎̸", FI = "≏̸", qI = "⩃", PI = "Ň", BI = "ň", $I = "Ņ", zI = "ņ", UI = "≇", HI = "⩭̸", jI = "⩂", VI = "Н", KI = "н", GI = "–", ZI = "⤤", WI = "↗", JI = "⇗", YI = "↗", XI = "≠", QI = "≐̸", eN = "​", tN = "​", nN = "​", sN = "​", rN = "≢", oN = "⤨", iN = "≂̸", cN = "≫", aN = "≪", lN = `
-`, uN = "∄", fN = "∄", hN = "𝔑", dN = "𝔫", pN = "≧̸", gN = "≱", mN = "≱", _N = "≧̸", bN = "⩾̸", vN = "⩾̸", xN = "⋙̸", yN = "≵", kN = "≫⃒", EN = "≯", wN = "≯", CN = "≫̸", AN = "↮", SN = "⇎", RN = "⫲", TN = "∋", DN = "⋼", MN = "⋺", IN = "∋", NN = "Њ", ON = "њ", LN = "↚", FN = "⇍", qN = "‥", PN = "≦̸", BN = "≰", $N = "↚", zN = "⇍", UN = "↮", HN = "⇎", jN = "≰", VN = "≦̸", KN = "⩽̸", GN = "⩽̸", ZN = "≮", WN = "⋘̸", JN = "≴", YN = "≪⃒", XN = "≮", QN = "⋪", eO = "⋬", tO = "≪̸", nO = "∤", sO = "⁠", rO = " ", oO = "𝕟", iO = "ℕ", cO = "⫬", aO = "¬", lO = "≢", uO = "≭", fO = "∦", hO = "∉", dO = "≠", pO = "≂̸", gO = "∄", mO = "≯", _O = "≱", bO = "≧̸", vO = "≫̸", xO = "≹", yO = "⩾̸", kO = "≵", EO = "≎̸", wO = "≏̸", CO = "∉", AO = "⋵̸", SO = "⋹̸", RO = "∉", TO = "⋷", DO = "⋶", MO = "⧏̸", IO = "⋪", NO = "⋬", OO = "≮", LO = "≰", FO = "≸", qO = "≪̸", PO = "⩽̸", BO = "≴", $O = "⪢̸", zO = "⪡̸", UO = "∌", HO = "∌", jO = "⋾", VO = "⋽", KO = "⊀", GO = "⪯̸", ZO = "⋠", WO = "∌", JO = "⧐̸", YO = "⋫", XO = "⋭", QO = "⊏̸", eL = "⋢", tL = "⊐̸", nL = "⋣", sL = "⊂⃒", rL = "⊈", oL = "⊁", iL = "⪰̸", cL = "⋡", aL = "≿̸", lL = "⊃⃒", uL = "⊉", fL = "≁", hL = "≄", dL = "≇", pL = "≉", gL = "∤", mL = "∦", _L = "∦", bL = "⫽⃥", vL = "∂̸", xL = "⨔", yL = "⊀", kL = "⋠", EL = "⊀", wL = "⪯̸", CL = "⪯̸", AL = "⤳̸", SL = "↛", RL = "⇏", TL = "↝̸", DL = "↛", ML = "⇏", IL = "⋫", NL = "⋭", OL = "⊁", LL = "⋡", FL = "⪰̸", qL = "𝒩", PL = "𝓃", BL = "∤", $L = "∦", zL = "≁", UL = "≄", HL = "≄", jL = "∤", VL = "∦", KL = "⋢", GL = "⋣", ZL = "⊄", WL = "⫅̸", JL = "⊈", YL = "⊂⃒", XL = "⊈", QL = "⫅̸", eF = "⊁", tF = "⪰̸", nF = "⊅", sF = "⫆̸", rF = "⊉", oF = "⊃⃒", iF = "⊉", cF = "⫆̸", aF = "≹", lF = "Ñ", uF = "ñ", fF = "≸", hF = "⋪", dF = "⋬", pF = "⋫", gF = "⋭", mF = "Ν", _F = "ν", bF = "#", vF = "№", xF = " ", yF = "≍⃒", kF = "⊬", EF = "⊭", wF = "⊮", CF = "⊯", AF = "≥⃒", SF = ">⃒", RF = "⤄", TF = "⧞", DF = "⤂", MF = "≤⃒", IF = "<⃒", NF = "⊴⃒", OF = "⤃", LF = "⊵⃒", FF = "∼⃒", qF = "⤣", PF = "↖", BF = "⇖", $F = "↖", zF = "⤧", UF = "Ó", HF = "ó", jF = "⊛", VF = "Ô", KF = "ô", GF = "⊚", ZF = "О", WF = "о", JF = "⊝", YF = "Ő", XF = "ő", QF = "⨸", eq = "⊙", tq = "⦼", nq = "Œ", sq = "œ", rq = "⦿", oq = "𝔒", iq = "𝔬", cq = "˛", aq = "Ò", lq = "ò", uq = "⧁", fq = "⦵", hq = "Ω", dq = "∮", pq = "↺", gq = "⦾", mq = "⦻", _q = "‾", bq = "⧀", vq = "Ō", xq = "ō", yq = "Ω", kq = "ω", Eq = "Ο", wq = "ο", Cq = "⦶", Aq = "⊖", Sq = "𝕆", Rq = "𝕠", Tq = "⦷", Dq = "“", Mq = "‘", Iq = "⦹", Nq = "⊕", Oq = "↻", Lq = "⩔", Fq = "∨", qq = "⩝", Pq = "ℴ", Bq = "ℴ", $q = "ª", zq = "º", Uq = "⊶", Hq = "⩖", jq = "⩗", Vq = "⩛", Kq = "Ⓢ", Gq = "𝒪", Zq = "ℴ", Wq = "Ø", Jq = "ø", Yq = "⊘", Xq = "Õ", Qq = "õ", eP = "⨶", tP = "⨷", nP = "⊗", sP = "Ö", rP = "ö", oP = "⌽", iP = "‾", cP = "⏞", aP = "⎴", lP = "⏜", uP = "¶", fP = "∥", hP = "∥", dP = "⫳", pP = "⫽", gP = "∂", mP = "∂", _P = "П", bP = "п", vP = "%", xP = ".", yP = "‰", kP = "⊥", EP = "‱", wP = "𝔓", CP = "𝔭", AP = "Φ", SP = "φ", RP = "ϕ", TP = "ℳ", DP = "☎", MP = "Π", IP = "π", NP = "⋔", OP = "ϖ", LP = "ℏ", FP = "ℎ", qP = "ℏ", PP = "⨣", BP = "⊞", $P = "⨢", zP = "+", UP = "∔", HP = "⨥", jP = "⩲", VP = "±", KP = "±", GP = "⨦", ZP = "⨧", WP = "±", JP = "ℌ", YP = "⨕", XP = "𝕡", QP = "ℙ", e2 = "£", t2 = "⪷", n2 = "⪻", s2 = "≺", r2 = "≼", o2 = "⪷", i2 = "≺", c2 = "≼", a2 = "≺", l2 = "⪯", u2 = "≼", f2 = "≾", h2 = "⪯", d2 = "⪹", p2 = "⪵", g2 = "⋨", m2 = "⪯", _2 = "⪳", b2 = "≾", v2 = "′", x2 = "″", y2 = "ℙ", k2 = "⪹", E2 = "⪵", w2 = "⋨", C2 = "∏", A2 = "∏", S2 = "⌮", R2 = "⌒", T2 = "⌓", D2 = "∝", M2 = "∝", I2 = "∷", N2 = "∝", O2 = "≾", L2 = "⊰", F2 = "𝒫", q2 = "𝓅", P2 = "Ψ", B2 = "ψ", $2 = " ", z2 = "𝔔", U2 = "𝔮", H2 = "⨌", j2 = "𝕢", V2 = "ℚ", K2 = "⁗", G2 = "𝒬", Z2 = "𝓆", W2 = "ℍ", J2 = "⨖", Y2 = "?", X2 = "≟", Q2 = '"', eB = '"', tB = "⇛", nB = "∽̱", sB = "Ŕ", rB = "ŕ", oB = "√", iB = "⦳", cB = "⟩", aB = "⟫", lB = "⦒", uB = "⦥", fB = "⟩", hB = "»", dB = "⥵", pB = "⇥", gB = "⤠", mB = "⤳", _B = "→", bB = "↠", vB = "⇒", xB = "⤞", yB = "↪", kB = "↬", EB = "⥅", wB = "⥴", CB = "⤖", AB = "↣", SB = "↝", RB = "⤚", TB = "⤜", DB = "∶", MB = "ℚ", IB = "⤍", NB = "⤏", OB = "⤐", LB = "❳", FB = "}", qB = "]", PB = "⦌", BB = "⦎", $B = "⦐", zB = "Ř", UB = "ř", HB = "Ŗ", jB = "ŗ", VB = "⌉", KB = "}", GB = "Р", ZB = "р", WB = "⤷", JB = "⥩", YB = "”", XB = "”", QB = "↳", e$ = "ℜ", t$ = "ℛ", n$ = "ℜ", s$ = "ℝ", r$ = "ℜ", o$ = "▭", i$ = "®", c$ = "®", a$ = "∋", l$ = "⇋", u$ = "⥯", f$ = "⥽", h$ = "⌋", d$ = "𝔯", p$ = "ℜ", g$ = "⥤", m$ = "⇁", _$ = "⇀", b$ = "⥬", v$ = "Ρ", x$ = "ρ", y$ = "ϱ", k$ = "⟩", E$ = "⇥", w$ = "→", C$ = "→", A$ = "⇒", S$ = "⇄", R$ = "↣", T$ = "⌉", D$ = "⟧", M$ = "⥝", I$ = "⥕", N$ = "⇂", O$ = "⌋", L$ = "⇁", F$ = "⇀", q$ = "⇄", P$ = "⇌", B$ = "⇉", $$ = "↝", z$ = "↦", U$ = "⊢", H$ = "⥛", j$ = "⋌", V$ = "⧐", K$ = "⊳", G$ = "⊵", Z$ = "⥏", W$ = "⥜", J$ = "⥔", Y$ = "↾", X$ = "⥓", Q$ = "⇀", ez = "˚", tz = "≓", nz = "⇄", sz = "⇌", rz = "‏", oz = "⎱", iz = "⎱", cz = "⫮", az = "⟭", lz = "⇾", uz = "⟧", fz = "⦆", hz = "𝕣", dz = "ℝ", pz = "⨮", gz = "⨵", mz = "⥰", _z = ")", bz = "⦔", vz = "⨒", xz = "⇉", yz = "⇛", kz = "›", Ez = "𝓇", wz = "ℛ", Cz = "↱", Az = "↱", Sz = "]", Rz = "’", Tz = "’", Dz = "⋌", Mz = "⋊", Iz = "▹", Nz = "⊵", Oz = "▸", Lz = "⧎", Fz = "⧴", qz = "⥨", Pz = "℞", Bz = "Ś", $z = "ś", zz = "‚", Uz = "⪸", Hz = "Š", jz = "š", Vz = "⪼", Kz = "≻", Gz = "≽", Zz = "⪰", Wz = "⪴", Jz = "Ş", Yz = "ş", Xz = "Ŝ", Qz = "ŝ", e3 = "⪺", t3 = "⪶", n3 = "⋩", s3 = "⨓", r3 = "≿", o3 = "С", i3 = "с", c3 = "⊡", a3 = "⋅", l3 = "⩦", u3 = "⤥", f3 = "↘", h3 = "⇘", d3 = "↘", p3 = "§", g3 = ";", m3 = "⤩", _3 = "∖", b3 = "∖", v3 = "✶", x3 = "𝔖", y3 = "𝔰", k3 = "⌢", E3 = "♯", w3 = "Щ", C3 = "щ", A3 = "Ш", S3 = "ш", R3 = "↓", T3 = "←", D3 = "∣", M3 = "∥", I3 = "→", N3 = "↑", O3 = "­", L3 = "Σ", F3 = "σ", q3 = "ς", P3 = "ς", B3 = "∼", $3 = "⩪", z3 = "≃", U3 = "≃", H3 = "⪞", j3 = "⪠", V3 = "⪝", K3 = "⪟", G3 = "≆", Z3 = "⨤", W3 = "⥲", J3 = "←", Y3 = "∘", X3 = "∖", Q3 = "⨳", eU = "⧤", tU = "∣", nU = "⌣", sU = "⪪", rU = "⪬", oU = "⪬︀", iU = "Ь", cU = "ь", aU = "⌿", lU = "⧄", uU = "/", fU = "𝕊", hU = "𝕤", dU = "♠", pU = "♠", gU = "∥", mU = "⊓", _U = "⊓︀", bU = "⊔", vU = "⊔︀", xU = "√", yU = "⊏", kU = "⊑", EU = "⊏", wU = "⊑", CU = "⊐", AU = "⊒", SU = "⊐", RU = "⊒", TU = "□", DU = "□", MU = "⊓", IU = "⊏", NU = "⊑", OU = "⊐", LU = "⊒", FU = "⊔", qU = "▪", PU = "□", BU = "▪", $U = "→", zU = "𝒮", UU = "𝓈", HU = "∖", jU = "⌣", VU = "⋆", KU = "⋆", GU = "☆", ZU = "★", WU = "ϵ", JU = "ϕ", YU = "¯", XU = "⊂", QU = "⋐", eH = "⪽", tH = "⫅", nH = "⊆", sH = "⫃", rH = "⫁", oH = "⫋", iH = "⊊", cH = "⪿", aH = "⥹", lH = "⊂", uH = "⋐", fH = "⊆", hH = "⫅", dH = "⊆", pH = "⊊", gH = "⫋", mH = "⫇", _H = "⫕", bH = "⫓", vH = "⪸", xH = "≻", yH = "≽", kH = "≻", EH = "⪰", wH = "≽", CH = "≿", AH = "⪰", SH = "⪺", RH = "⪶", TH = "⋩", DH = "≿", MH = "∋", IH = "∑", NH = "∑", OH = "♪", LH = "¹", FH = "²", qH = "³", PH = "⊃", BH = "⋑", $H = "⪾", zH = "⫘", UH = "⫆", HH = "⊇", jH = "⫄", VH = "⊃", KH = "⊇", GH = "⟉", ZH = "⫗", WH = "⥻", JH = "⫂", YH = "⫌", XH = "⊋", QH = "⫀", e6 = "⊃", t6 = "⋑", n6 = "⊇", s6 = "⫆", r6 = "⊋", o6 = "⫌", i6 = "⫈", c6 = "⫔", a6 = "⫖", l6 = "⤦", u6 = "↙", f6 = "⇙", h6 = "↙", d6 = "⤪", p6 = "ß", g6 = "	", m6 = "⌖", _6 = "Τ", b6 = "τ", v6 = "⎴", x6 = "Ť", y6 = "ť", k6 = "Ţ", E6 = "ţ", w6 = "Т", C6 = "т", A6 = "⃛", S6 = "⌕", R6 = "𝔗", T6 = "𝔱", D6 = "∴", M6 = "∴", I6 = "∴", N6 = "Θ", O6 = "θ", L6 = "ϑ", F6 = "ϑ", q6 = "≈", P6 = "∼", B6 = "  ", $6 = " ", z6 = " ", U6 = "≈", H6 = "∼", j6 = "Þ", V6 = "þ", K6 = "˜", G6 = "∼", Z6 = "≃", W6 = "≅", J6 = "≈", Y6 = "⨱", X6 = "⊠", Q6 = "×", e5 = "⨰", t5 = "∭", n5 = "⤨", s5 = "⌶", r5 = "⫱", o5 = "⊤", i5 = "𝕋", c5 = "𝕥", a5 = "⫚", l5 = "⤩", u5 = "‴", f5 = "™", h5 = "™", d5 = "▵", p5 = "▿", g5 = "◃", m5 = "⊴", _5 = "≜", b5 = "▹", v5 = "⊵", x5 = "◬", y5 = "≜", k5 = "⨺", E5 = "⃛", w5 = "⨹", C5 = "⧍", A5 = "⨻", S5 = "⏢", R5 = "𝒯", T5 = "𝓉", D5 = "Ц", M5 = "ц", I5 = "Ћ", N5 = "ћ", O5 = "Ŧ", L5 = "ŧ", F5 = "≬", q5 = "↞", P5 = "↠", B5 = "Ú", $5 = "ú", z5 = "↑", U5 = "↟", H5 = "⇑", j5 = "⥉", V5 = "Ў", K5 = "ў", G5 = "Ŭ", Z5 = "ŭ", W5 = "Û", J5 = "û", Y5 = "У", X5 = "у", Q5 = "⇅", e8 = "Ű", t8 = "ű", n8 = "⥮", s8 = "⥾", r8 = "𝔘", o8 = "𝔲", i8 = "Ù", c8 = "ù", a8 = "⥣", l8 = "↿", u8 = "↾", f8 = "▀", h8 = "⌜", d8 = "⌜", p8 = "⌏", g8 = "◸", m8 = "Ū", _8 = "ū", b8 = "¨", v8 = "_", x8 = "⏟", y8 = "⎵", k8 = "⏝", E8 = "⋃", w8 = "⊎", C8 = "Ų", A8 = "ų", S8 = "𝕌", R8 = "𝕦", T8 = "⤒", D8 = "↑", M8 = "↑", I8 = "⇑", N8 = "⇅", O8 = "↕", L8 = "↕", F8 = "⇕", q8 = "⥮", P8 = "↿", B8 = "↾", $8 = "⊎", z8 = "↖", U8 = "↗", H8 = "υ", j8 = "ϒ", V8 = "ϒ", K8 = "Υ", G8 = "υ", Z8 = "↥", W8 = "⊥", J8 = "⇈", Y8 = "⌝", X8 = "⌝", Q8 = "⌎", e4 = "Ů", t4 = "ů", n4 = "◹", s4 = "𝒰", r4 = "𝓊", o4 = "⋰", i4 = "Ũ", c4 = "ũ", a4 = "▵", l4 = "▴", u4 = "⇈", f4 = "Ü", h4 = "ü", d4 = "⦧", p4 = "⦜", g4 = "ϵ", m4 = "ϰ", _4 = "∅", b4 = "ϕ", v4 = "ϖ", x4 = "∝", y4 = "↕", k4 = "⇕", E4 = "ϱ", w4 = "ς", C4 = "⊊︀", A4 = "⫋︀", S4 = "⊋︀", R4 = "⫌︀", T4 = "ϑ", D4 = "⊲", M4 = "⊳", I4 = "⫨", N4 = "⫫", O4 = "⫩", L4 = "В", F4 = "в", q4 = "⊢", P4 = "⊨", B4 = "⊩", $4 = "⊫", z4 = "⫦", U4 = "⊻", H4 = "∨", j4 = "⋁", V4 = "≚", K4 = "⋮", G4 = "|", Z4 = "‖", W4 = "|", J4 = "‖", Y4 = "∣", X4 = "|", Q4 = "❘", e9 = "≀", t9 = " ", n9 = "𝔙", s9 = "𝔳", r9 = "⊲", o9 = "⊂⃒", i9 = "⊃⃒", c9 = "𝕍", a9 = "𝕧", l9 = "∝", u9 = "⊳", f9 = "𝒱", h9 = "𝓋", d9 = "⫋︀", p9 = "⊊︀", g9 = "⫌︀", m9 = "⊋︀", _9 = "⊪", b9 = "⦚", v9 = "Ŵ", x9 = "ŵ", y9 = "⩟", k9 = "∧", E9 = "⋀", w9 = "≙", C9 = "℘", A9 = "𝔚", S9 = "𝔴", R9 = "𝕎", T9 = "𝕨", D9 = "℘", M9 = "≀", I9 = "≀", N9 = "𝒲", O9 = "𝓌", L9 = "⋂", F9 = "◯", q9 = "⋃", P9 = "▽", B9 = "𝔛", $9 = "𝔵", z9 = "⟷", U9 = "⟺", H9 = "Ξ", j9 = "ξ", V9 = "⟵", K9 = "⟸", G9 = "⟼", Z9 = "⋻", W9 = "⨀", J9 = "𝕏", Y9 = "𝕩", X9 = "⨁", Q9 = "⨂", ej = "⟶", tj = "⟹", nj = "𝒳", sj = "𝓍", rj = "⨆", oj = "⨄", ij = "△", cj = "⋁", aj = "⋀", lj = "Ý", uj = "ý", fj = "Я", hj = "я", dj = "Ŷ", pj = "ŷ", gj = "Ы", mj = "ы", _j = "¥", bj = "𝔜", vj = "𝔶", xj = "Ї", yj = "ї", kj = "𝕐", Ej = "𝕪", wj = "𝒴", Cj = "𝓎", Aj = "Ю", Sj = "ю", Rj = "ÿ", Tj = "Ÿ", Dj = "Ź", Mj = "ź", Ij = "Ž", Nj = "ž", Oj = "З", Lj = "з", Fj = "Ż", qj = "ż", Pj = "ℨ", Bj = "​", $j = "Ζ", zj = "ζ", Uj = "𝔷", Hj = "ℨ", jj = "Ж", Vj = "ж", Kj = "⇝", Gj = "𝕫", Zj = "ℤ", Wj = "𝒵", Jj = "𝓏", Yj = "‍", Xj = "‌", Qj = {
+const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "∾̳", Hp = "Â", jp = "â", Vp = "´", Kp = "А", Gp = "а", Zp = "Æ", Wp = "æ", Jp = "⁡", Yp = "𝔄", Xp = "𝔞", Qp = "À", eg = "à", tg = "ℵ", ng = "ℵ", sg = "Α", rg = "α", og = "Ā", ig = "ā", cg = "⨿", ag = "&", lg = "&", ug = "⩕", fg = "⩓", hg = "∧", dg = "⩜", pg = "⩘", gg = "⩚", mg = "∠", _g = "⦤", bg = "∠", vg = "⦨", xg = "⦩", yg = "⦪", kg = "⦫", Eg = "⦬", wg = "⦭", Cg = "⦮", Ag = "⦯", Sg = "∡", Tg = "∟", Rg = "⊾", Dg = "⦝", Mg = "∢", Ig = "Å", Ng = "⍼", Og = "Ą", Lg = "ą", Fg = "𝔸", qg = "𝕒", Pg = "⩯", Bg = "≈", $g = "⩰", zg = "≊", Ug = "≋", Hg = "'", jg = "⁡", Vg = "≈", Kg = "≊", Gg = "Å", Zg = "å", Wg = "𝒜", Jg = "𝒶", Yg = "≔", Xg = "*", Qg = "≈", em = "≍", tm = "Ã", nm = "ã", sm = "Ä", rm = "ä", om = "∳", im = "⨑", cm = "≌", am = "϶", lm = "‵", um = "∽", fm = "⋍", hm = "∖", dm = "⫧", pm = "⊽", gm = "⌅", mm = "⌆", _m = "⌅", bm = "⎵", vm = "⎶", xm = "≌", ym = "Б", km = "б", Em = "„", wm = "∵", Cm = "∵", Am = "∵", Sm = "⦰", Tm = "϶", Rm = "ℬ", Dm = "ℬ", Mm = "Β", Im = "β", Nm = "ℶ", Om = "≬", Lm = "𝔅", Fm = "𝔟", qm = "⋂", Pm = "◯", Bm = "⋃", $m = "⨀", zm = "⨁", Um = "⨂", Hm = "⨆", jm = "★", Vm = "▽", Km = "△", Gm = "⨄", Zm = "⋁", Wm = "⋀", Jm = "⤍", Ym = "⧫", Xm = "▪", Qm = "▴", e_ = "▾", t_ = "◂", n_ = "▸", s_ = "␣", r_ = "▒", o_ = "░", i_ = "▓", c_ = "█", a_ = "=⃥", l_ = "≡⃥", u_ = "⫭", f_ = "⌐", h_ = "𝔹", d_ = "𝕓", p_ = "⊥", g_ = "⊥", m_ = "⋈", __ = "⧉", b_ = "┐", v_ = "╕", x_ = "╖", y_ = "╗", k_ = "┌", E_ = "╒", w_ = "╓", C_ = "╔", A_ = "─", S_ = "═", T_ = "┬", R_ = "╤", D_ = "╥", M_ = "╦", I_ = "┴", N_ = "╧", O_ = "╨", L_ = "╩", F_ = "⊟", q_ = "⊞", P_ = "⊠", B_ = "┘", $_ = "╛", z_ = "╜", U_ = "╝", H_ = "└", j_ = "╘", V_ = "╙", K_ = "╚", G_ = "│", Z_ = "║", W_ = "┼", J_ = "╪", Y_ = "╫", X_ = "╬", Q_ = "┤", e0 = "╡", t0 = "╢", n0 = "╣", s0 = "├", r0 = "╞", o0 = "╟", i0 = "╠", c0 = "‵", a0 = "˘", l0 = "˘", u0 = "¦", f0 = "𝒷", h0 = "ℬ", d0 = "⁏", p0 = "∽", g0 = "⋍", m0 = "⧅", _0 = "\\", b0 = "⟈", v0 = "•", x0 = "•", y0 = "≎", k0 = "⪮", E0 = "≏", w0 = "≎", C0 = "≏", A0 = "Ć", S0 = "ć", T0 = "⩄", R0 = "⩉", D0 = "⩋", M0 = "∩", I0 = "⋒", N0 = "⩇", O0 = "⩀", L0 = "ⅅ", F0 = "∩︀", q0 = "⁁", P0 = "ˇ", B0 = "ℭ", $0 = "⩍", z0 = "Č", U0 = "č", H0 = "Ç", j0 = "ç", V0 = "Ĉ", K0 = "ĉ", G0 = "∰", Z0 = "⩌", W0 = "⩐", J0 = "Ċ", Y0 = "ċ", X0 = "¸", Q0 = "¸", eb = "⦲", tb = "¢", nb = "·", sb = "·", rb = "𝔠", ob = "ℭ", ib = "Ч", cb = "ч", ab = "✓", lb = "✓", ub = "Χ", fb = "χ", hb = "ˆ", db = "≗", pb = "↺", gb = "↻", mb = "⊛", _b = "⊚", bb = "⊝", vb = "⊙", xb = "®", yb = "Ⓢ", kb = "⊖", Eb = "⊕", wb = "⊗", Cb = "○", Ab = "⧃", Sb = "≗", Tb = "⨐", Rb = "⫯", Db = "⧂", Mb = "∲", Ib = "”", Nb = "’", Ob = "♣", Lb = "♣", Fb = ":", qb = "∷", Pb = "⩴", Bb = "≔", $b = "≔", zb = ",", Ub = "@", Hb = "∁", jb = "∘", Vb = "∁", Kb = "ℂ", Gb = "≅", Zb = "⩭", Wb = "≡", Jb = "∮", Yb = "∯", Xb = "∮", Qb = "𝕔", ev = "ℂ", tv = "∐", nv = "∐", sv = "©", rv = "©", ov = "℗", iv = "∳", cv = "↵", av = "✗", lv = "⨯", uv = "𝒞", fv = "𝒸", hv = "⫏", dv = "⫑", pv = "⫐", gv = "⫒", mv = "⋯", _v = "⤸", bv = "⤵", vv = "⋞", xv = "⋟", yv = "↶", kv = "⤽", Ev = "⩈", wv = "⩆", Cv = "≍", Av = "∪", Sv = "⋓", Tv = "⩊", Rv = "⊍", Dv = "⩅", Mv = "∪︀", Iv = "↷", Nv = "⤼", Ov = "⋞", Lv = "⋟", Fv = "⋎", qv = "⋏", Pv = "¤", Bv = "↶", $v = "↷", zv = "⋎", Uv = "⋏", Hv = "∲", jv = "∱", Vv = "⌭", Kv = "†", Gv = "‡", Zv = "ℸ", Wv = "↓", Jv = "↡", Yv = "⇓", Xv = "‐", Qv = "⫤", ex = "⊣", tx = "⤏", nx = "˝", sx = "Ď", rx = "ď", ox = "Д", ix = "д", cx = "‡", ax = "⇊", lx = "ⅅ", ux = "ⅆ", fx = "⤑", hx = "⩷", dx = "°", px = "∇", gx = "Δ", mx = "δ", _x = "⦱", bx = "⥿", vx = "𝔇", xx = "𝔡", yx = "⥥", kx = "⇃", Ex = "⇂", wx = "´", Cx = "˙", Ax = "˝", Sx = "`", Tx = "˜", Rx = "⋄", Dx = "⋄", Mx = "⋄", Ix = "♦", Nx = "♦", Ox = "¨", Lx = "ⅆ", Fx = "ϝ", qx = "⋲", Px = "÷", Bx = "÷", $x = "⋇", zx = "⋇", Ux = "Ђ", Hx = "ђ", jx = "⌞", Vx = "⌍", Kx = "$", Gx = "𝔻", Zx = "𝕕", Wx = "¨", Jx = "˙", Yx = "⃜", Xx = "≐", Qx = "≑", ey = "≐", ty = "∸", ny = "∔", sy = "⊡", ry = "⌆", oy = "∯", iy = "¨", cy = "⇓", ay = "⇐", ly = "⇔", uy = "⫤", fy = "⟸", hy = "⟺", dy = "⟹", py = "⇒", gy = "⊨", my = "⇑", _y = "⇕", by = "∥", vy = "⤓", xy = "↓", yy = "↓", ky = "⇓", Ey = "⇵", wy = "̑", Cy = "⇊", Ay = "⇃", Sy = "⇂", Ty = "⥐", Ry = "⥞", Dy = "⥖", My = "↽", Iy = "⥟", Ny = "⥗", Oy = "⇁", Ly = "↧", Fy = "⊤", qy = "⤐", Py = "⌟", By = "⌌", $y = "𝒟", zy = "𝒹", Uy = "Ѕ", Hy = "ѕ", jy = "⧶", Vy = "Đ", Ky = "đ", Gy = "⋱", Zy = "▿", Wy = "▾", Jy = "⇵", Yy = "⥯", Xy = "⦦", Qy = "Џ", ek = "џ", tk = "⟿", nk = "É", sk = "é", rk = "⩮", ok = "Ě", ik = "ě", ck = "Ê", ak = "ê", lk = "≖", uk = "≕", fk = "Э", hk = "э", dk = "⩷", pk = "Ė", gk = "ė", mk = "≑", _k = "ⅇ", bk = "≒", vk = "𝔈", xk = "𝔢", yk = "⪚", kk = "È", Ek = "è", wk = "⪖", Ck = "⪘", Ak = "⪙", Sk = "∈", Tk = "⏧", Rk = "ℓ", Dk = "⪕", Mk = "⪗", Ik = "Ē", Nk = "ē", Ok = "∅", Lk = "∅", Fk = "◻", qk = "∅", Pk = "▫", Bk = " ", $k = " ", zk = " ", Uk = "Ŋ", Hk = "ŋ", jk = " ", Vk = "Ę", Kk = "ę", Gk = "𝔼", Zk = "𝕖", Wk = "⋕", Jk = "⧣", Yk = "⩱", Xk = "ε", Qk = "Ε", eE = "ε", tE = "ϵ", nE = "≖", sE = "≕", rE = "≂", oE = "⪖", iE = "⪕", cE = "⩵", aE = "=", lE = "≂", uE = "≟", fE = "⇌", hE = "≡", dE = "⩸", pE = "⧥", gE = "⥱", mE = "≓", _E = "ℯ", bE = "ℰ", vE = "≐", xE = "⩳", yE = "≂", kE = "Η", EE = "η", wE = "Ð", CE = "ð", AE = "Ë", SE = "ë", TE = "€", RE = "!", DE = "∃", ME = "∃", IE = "ℰ", NE = "ⅇ", OE = "ⅇ", LE = "≒", FE = "Ф", qE = "ф", PE = "♀", BE = "ﬃ", $E = "ﬀ", zE = "ﬄ", UE = "𝔉", HE = "𝔣", jE = "ﬁ", VE = "◼", KE = "▪", GE = "fj", ZE = "♭", WE = "ﬂ", JE = "▱", YE = "ƒ", XE = "𝔽", QE = "𝕗", e1 = "∀", t1 = "∀", n1 = "⋔", s1 = "⫙", r1 = "ℱ", o1 = "⨍", i1 = "½", c1 = "⅓", a1 = "¼", l1 = "⅕", u1 = "⅙", f1 = "⅛", h1 = "⅔", d1 = "⅖", p1 = "¾", g1 = "⅗", m1 = "⅜", _1 = "⅘", b1 = "⅚", v1 = "⅝", x1 = "⅞", y1 = "⁄", k1 = "⌢", E1 = "𝒻", w1 = "ℱ", C1 = "ǵ", A1 = "Γ", S1 = "γ", T1 = "Ϝ", R1 = "ϝ", D1 = "⪆", M1 = "Ğ", I1 = "ğ", N1 = "Ģ", O1 = "Ĝ", L1 = "ĝ", F1 = "Г", q1 = "г", P1 = "Ġ", B1 = "ġ", $1 = "≥", z1 = "≧", U1 = "⪌", H1 = "⋛", j1 = "≥", V1 = "≧", K1 = "⩾", G1 = "⪩", Z1 = "⩾", W1 = "⪀", J1 = "⪂", Y1 = "⪄", X1 = "⋛︀", Q1 = "⪔", ew = "𝔊", tw = "𝔤", nw = "≫", sw = "⋙", rw = "⋙", ow = "ℷ", iw = "Ѓ", cw = "ѓ", aw = "⪥", lw = "≷", uw = "⪒", fw = "⪤", hw = "⪊", dw = "⪊", pw = "⪈", gw = "≩", mw = "⪈", _w = "≩", bw = "⋧", vw = "𝔾", xw = "𝕘", yw = "`", kw = "≥", Ew = "⋛", ww = "≧", Cw = "⪢", Aw = "≷", Sw = "⩾", Tw = "≳", Rw = "𝒢", Dw = "ℊ", Mw = "≳", Iw = "⪎", Nw = "⪐", Ow = "⪧", Lw = "⩺", Fw = ">", qw = ">", Pw = "≫", Bw = "⋗", $w = "⦕", zw = "⩼", Uw = "⪆", Hw = "⥸", jw = "⋗", Vw = "⋛", Kw = "⪌", Gw = "≷", Zw = "≳", Ww = "≩︀", Jw = "≩︀", Yw = "ˇ", Xw = " ", Qw = "½", eC = "ℋ", tC = "Ъ", nC = "ъ", sC = "⥈", rC = "↔", oC = "⇔", iC = "↭", cC = "^", aC = "ℏ", lC = "Ĥ", uC = "ĥ", fC = "♥", hC = "♥", dC = "…", pC = "⊹", gC = "𝔥", mC = "ℌ", _C = "ℋ", bC = "⤥", vC = "⤦", xC = "⇿", yC = "∻", kC = "↩", EC = "↪", wC = "𝕙", CC = "ℍ", AC = "―", SC = "─", TC = "𝒽", RC = "ℋ", DC = "ℏ", MC = "Ħ", IC = "ħ", NC = "≎", OC = "≏", LC = "⁃", FC = "‐", qC = "Í", PC = "í", BC = "⁣", $C = "Î", zC = "î", UC = "И", HC = "и", jC = "İ", VC = "Е", KC = "е", GC = "¡", ZC = "⇔", WC = "𝔦", JC = "ℑ", YC = "Ì", XC = "ì", QC = "ⅈ", eA = "⨌", tA = "∭", nA = "⧜", sA = "℩", rA = "Ĳ", oA = "ĳ", iA = "Ī", cA = "ī", aA = "ℑ", lA = "ⅈ", uA = "ℐ", fA = "ℑ", hA = "ı", dA = "ℑ", pA = "⊷", gA = "Ƶ", mA = "⇒", _A = "℅", bA = "∞", vA = "⧝", xA = "ı", yA = "⊺", kA = "∫", EA = "∬", wA = "ℤ", CA = "∫", AA = "⊺", SA = "⋂", TA = "⨗", RA = "⨼", DA = "⁣", MA = "⁢", IA = "Ё", NA = "ё", OA = "Į", LA = "į", FA = "𝕀", qA = "𝕚", PA = "Ι", BA = "ι", $A = "⨼", zA = "¿", UA = "𝒾", HA = "ℐ", jA = "∈", VA = "⋵", KA = "⋹", GA = "⋴", ZA = "⋳", WA = "∈", JA = "⁢", YA = "Ĩ", XA = "ĩ", QA = "І", eS = "і", tS = "Ï", nS = "ï", sS = "Ĵ", rS = "ĵ", oS = "Й", iS = "й", cS = "𝔍", aS = "𝔧", lS = "ȷ", uS = "𝕁", fS = "𝕛", hS = "𝒥", dS = "𝒿", pS = "Ј", gS = "ј", mS = "Є", _S = "є", bS = "Κ", vS = "κ", xS = "ϰ", yS = "Ķ", kS = "ķ", ES = "К", wS = "к", CS = "𝔎", AS = "𝔨", SS = "ĸ", TS = "Х", RS = "х", DS = "Ќ", MS = "ќ", IS = "𝕂", NS = "𝕜", OS = "𝒦", LS = "𝓀", FS = "⇚", qS = "Ĺ", PS = "ĺ", BS = "⦴", $S = "ℒ", zS = "Λ", US = "λ", HS = "⟨", jS = "⟪", VS = "⦑", KS = "⟨", GS = "⪅", ZS = "ℒ", WS = "«", JS = "⇤", YS = "⤟", XS = "←", QS = "↞", eT = "⇐", tT = "⤝", nT = "↩", sT = "↫", rT = "⤹", oT = "⥳", iT = "↢", cT = "⤙", aT = "⤛", lT = "⪫", uT = "⪭", fT = "⪭︀", hT = "⤌", dT = "⤎", pT = "❲", gT = "{", mT = "[", _T = "⦋", bT = "⦏", vT = "⦍", xT = "Ľ", yT = "ľ", kT = "Ļ", ET = "ļ", wT = "⌈", CT = "{", AT = "Л", ST = "л", TT = "⤶", RT = "“", DT = "„", MT = "⥧", IT = "⥋", NT = "↲", OT = "≤", LT = "≦", FT = "⟨", qT = "⇤", PT = "←", BT = "←", $T = "⇐", zT = "⇆", UT = "↢", HT = "⌈", jT = "⟦", VT = "⥡", KT = "⥙", GT = "⇃", ZT = "⌊", WT = "↽", JT = "↼", YT = "⇇", XT = "↔", QT = "↔", eR = "⇔", tR = "⇆", nR = "⇋", sR = "↭", rR = "⥎", oR = "↤", iR = "⊣", cR = "⥚", aR = "⋋", lR = "⧏", uR = "⊲", fR = "⊴", hR = "⥑", dR = "⥠", pR = "⥘", gR = "↿", mR = "⥒", _R = "↼", bR = "⪋", vR = "⋚", xR = "≤", yR = "≦", kR = "⩽", ER = "⪨", wR = "⩽", CR = "⩿", AR = "⪁", SR = "⪃", TR = "⋚︀", RR = "⪓", DR = "⪅", MR = "⋖", IR = "⋚", NR = "⪋", OR = "⋚", LR = "≦", FR = "≶", qR = "≶", PR = "⪡", BR = "≲", $R = "⩽", zR = "≲", UR = "⥼", HR = "⌊", jR = "𝔏", VR = "𝔩", KR = "≶", GR = "⪑", ZR = "⥢", WR = "↽", JR = "↼", YR = "⥪", XR = "▄", QR = "Љ", eD = "љ", tD = "⇇", nD = "≪", sD = "⋘", rD = "⌞", oD = "⇚", iD = "⥫", cD = "◺", aD = "Ŀ", lD = "ŀ", uD = "⎰", fD = "⎰", hD = "⪉", dD = "⪉", pD = "⪇", gD = "≨", mD = "⪇", _D = "≨", bD = "⋦", vD = "⟬", xD = "⇽", yD = "⟦", kD = "⟵", ED = "⟵", wD = "⟸", CD = "⟷", AD = "⟷", SD = "⟺", TD = "⟼", RD = "⟶", DD = "⟶", MD = "⟹", ID = "↫", ND = "↬", OD = "⦅", LD = "𝕃", FD = "𝕝", qD = "⨭", PD = "⨴", BD = "∗", $D = "_", zD = "↙", UD = "↘", HD = "◊", jD = "◊", VD = "⧫", KD = "(", GD = "⦓", ZD = "⇆", WD = "⌟", JD = "⇋", YD = "⥭", XD = "‎", QD = "⊿", eM = "‹", tM = "𝓁", nM = "ℒ", sM = "↰", rM = "↰", oM = "≲", iM = "⪍", cM = "⪏", aM = "[", lM = "‘", uM = "‚", fM = "Ł", hM = "ł", dM = "⪦", pM = "⩹", gM = "<", mM = "<", _M = "≪", bM = "⋖", vM = "⋋", xM = "⋉", yM = "⥶", kM = "⩻", EM = "◃", wM = "⊴", CM = "◂", AM = "⦖", SM = "⥊", TM = "⥦", RM = "≨︀", DM = "≨︀", MM = "¯", IM = "♂", NM = "✠", OM = "✠", LM = "↦", FM = "↦", qM = "↧", PM = "↤", BM = "↥", $M = "▮", zM = "⨩", UM = "М", HM = "м", jM = "—", VM = "∺", KM = "∡", GM = " ", ZM = "ℳ", WM = "𝔐", JM = "𝔪", YM = "℧", XM = "µ", QM = "*", eI = "⫰", tI = "∣", nI = "·", sI = "⊟", rI = "−", oI = "∸", iI = "⨪", cI = "∓", aI = "⫛", lI = "…", uI = "∓", fI = "⊧", hI = "𝕄", dI = "𝕞", pI = "∓", gI = "𝓂", mI = "ℳ", _I = "∾", bI = "Μ", vI = "μ", xI = "⊸", yI = "⊸", kI = "∇", EI = "Ń", wI = "ń", CI = "∠⃒", AI = "≉", SI = "⩰̸", TI = "≋̸", RI = "ŉ", DI = "≉", MI = "♮", II = "ℕ", NI = "♮", OI = " ", LI = "≎̸", FI = "≏̸", qI = "⩃", PI = "Ň", BI = "ň", $I = "Ņ", zI = "ņ", UI = "≇", HI = "⩭̸", jI = "⩂", VI = "Н", KI = "н", GI = "–", ZI = "⤤", WI = "↗", JI = "⇗", YI = "↗", XI = "≠", QI = "≐̸", eN = "​", tN = "​", nN = "​", sN = "​", rN = "≢", oN = "⤨", iN = "≂̸", cN = "≫", aN = "≪", lN = `
+`, uN = "∄", fN = "∄", hN = "𝔑", dN = "𝔫", pN = "≧̸", gN = "≱", mN = "≱", _N = "≧̸", bN = "⩾̸", vN = "⩾̸", xN = "⋙̸", yN = "≵", kN = "≫⃒", EN = "≯", wN = "≯", CN = "≫̸", AN = "↮", SN = "⇎", TN = "⫲", RN = "∋", DN = "⋼", MN = "⋺", IN = "∋", NN = "Њ", ON = "њ", LN = "↚", FN = "⇍", qN = "‥", PN = "≦̸", BN = "≰", $N = "↚", zN = "⇍", UN = "↮", HN = "⇎", jN = "≰", VN = "≦̸", KN = "⩽̸", GN = "⩽̸", ZN = "≮", WN = "⋘̸", JN = "≴", YN = "≪⃒", XN = "≮", QN = "⋪", eO = "⋬", tO = "≪̸", nO = "∤", sO = "⁠", rO = " ", oO = "𝕟", iO = "ℕ", cO = "⫬", aO = "¬", lO = "≢", uO = "≭", fO = "∦", hO = "∉", dO = "≠", pO = "≂̸", gO = "∄", mO = "≯", _O = "≱", bO = "≧̸", vO = "≫̸", xO = "≹", yO = "⩾̸", kO = "≵", EO = "≎̸", wO = "≏̸", CO = "∉", AO = "⋵̸", SO = "⋹̸", TO = "∉", RO = "⋷", DO = "⋶", MO = "⧏̸", IO = "⋪", NO = "⋬", OO = "≮", LO = "≰", FO = "≸", qO = "≪̸", PO = "⩽̸", BO = "≴", $O = "⪢̸", zO = "⪡̸", UO = "∌", HO = "∌", jO = "⋾", VO = "⋽", KO = "⊀", GO = "⪯̸", ZO = "⋠", WO = "∌", JO = "⧐̸", YO = "⋫", XO = "⋭", QO = "⊏̸", eL = "⋢", tL = "⊐̸", nL = "⋣", sL = "⊂⃒", rL = "⊈", oL = "⊁", iL = "⪰̸", cL = "⋡", aL = "≿̸", lL = "⊃⃒", uL = "⊉", fL = "≁", hL = "≄", dL = "≇", pL = "≉", gL = "∤", mL = "∦", _L = "∦", bL = "⫽⃥", vL = "∂̸", xL = "⨔", yL = "⊀", kL = "⋠", EL = "⊀", wL = "⪯̸", CL = "⪯̸", AL = "⤳̸", SL = "↛", TL = "⇏", RL = "↝̸", DL = "↛", ML = "⇏", IL = "⋫", NL = "⋭", OL = "⊁", LL = "⋡", FL = "⪰̸", qL = "𝒩", PL = "𝓃", BL = "∤", $L = "∦", zL = "≁", UL = "≄", HL = "≄", jL = "∤", VL = "∦", KL = "⋢", GL = "⋣", ZL = "⊄", WL = "⫅̸", JL = "⊈", YL = "⊂⃒", XL = "⊈", QL = "⫅̸", eF = "⊁", tF = "⪰̸", nF = "⊅", sF = "⫆̸", rF = "⊉", oF = "⊃⃒", iF = "⊉", cF = "⫆̸", aF = "≹", lF = "Ñ", uF = "ñ", fF = "≸", hF = "⋪", dF = "⋬", pF = "⋫", gF = "⋭", mF = "Ν", _F = "ν", bF = "#", vF = "№", xF = " ", yF = "≍⃒", kF = "⊬", EF = "⊭", wF = "⊮", CF = "⊯", AF = "≥⃒", SF = ">⃒", TF = "⤄", RF = "⧞", DF = "⤂", MF = "≤⃒", IF = "<⃒", NF = "⊴⃒", OF = "⤃", LF = "⊵⃒", FF = "∼⃒", qF = "⤣", PF = "↖", BF = "⇖", $F = "↖", zF = "⤧", UF = "Ó", HF = "ó", jF = "⊛", VF = "Ô", KF = "ô", GF = "⊚", ZF = "О", WF = "о", JF = "⊝", YF = "Ő", XF = "ő", QF = "⨸", eq = "⊙", tq = "⦼", nq = "Œ", sq = "œ", rq = "⦿", oq = "𝔒", iq = "𝔬", cq = "˛", aq = "Ò", lq = "ò", uq = "⧁", fq = "⦵", hq = "Ω", dq = "∮", pq = "↺", gq = "⦾", mq = "⦻", _q = "‾", bq = "⧀", vq = "Ō", xq = "ō", yq = "Ω", kq = "ω", Eq = "Ο", wq = "ο", Cq = "⦶", Aq = "⊖", Sq = "𝕆", Tq = "𝕠", Rq = "⦷", Dq = "“", Mq = "‘", Iq = "⦹", Nq = "⊕", Oq = "↻", Lq = "⩔", Fq = "∨", qq = "⩝", Pq = "ℴ", Bq = "ℴ", $q = "ª", zq = "º", Uq = "⊶", Hq = "⩖", jq = "⩗", Vq = "⩛", Kq = "Ⓢ", Gq = "𝒪", Zq = "ℴ", Wq = "Ø", Jq = "ø", Yq = "⊘", Xq = "Õ", Qq = "õ", eP = "⨶", tP = "⨷", nP = "⊗", sP = "Ö", rP = "ö", oP = "⌽", iP = "‾", cP = "⏞", aP = "⎴", lP = "⏜", uP = "¶", fP = "∥", hP = "∥", dP = "⫳", pP = "⫽", gP = "∂", mP = "∂", _P = "П", bP = "п", vP = "%", xP = ".", yP = "‰", kP = "⊥", EP = "‱", wP = "𝔓", CP = "𝔭", AP = "Φ", SP = "φ", TP = "ϕ", RP = "ℳ", DP = "☎", MP = "Π", IP = "π", NP = "⋔", OP = "ϖ", LP = "ℏ", FP = "ℎ", qP = "ℏ", PP = "⨣", BP = "⊞", $P = "⨢", zP = "+", UP = "∔", HP = "⨥", jP = "⩲", VP = "±", KP = "±", GP = "⨦", ZP = "⨧", WP = "±", JP = "ℌ", YP = "⨕", XP = "𝕡", QP = "ℙ", e2 = "£", t2 = "⪷", n2 = "⪻", s2 = "≺", r2 = "≼", o2 = "⪷", i2 = "≺", c2 = "≼", a2 = "≺", l2 = "⪯", u2 = "≼", f2 = "≾", h2 = "⪯", d2 = "⪹", p2 = "⪵", g2 = "⋨", m2 = "⪯", _2 = "⪳", b2 = "≾", v2 = "′", x2 = "″", y2 = "ℙ", k2 = "⪹", E2 = "⪵", w2 = "⋨", C2 = "∏", A2 = "∏", S2 = "⌮", T2 = "⌒", R2 = "⌓", D2 = "∝", M2 = "∝", I2 = "∷", N2 = "∝", O2 = "≾", L2 = "⊰", F2 = "𝒫", q2 = "𝓅", P2 = "Ψ", B2 = "ψ", $2 = " ", z2 = "𝔔", U2 = "𝔮", H2 = "⨌", j2 = "𝕢", V2 = "ℚ", K2 = "⁗", G2 = "𝒬", Z2 = "𝓆", W2 = "ℍ", J2 = "⨖", Y2 = "?", X2 = "≟", Q2 = '"', eB = '"', tB = "⇛", nB = "∽̱", sB = "Ŕ", rB = "ŕ", oB = "√", iB = "⦳", cB = "⟩", aB = "⟫", lB = "⦒", uB = "⦥", fB = "⟩", hB = "»", dB = "⥵", pB = "⇥", gB = "⤠", mB = "⤳", _B = "→", bB = "↠", vB = "⇒", xB = "⤞", yB = "↪", kB = "↬", EB = "⥅", wB = "⥴", CB = "⤖", AB = "↣", SB = "↝", TB = "⤚", RB = "⤜", DB = "∶", MB = "ℚ", IB = "⤍", NB = "⤏", OB = "⤐", LB = "❳", FB = "}", qB = "]", PB = "⦌", BB = "⦎", $B = "⦐", zB = "Ř", UB = "ř", HB = "Ŗ", jB = "ŗ", VB = "⌉", KB = "}", GB = "Р", ZB = "р", WB = "⤷", JB = "⥩", YB = "”", XB = "”", QB = "↳", e$ = "ℜ", t$ = "ℛ", n$ = "ℜ", s$ = "ℝ", r$ = "ℜ", o$ = "▭", i$ = "®", c$ = "®", a$ = "∋", l$ = "⇋", u$ = "⥯", f$ = "⥽", h$ = "⌋", d$ = "𝔯", p$ = "ℜ", g$ = "⥤", m$ = "⇁", _$ = "⇀", b$ = "⥬", v$ = "Ρ", x$ = "ρ", y$ = "ϱ", k$ = "⟩", E$ = "⇥", w$ = "→", C$ = "→", A$ = "⇒", S$ = "⇄", T$ = "↣", R$ = "⌉", D$ = "⟧", M$ = "⥝", I$ = "⥕", N$ = "⇂", O$ = "⌋", L$ = "⇁", F$ = "⇀", q$ = "⇄", P$ = "⇌", B$ = "⇉", $$ = "↝", z$ = "↦", U$ = "⊢", H$ = "⥛", j$ = "⋌", V$ = "⧐", K$ = "⊳", G$ = "⊵", Z$ = "⥏", W$ = "⥜", J$ = "⥔", Y$ = "↾", X$ = "⥓", Q$ = "⇀", ez = "˚", tz = "≓", nz = "⇄", sz = "⇌", rz = "‏", oz = "⎱", iz = "⎱", cz = "⫮", az = "⟭", lz = "⇾", uz = "⟧", fz = "⦆", hz = "𝕣", dz = "ℝ", pz = "⨮", gz = "⨵", mz = "⥰", _z = ")", bz = "⦔", vz = "⨒", xz = "⇉", yz = "⇛", kz = "›", Ez = "𝓇", wz = "ℛ", Cz = "↱", Az = "↱", Sz = "]", Tz = "’", Rz = "’", Dz = "⋌", Mz = "⋊", Iz = "▹", Nz = "⊵", Oz = "▸", Lz = "⧎", Fz = "⧴", qz = "⥨", Pz = "℞", Bz = "Ś", $z = "ś", zz = "‚", Uz = "⪸", Hz = "Š", jz = "š", Vz = "⪼", Kz = "≻", Gz = "≽", Zz = "⪰", Wz = "⪴", Jz = "Ş", Yz = "ş", Xz = "Ŝ", Qz = "ŝ", e3 = "⪺", t3 = "⪶", n3 = "⋩", s3 = "⨓", r3 = "≿", o3 = "С", i3 = "с", c3 = "⊡", a3 = "⋅", l3 = "⩦", u3 = "⤥", f3 = "↘", h3 = "⇘", d3 = "↘", p3 = "§", g3 = ";", m3 = "⤩", _3 = "∖", b3 = "∖", v3 = "✶", x3 = "𝔖", y3 = "𝔰", k3 = "⌢", E3 = "♯", w3 = "Щ", C3 = "щ", A3 = "Ш", S3 = "ш", T3 = "↓", R3 = "←", D3 = "∣", M3 = "∥", I3 = "→", N3 = "↑", O3 = "­", L3 = "Σ", F3 = "σ", q3 = "ς", P3 = "ς", B3 = "∼", $3 = "⩪", z3 = "≃", U3 = "≃", H3 = "⪞", j3 = "⪠", V3 = "⪝", K3 = "⪟", G3 = "≆", Z3 = "⨤", W3 = "⥲", J3 = "←", Y3 = "∘", X3 = "∖", Q3 = "⨳", eU = "⧤", tU = "∣", nU = "⌣", sU = "⪪", rU = "⪬", oU = "⪬︀", iU = "Ь", cU = "ь", aU = "⌿", lU = "⧄", uU = "/", fU = "𝕊", hU = "𝕤", dU = "♠", pU = "♠", gU = "∥", mU = "⊓", _U = "⊓︀", bU = "⊔", vU = "⊔︀", xU = "√", yU = "⊏", kU = "⊑", EU = "⊏", wU = "⊑", CU = "⊐", AU = "⊒", SU = "⊐", TU = "⊒", RU = "□", DU = "□", MU = "⊓", IU = "⊏", NU = "⊑", OU = "⊐", LU = "⊒", FU = "⊔", qU = "▪", PU = "□", BU = "▪", $U = "→", zU = "𝒮", UU = "𝓈", HU = "∖", jU = "⌣", VU = "⋆", KU = "⋆", GU = "☆", ZU = "★", WU = "ϵ", JU = "ϕ", YU = "¯", XU = "⊂", QU = "⋐", eH = "⪽", tH = "⫅", nH = "⊆", sH = "⫃", rH = "⫁", oH = "⫋", iH = "⊊", cH = "⪿", aH = "⥹", lH = "⊂", uH = "⋐", fH = "⊆", hH = "⫅", dH = "⊆", pH = "⊊", gH = "⫋", mH = "⫇", _H = "⫕", bH = "⫓", vH = "⪸", xH = "≻", yH = "≽", kH = "≻", EH = "⪰", wH = "≽", CH = "≿", AH = "⪰", SH = "⪺", TH = "⪶", RH = "⋩", DH = "≿", MH = "∋", IH = "∑", NH = "∑", OH = "♪", LH = "¹", FH = "²", qH = "³", PH = "⊃", BH = "⋑", $H = "⪾", zH = "⫘", UH = "⫆", HH = "⊇", jH = "⫄", VH = "⊃", KH = "⊇", GH = "⟉", ZH = "⫗", WH = "⥻", JH = "⫂", YH = "⫌", XH = "⊋", QH = "⫀", e6 = "⊃", t6 = "⋑", n6 = "⊇", s6 = "⫆", r6 = "⊋", o6 = "⫌", i6 = "⫈", c6 = "⫔", a6 = "⫖", l6 = "⤦", u6 = "↙", f6 = "⇙", h6 = "↙", d6 = "⤪", p6 = "ß", g6 = "	", m6 = "⌖", _6 = "Τ", b6 = "τ", v6 = "⎴", x6 = "Ť", y6 = "ť", k6 = "Ţ", E6 = "ţ", w6 = "Т", C6 = "т", A6 = "⃛", S6 = "⌕", T6 = "𝔗", R6 = "𝔱", D6 = "∴", M6 = "∴", I6 = "∴", N6 = "Θ", O6 = "θ", L6 = "ϑ", F6 = "ϑ", q6 = "≈", P6 = "∼", B6 = "  ", $6 = " ", z6 = " ", U6 = "≈", H6 = "∼", j6 = "Þ", V6 = "þ", K6 = "˜", G6 = "∼", Z6 = "≃", W6 = "≅", J6 = "≈", Y6 = "⨱", X6 = "⊠", Q6 = "×", e5 = "⨰", t5 = "∭", n5 = "⤨", s5 = "⌶", r5 = "⫱", o5 = "⊤", i5 = "𝕋", c5 = "𝕥", a5 = "⫚", l5 = "⤩", u5 = "‴", f5 = "™", h5 = "™", d5 = "▵", p5 = "▿", g5 = "◃", m5 = "⊴", _5 = "≜", b5 = "▹", v5 = "⊵", x5 = "◬", y5 = "≜", k5 = "⨺", E5 = "⃛", w5 = "⨹", C5 = "⧍", A5 = "⨻", S5 = "⏢", T5 = "𝒯", R5 = "𝓉", D5 = "Ц", M5 = "ц", I5 = "Ћ", N5 = "ћ", O5 = "Ŧ", L5 = "ŧ", F5 = "≬", q5 = "↞", P5 = "↠", B5 = "Ú", $5 = "ú", z5 = "↑", U5 = "↟", H5 = "⇑", j5 = "⥉", V5 = "Ў", K5 = "ў", G5 = "Ŭ", Z5 = "ŭ", W5 = "Û", J5 = "û", Y5 = "У", X5 = "у", Q5 = "⇅", e8 = "Ű", t8 = "ű", n8 = "⥮", s8 = "⥾", r8 = "𝔘", o8 = "𝔲", i8 = "Ù", c8 = "ù", a8 = "⥣", l8 = "↿", u8 = "↾", f8 = "▀", h8 = "⌜", d8 = "⌜", p8 = "⌏", g8 = "◸", m8 = "Ū", _8 = "ū", b8 = "¨", v8 = "_", x8 = "⏟", y8 = "⎵", k8 = "⏝", E8 = "⋃", w8 = "⊎", C8 = "Ų", A8 = "ų", S8 = "𝕌", T8 = "𝕦", R8 = "⤒", D8 = "↑", M8 = "↑", I8 = "⇑", N8 = "⇅", O8 = "↕", L8 = "↕", F8 = "⇕", q8 = "⥮", P8 = "↿", B8 = "↾", $8 = "⊎", z8 = "↖", U8 = "↗", H8 = "υ", j8 = "ϒ", V8 = "ϒ", K8 = "Υ", G8 = "υ", Z8 = "↥", W8 = "⊥", J8 = "⇈", Y8 = "⌝", X8 = "⌝", Q8 = "⌎", e4 = "Ů", t4 = "ů", n4 = "◹", s4 = "𝒰", r4 = "𝓊", o4 = "⋰", i4 = "Ũ", c4 = "ũ", a4 = "▵", l4 = "▴", u4 = "⇈", f4 = "Ü", h4 = "ü", d4 = "⦧", p4 = "⦜", g4 = "ϵ", m4 = "ϰ", _4 = "∅", b4 = "ϕ", v4 = "ϖ", x4 = "∝", y4 = "↕", k4 = "⇕", E4 = "ϱ", w4 = "ς", C4 = "⊊︀", A4 = "⫋︀", S4 = "⊋︀", T4 = "⫌︀", R4 = "ϑ", D4 = "⊲", M4 = "⊳", I4 = "⫨", N4 = "⫫", O4 = "⫩", L4 = "В", F4 = "в", q4 = "⊢", P4 = "⊨", B4 = "⊩", $4 = "⊫", z4 = "⫦", U4 = "⊻", H4 = "∨", j4 = "⋁", V4 = "≚", K4 = "⋮", G4 = "|", Z4 = "‖", W4 = "|", J4 = "‖", Y4 = "∣", X4 = "|", Q4 = "❘", e9 = "≀", t9 = " ", n9 = "𝔙", s9 = "𝔳", r9 = "⊲", o9 = "⊂⃒", i9 = "⊃⃒", c9 = "𝕍", a9 = "𝕧", l9 = "∝", u9 = "⊳", f9 = "𝒱", h9 = "𝓋", d9 = "⫋︀", p9 = "⊊︀", g9 = "⫌︀", m9 = "⊋︀", _9 = "⊪", b9 = "⦚", v9 = "Ŵ", x9 = "ŵ", y9 = "⩟", k9 = "∧", E9 = "⋀", w9 = "≙", C9 = "℘", A9 = "𝔚", S9 = "𝔴", T9 = "𝕎", R9 = "𝕨", D9 = "℘", M9 = "≀", I9 = "≀", N9 = "𝒲", O9 = "𝓌", L9 = "⋂", F9 = "◯", q9 = "⋃", P9 = "▽", B9 = "𝔛", $9 = "𝔵", z9 = "⟷", U9 = "⟺", H9 = "Ξ", j9 = "ξ", V9 = "⟵", K9 = "⟸", G9 = "⟼", Z9 = "⋻", W9 = "⨀", J9 = "𝕏", Y9 = "𝕩", X9 = "⨁", Q9 = "⨂", ej = "⟶", tj = "⟹", nj = "𝒳", sj = "𝓍", rj = "⨆", oj = "⨄", ij = "△", cj = "⋁", aj = "⋀", lj = "Ý", uj = "ý", fj = "Я", hj = "я", dj = "Ŷ", pj = "ŷ", gj = "Ы", mj = "ы", _j = "¥", bj = "𝔜", vj = "𝔶", xj = "Ї", yj = "ї", kj = "𝕐", Ej = "𝕪", wj = "𝒴", Cj = "𝓎", Aj = "Ю", Sj = "ю", Tj = "ÿ", Rj = "Ÿ", Dj = "Ź", Mj = "ź", Ij = "Ž", Nj = "ž", Oj = "З", Lj = "з", Fj = "Ż", qj = "ż", Pj = "ℨ", Bj = "​", $j = "Ζ", zj = "ζ", Uj = "𝔷", Hj = "ℨ", jj = "Ж", Vj = "ж", Kj = "⇝", Gj = "𝕫", Zj = "ℤ", Wj = "𝒵", Jj = "𝓏", Yj = "‍", Xj = "‌", Qj = {
   Aacute: Fp,
   aacute: qp,
   Abreve: Pp,
@@ -8639,8 +8671,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   angmsdag: Cg,
   angmsdah: Ag,
   angmsd: Sg,
-  angrt: Rg,
-  angrtvb: Tg,
+  angrt: Tg,
+  angrtvb: Rg,
   angrtvbd: Dg,
   angsph: Mg,
   angst: Ig,
@@ -8693,8 +8725,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   because: Cm,
   Because: Am,
   bemptyv: Sm,
-  bepsi: Rm,
-  bernou: Tm,
+  bepsi: Tm,
+  bernou: Rm,
   Bernoullis: Dm,
   Beta: Mm,
   beta: Im,
@@ -8747,8 +8779,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   boxDR: C_,
   boxh: A_,
   boxH: S_,
-  boxhd: R_,
-  boxHd: T_,
+  boxhd: T_,
+  boxHd: R_,
   boxhD: D_,
   boxHD: M_,
   boxhu: I_,
@@ -8801,8 +8833,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   bumpeq: C0,
   Cacute: A0,
   cacute: S0,
-  capand: R0,
-  capbrcup: T0,
+  capand: T0,
+  capbrcup: R0,
   capcap: D0,
   cap: M0,
   Cap: I0,
@@ -8855,8 +8887,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   cir: Cb,
   cirE: Ab,
   cire: Sb,
-  cirfnint: Rb,
-  cirmid: Tb,
+  cirfnint: Tb,
+  cirmid: Rb,
   cirscir: Db,
   ClockwiseContourIntegral: Mb,
   CloseCurlyDoubleQuote: Ib,
@@ -8909,8 +8941,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   CupCap: Cv,
   cup: Av,
   Cup: Sv,
-  cupcup: Rv,
-  cupdot: Tv,
+  cupcup: Tv,
+  cupdot: Rv,
   cupor: Dv,
   cups: Mv,
   curarr: Iv,
@@ -8963,8 +8995,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   DiacriticalDot: Cx,
   DiacriticalDoubleAcute: Ax,
   DiacriticalGrave: Sx,
-  DiacriticalTilde: Rx,
-  diam: Tx,
+  DiacriticalTilde: Tx,
+  diam: Rx,
   diamond: Dx,
   Diamond: Mx,
   diamondsuit: Ix,
@@ -9017,8 +9049,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   downdownarrows: Cy,
   downharpoonleft: Ay,
   downharpoonright: Sy,
-  DownLeftRightVector: Ry,
-  DownLeftTeeVector: Ty,
+  DownLeftRightVector: Ty,
+  DownLeftTeeVector: Ry,
   DownLeftVectorBar: Dy,
   DownLeftVector: My,
   DownRightTeeVector: Iy,
@@ -9071,8 +9103,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   egsdot: Ck,
   el: Ak,
   Element: Sk,
-  elinters: Rk,
-  ell: Tk,
+  elinters: Tk,
+  ell: Rk,
   els: Dk,
   elsdot: Mk,
   Emacr: Ik,
@@ -9125,8 +9157,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   eth: CE,
   Euml: AE,
   euml: SE,
-  euro: RE,
-  excl: TE,
+  euro: TE,
+  excl: RE,
   exist: DE,
   Exists: ME,
   expectation: IE,
@@ -9179,8 +9211,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   gacute: C1,
   Gamma: A1,
   gamma: S1,
-  Gammad: R1,
-  gammad: T1,
+  Gammad: T1,
+  gammad: R1,
   gap: D1,
   Gbreve: M1,
   gbreve: I1,
@@ -9233,8 +9265,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   GreaterGreater: Cw,
   GreaterLess: Aw,
   GreaterSlantEqual: Sw,
-  GreaterTilde: Rw,
-  Gscr: Tw,
+  GreaterTilde: Tw,
+  Gscr: Rw,
   gscr: Dw,
   gsim: Mw,
   gsime: Iw,
@@ -9287,8 +9319,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   Hopf: CC,
   horbar: AC,
   HorizontalLine: SC,
-  hscr: RC,
-  Hscr: TC,
+  hscr: TC,
+  Hscr: RC,
   hslash: DC,
   Hstrok: MC,
   hstrok: IC,
@@ -9342,8 +9374,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   Integral: CA,
   intercal: AA,
   Intersection: SA,
-  intlarhk: RA,
-  intprod: TA,
+  intlarhk: TA,
+  intprod: RA,
   InvisibleComma: DA,
   InvisibleTimes: MA,
   IOcy: IA,
@@ -9396,8 +9428,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   Kfr: CS,
   kfr: AS,
   kgreen: SS,
-  KHcy: RS,
-  khcy: TS,
+  KHcy: TS,
+  khcy: RS,
   KJcy: DS,
   kjcy: MS,
   Kopf: IS,
@@ -9422,114 +9454,114 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   larrbfs: YS,
   larr: XS,
   Larr: QS,
-  lArr: eR,
-  larrfs: tR,
-  larrhk: nR,
-  larrlp: sR,
-  larrpl: rR,
-  larrsim: oR,
-  larrtl: iR,
-  latail: cR,
-  lAtail: aR,
-  lat: lR,
-  late: uR,
-  lates: fR,
-  lbarr: hR,
-  lBarr: dR,
-  lbbrk: pR,
-  lbrace: gR,
-  lbrack: mR,
-  lbrke: _R,
-  lbrksld: bR,
-  lbrkslu: vR,
-  Lcaron: xR,
-  lcaron: yR,
-  Lcedil: kR,
-  lcedil: ER,
-  lceil: wR,
-  lcub: CR,
-  Lcy: AR,
-  lcy: SR,
-  ldca: RR,
-  ldquo: TR,
-  ldquor: DR,
-  ldrdhar: MR,
-  ldrushar: IR,
-  ldsh: NR,
-  le: OR,
-  lE: LR,
-  LeftAngleBracket: FR,
-  LeftArrowBar: qR,
-  leftarrow: PR,
-  LeftArrow: BR,
-  Leftarrow: $R,
-  LeftArrowRightArrow: zR,
-  leftarrowtail: UR,
-  LeftCeiling: HR,
-  LeftDoubleBracket: jR,
-  LeftDownTeeVector: VR,
-  LeftDownVectorBar: KR,
-  LeftDownVector: GR,
-  LeftFloor: ZR,
-  leftharpoondown: WR,
-  leftharpoonup: JR,
-  leftleftarrows: YR,
-  leftrightarrow: XR,
-  LeftRightArrow: QR,
-  Leftrightarrow: eT,
-  leftrightarrows: tT,
-  leftrightharpoons: nT,
-  leftrightsquigarrow: sT,
-  LeftRightVector: rT,
-  LeftTeeArrow: oT,
-  LeftTee: iT,
-  LeftTeeVector: cT,
-  leftthreetimes: aT,
-  LeftTriangleBar: lT,
-  LeftTriangle: uT,
-  LeftTriangleEqual: fT,
-  LeftUpDownVector: hT,
-  LeftUpTeeVector: dT,
-  LeftUpVectorBar: pT,
-  LeftUpVector: gT,
-  LeftVectorBar: mT,
-  LeftVector: _T,
-  lEg: bT,
-  leg: vT,
-  leq: xT,
-  leqq: yT,
-  leqslant: kT,
-  lescc: ET,
-  les: wT,
-  lesdot: CT,
-  lesdoto: AT,
-  lesdotor: ST,
-  lesg: RT,
-  lesges: TT,
-  lessapprox: DT,
-  lessdot: MT,
-  lesseqgtr: IT,
-  lesseqqgtr: NT,
-  LessEqualGreater: OT,
-  LessFullEqual: LT,
-  LessGreater: FT,
-  lessgtr: qT,
-  LessLess: PT,
-  lesssim: BT,
-  LessSlantEqual: $T,
-  LessTilde: zT,
-  lfisht: UT,
-  lfloor: HT,
-  Lfr: jT,
-  lfr: VT,
-  lg: KT,
-  lgE: GT,
-  lHar: ZT,
-  lhard: WT,
-  lharu: JT,
-  lharul: YT,
-  lhblk: XT,
-  LJcy: QT,
+  lArr: eT,
+  larrfs: tT,
+  larrhk: nT,
+  larrlp: sT,
+  larrpl: rT,
+  larrsim: oT,
+  larrtl: iT,
+  latail: cT,
+  lAtail: aT,
+  lat: lT,
+  late: uT,
+  lates: fT,
+  lbarr: hT,
+  lBarr: dT,
+  lbbrk: pT,
+  lbrace: gT,
+  lbrack: mT,
+  lbrke: _T,
+  lbrksld: bT,
+  lbrkslu: vT,
+  Lcaron: xT,
+  lcaron: yT,
+  Lcedil: kT,
+  lcedil: ET,
+  lceil: wT,
+  lcub: CT,
+  Lcy: AT,
+  lcy: ST,
+  ldca: TT,
+  ldquo: RT,
+  ldquor: DT,
+  ldrdhar: MT,
+  ldrushar: IT,
+  ldsh: NT,
+  le: OT,
+  lE: LT,
+  LeftAngleBracket: FT,
+  LeftArrowBar: qT,
+  leftarrow: PT,
+  LeftArrow: BT,
+  Leftarrow: $T,
+  LeftArrowRightArrow: zT,
+  leftarrowtail: UT,
+  LeftCeiling: HT,
+  LeftDoubleBracket: jT,
+  LeftDownTeeVector: VT,
+  LeftDownVectorBar: KT,
+  LeftDownVector: GT,
+  LeftFloor: ZT,
+  leftharpoondown: WT,
+  leftharpoonup: JT,
+  leftleftarrows: YT,
+  leftrightarrow: XT,
+  LeftRightArrow: QT,
+  Leftrightarrow: eR,
+  leftrightarrows: tR,
+  leftrightharpoons: nR,
+  leftrightsquigarrow: sR,
+  LeftRightVector: rR,
+  LeftTeeArrow: oR,
+  LeftTee: iR,
+  LeftTeeVector: cR,
+  leftthreetimes: aR,
+  LeftTriangleBar: lR,
+  LeftTriangle: uR,
+  LeftTriangleEqual: fR,
+  LeftUpDownVector: hR,
+  LeftUpTeeVector: dR,
+  LeftUpVectorBar: pR,
+  LeftUpVector: gR,
+  LeftVectorBar: mR,
+  LeftVector: _R,
+  lEg: bR,
+  leg: vR,
+  leq: xR,
+  leqq: yR,
+  leqslant: kR,
+  lescc: ER,
+  les: wR,
+  lesdot: CR,
+  lesdoto: AR,
+  lesdotor: SR,
+  lesg: TR,
+  lesges: RR,
+  lessapprox: DR,
+  lessdot: MR,
+  lesseqgtr: IR,
+  lesseqqgtr: NR,
+  LessEqualGreater: OR,
+  LessFullEqual: LR,
+  LessGreater: FR,
+  lessgtr: qR,
+  LessLess: PR,
+  lesssim: BR,
+  LessSlantEqual: $R,
+  LessTilde: zR,
+  lfisht: UR,
+  lfloor: HR,
+  Lfr: jR,
+  lfr: VR,
+  lg: KR,
+  lgE: GR,
+  lHar: ZR,
+  lhard: WR,
+  lharu: JR,
+  lharul: YR,
+  lhblk: XR,
+  LJcy: QR,
   ljcy: eD,
   llarr: tD,
   ll: nD,
@@ -9558,8 +9590,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   longleftrightarrow: CD,
   LongLeftRightArrow: AD,
   Longleftrightarrow: SD,
-  longmapsto: RD,
-  longrightarrow: TD,
+  longmapsto: TD,
+  longrightarrow: RD,
   LongRightArrow: DD,
   Longrightarrow: MD,
   looparrowleft: ID,
@@ -9612,8 +9644,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   ltrif: CM,
   ltrPar: AM,
   lurdshar: SM,
-  luruhar: RM,
-  lvertneqq: TM,
+  luruhar: TM,
+  lvertneqq: RM,
   lvnE: DM,
   macr: MM,
   male: IM,
@@ -9667,8 +9699,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   nang: CI,
   nap: AI,
   napE: SI,
-  napid: RI,
-  napos: TI,
+  napid: TI,
+  napos: RI,
   napprox: DI,
   natural: MI,
   naturals: II,
@@ -9721,8 +9753,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   nGtv: CN,
   nharr: AN,
   nhArr: SN,
-  nhpar: RN,
-  ni: TN,
+  nhpar: TN,
+  ni: RN,
   nis: DN,
   nisd: MN,
   niv: IN,
@@ -9775,8 +9807,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   notin: CO,
   notindot: AO,
   notinE: SO,
-  notinva: RO,
-  notinvb: TO,
+  notinva: TO,
+  notinvb: RO,
   notinvc: DO,
   NotLeftTriangleBar: MO,
   NotLeftTriangle: IO,
@@ -9829,8 +9861,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   npre: CL,
   nrarrc: AL,
   nrarr: SL,
-  nrArr: RL,
-  nrarrw: TL,
+  nrArr: TL,
+  nrarrw: RL,
   nrightarrow: DL,
   nRightarrow: ML,
   nrtri: IL,
@@ -9883,8 +9915,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   nVDash: CF,
   nvge: AF,
   nvgt: SF,
-  nvHarr: RF,
-  nvinfin: TF,
+  nvHarr: TF,
+  nvinfin: RF,
   nvlArr: DF,
   nvle: MF,
   nvlt: IF,
@@ -9937,8 +9969,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   omid: Cq,
   ominus: Aq,
   Oopf: Sq,
-  oopf: Rq,
-  opar: Tq,
+  oopf: Tq,
+  opar: Rq,
   OpenCurlyDoubleQuote: Dq,
   OpenCurlyQuote: Mq,
   operp: Iq,
@@ -9991,8 +10023,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   pfr: CP,
   Phi: AP,
   phi: SP,
-  phiv: RP,
-  phmmat: TP,
+  phiv: TP,
+  phmmat: RP,
   phone: DP,
   Pi: MP,
   pi: IP,
@@ -10045,8 +10077,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   prod: C2,
   Product: A2,
   profalar: S2,
-  profline: R2,
-  profsurf: T2,
+  profline: T2,
+  profsurf: R2,
   prop: D2,
   Proportional: M2,
   Proportion: I2,
@@ -10099,8 +10131,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   Rarrtl: CB,
   rarrtl: AB,
   rarrw: SB,
-  ratail: RB,
-  rAtail: TB,
+  ratail: TB,
+  rAtail: RB,
   ratio: DB,
   rationals: MB,
   rbarr: IB,
@@ -10153,8 +10185,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   RightArrow: C$,
   Rightarrow: A$,
   RightArrowLeftArrow: S$,
-  rightarrowtail: R$,
-  RightCeiling: T$,
+  rightarrowtail: T$,
+  RightCeiling: R$,
   RightDoubleBracket: D$,
   RightDownTeeVector: M$,
   RightDownVectorBar: I$,
@@ -10207,8 +10239,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   rsh: Cz,
   Rsh: Az,
   rsqb: Sz,
-  rsquo: Rz,
-  rsquor: Tz,
+  rsquo: Tz,
+  rsquor: Rz,
   rthree: Dz,
   rtimes: Mz,
   rtri: Iz,
@@ -10261,8 +10293,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   shchcy: C3,
   SHcy: A3,
   shcy: S3,
-  ShortDownArrow: R3,
-  ShortLeftArrow: T3,
+  ShortDownArrow: T3,
+  ShortLeftArrow: R3,
   shortmid: D3,
   shortparallel: M3,
   ShortRightArrow: I3,
@@ -10315,8 +10347,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   sqsup: CU,
   sqsupe: AU,
   sqsupset: SU,
-  sqsupseteq: RU,
-  square: TU,
+  sqsupseteq: TU,
+  square: RU,
   Square: DU,
   SquareIntersection: MU,
   SquareSubset: IU,
@@ -10369,8 +10401,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   SucceedsTilde: CH,
   succeq: AH,
   succnapprox: SH,
-  succneqq: RH,
-  succnsim: TH,
+  succneqq: TH,
+  succnsim: RH,
   succsim: DH,
   SuchThat: MH,
   sum: IH,
@@ -10423,8 +10455,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   tcy: C6,
   tdot: A6,
   telrec: S6,
-  Tfr: R6,
-  tfr: T6,
+  Tfr: T6,
+  tfr: R6,
   there4: D6,
   therefore: M6,
   Therefore: I6,
@@ -10477,8 +10509,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   trisb: C5,
   tritime: A5,
   trpezium: S5,
-  Tscr: R5,
-  tscr: T5,
+  Tscr: T5,
+  tscr: R5,
   TScy: D5,
   tscy: M5,
   TSHcy: I5,
@@ -10531,8 +10563,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   Uogon: C8,
   uogon: A8,
   Uopf: S8,
-  uopf: R8,
-  UpArrowBar: T8,
+  uopf: T8,
+  UpArrowBar: R8,
   uparrow: D8,
   UpArrow: M8,
   Uparrow: I8,
@@ -10585,8 +10617,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   varsubsetneq: C4,
   varsubsetneqq: A4,
   varsupsetneq: S4,
-  varsupsetneqq: R4,
-  vartheta: T4,
+  varsupsetneqq: T4,
+  vartheta: R4,
   vartriangleleft: D4,
   vartriangleright: M4,
   vBar: I4,
@@ -10639,8 +10671,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   weierp: C9,
   Wfr: A9,
   wfr: S9,
-  Wopf: R9,
-  wopf: T9,
+  Wopf: T9,
+  wopf: R9,
   wp: D9,
   wr: M9,
   wreath: I9,
@@ -10693,8 +10725,8 @@ const Fp = "Á", qp = "á", Pp = "Ă", Bp = "ă", $p = "∾", zp = "∿", Up = "
   yscr: Cj,
   YUcy: Aj,
   yucy: Sj,
-  yuml: Rj,
-  Yuml: Tj,
+  yuml: Tj,
+  Yuml: Rj,
   Zacute: Dj,
   zacute: Mj,
   Zcaron: Ij,
@@ -10858,8 +10890,8 @@ function sV() {
       var S = -1;
       for (v = 0; v < a.length; v++)
         p = w.indexOf(a[v]), p !== -1 && (S === -1 || p < S) && (S = p);
-      var T, P;
-      for (S === -1 ? P = w.lastIndexOf("@") : P = w.lastIndexOf("@", S), P !== -1 && (T = w.slice(0, P), w = w.slice(P + 1), this.auth = T), S = -1, v = 0; v < c.length; v++)
+      var R, P;
+      for (S === -1 ? P = w.lastIndexOf("@") : P = w.lastIndexOf("@", S), P !== -1 && (R = w.slice(0, P), w = w.slice(P + 1), this.auth = R), S = -1, v = 0; v < c.length; v++)
         p = w.indexOf(c[v]), p !== -1 && (S === -1 || p < S) && (S = p);
       S === -1 && (S = w.length), w[S - 1] === ":" && S--;
       var I = w.slice(0, S);
@@ -10915,9 +10947,9 @@ var Sc;
 function oV() {
   return Sc || (Sc = 1, cn.Any = hu(), cn.Cc = du(), cn.Cf = rV(), cn.P = oi(), cn.Z = pu()), cn;
 }
-var Rc;
+var Tc;
 function ye() {
-  return Rc || (Rc = 1, (function(e) {
+  return Tc || (Tc = 1, (function(e) {
     function t(D) {
       return Object.prototype.toString.call(D);
     }
@@ -11015,9 +11047,9 @@ function ye() {
       }
       return !1;
     }
-    var T = oi();
+    var R = oi();
     function P(D) {
-      return T.test(D);
+      return R.test(D);
     }
     function I(D) {
       switch (D) {
@@ -11064,9 +11096,9 @@ function ye() {
     e.lib = {}, e.lib.mdurl = fu(), e.lib.ucmicro = oV(), e.assign = o, e.isString = n, e.has = r, e.unescapeMd = y, e.unescapeAll = A, e.isValidEntityCode = c, e.fromCodePoint = a, e.escapeHtml = E, e.arrayReplaceAt = i, e.isSpace = C, e.isWhiteSpace = S, e.isMdAsciiPunct = I, e.isPunctChar = P, e.escapeRE = B, e.normalizeReference = te;
   })(_r)), _r;
 }
-var qn = {}, Rr, Tc;
+var qn = {}, Tr, Rc;
 function iV() {
-  return Tc || (Tc = 1, Rr = function(t, n, s) {
+  return Rc || (Rc = 1, Tr = function(t, n, s) {
     var r, o, i, c, a = -1, u = t.posMax, l = t.pos;
     for (t.pos = n + 1, r = 1; t.pos < u; ) {
       if (i = t.src.charCodeAt(t.pos), i === 93 && (r--, r === 0)) {
@@ -11081,14 +11113,14 @@ function iV() {
       }
     }
     return o && (a = t.pos), t.pos = l, a;
-  }), Rr;
+  }), Tr;
 }
-var Tr, Dc;
+var Rr, Dc;
 function cV() {
-  if (Dc) return Tr;
+  if (Dc) return Rr;
   Dc = 1;
   var e = ye().unescapeAll;
-  return Tr = function(n, s, r) {
+  return Rr = function(n, s, r) {
     var o, i, c = s, a = {
       ok: !1,
       pos: 0,
@@ -11126,7 +11158,7 @@ function cV() {
       c++;
     }
     return s === c || i !== 0 || (a.str = e(n.slice(s, c)), a.pos = c, a.ok = !0), a;
-  }, Tr;
+  }, Rr;
 }
 var Dr, Mc;
 function aV() {
@@ -11409,28 +11441,28 @@ function mV() {
     return a.slice(0, u) + l + a.slice(u + 1);
   }
   function c(a, u) {
-    var l, f, d, h, _, y, A, v, k, b, p, E, w, B, C, S, T, P, I, te, D;
+    var l, f, d, h, _, y, A, v, k, b, p, E, w, B, C, S, R, P, I, te, D;
     for (I = [], l = 0; l < a.length; l++) {
-      for (f = a[l], A = a[l].level, T = I.length - 1; T >= 0 && !(I[T].level <= A); T--)
+      for (f = a[l], A = a[l].level, R = I.length - 1; R >= 0 && !(I[R].level <= A); R--)
         ;
-      if (I.length = T + 1, f.type === "text") {
+      if (I.length = R + 1, f.type === "text") {
         d = f.content, _ = 0, y = d.length;
         e:
           for (; _ < y && (r.lastIndex = _, h = r.exec(d), !!h); ) {
             if (C = S = !0, _ = h.index + 1, P = h[0] === "'", k = 32, h.index - 1 >= 0)
               k = d.charCodeAt(h.index - 1);
             else
-              for (T = l - 1; T >= 0 && !(a[T].type === "softbreak" || a[T].type === "hardbreak"); T--)
-                if (a[T].content) {
-                  k = a[T].content.charCodeAt(a[T].content.length - 1);
+              for (R = l - 1; R >= 0 && !(a[R].type === "softbreak" || a[R].type === "hardbreak"); R--)
+                if (a[R].content) {
+                  k = a[R].content.charCodeAt(a[R].content.length - 1);
                   break;
                 }
             if (b = 32, _ < y)
               b = d.charCodeAt(_);
             else
-              for (T = l + 1; T < a.length && !(a[T].type === "softbreak" || a[T].type === "hardbreak"); T++)
-                if (a[T].content) {
-                  b = a[T].content.charCodeAt(0);
+              for (R = l + 1; R < a.length && !(a[R].type === "softbreak" || a[R].type === "hardbreak"); R++)
+                if (a[R].content) {
+                  b = a[R].content.charCodeAt(0);
                   break;
                 }
             if (p = n(k) || t(String.fromCharCode(k)), E = n(b) || t(String.fromCharCode(b)), w = e(k), B = e(b), B ? C = !1 : E && (w || p || (C = !1)), w ? S = !1 : p && (B || E || (S = !1)), b === 34 && h[0] === '"' && k >= 48 && k <= 57 && (S = C = !1), C && S && (C = p, S = E), !C && !S) {
@@ -11438,13 +11470,13 @@ function mV() {
               continue;
             }
             if (S) {
-              for (T = I.length - 1; T >= 0 && (v = I[T], !(I[T].level < A)); T--)
-                if (v.single === P && I[T].level === A) {
-                  v = I[T], P ? (te = u.md.options.quotes[2], D = u.md.options.quotes[3]) : (te = u.md.options.quotes[0], D = u.md.options.quotes[1]), f.content = i(f.content, h.index, D), a[v.token].content = i(
+              for (R = I.length - 1; R >= 0 && (v = I[R], !(I[R].level < A)); R--)
+                if (v.single === P && I[R].level === A) {
+                  v = I[R], P ? (te = u.md.options.quotes[2], D = u.md.options.quotes[3]) : (te = u.md.options.quotes[0], D = u.md.options.quotes[1]), f.content = i(f.content, h.index, D), a[v.token].content = i(
                     a[v.token].content,
                     v.pos,
                     te
-                  ), _ += D.length - 1, v.token === l && (_ += te.length - 1), d = f.content, y = d.length, I.length = T;
+                  ), _ += D.length - 1, v.token === l && (_ += te.length - 1), d = f.content, y = d.length, I.length = R;
                   continue e;
                 }
             }
@@ -11641,7 +11673,7 @@ function EV() {
   Zc = 1;
   var e = ye().isSpace;
   return Kr = function(n, s, r, o) {
-    var i, c, a, u, l, f, d, h, _, y, A, v, k, b, p, E, w, B, C, S, T = n.lineMax, P = n.bMarks[s] + n.tShift[s], I = n.eMarks[s];
+    var i, c, a, u, l, f, d, h, _, y, A, v, k, b, p, E, w, B, C, S, R = n.lineMax, P = n.bMarks[s] + n.tShift[s], I = n.eMarks[s];
     if (n.sCount[s] - n.blkIndent >= 4 || n.src.charCodeAt(P) !== 62)
       return !1;
     if (o)
@@ -11668,7 +11700,7 @@ function EV() {
       }
       y.push(n.bMarks[h]), A.push(n.bsCount[h]), p.push(n.tShift[h]), b.push(n.sCount[h]), n.sCount[h] = -1;
     }
-    for (v = n.blkIndent, n.blkIndent = 0, C = n.push("blockquote_open", "blockquote", 1), C.markup = ">", C.map = d = [s, 0], n.md.block.tokenize(n, s, h), C = n.push("blockquote_close", "blockquote", -1), C.markup = ">", n.lineMax = T, n.parentType = k, d[1] = n.line, a = 0; a < p.length; a++)
+    for (v = n.blkIndent, n.blkIndent = 0, C = n.push("blockquote_open", "blockquote", 1), C.markup = ">", C.map = d = [s, 0], n.md.block.tokenize(n, s, h), C = n.push("blockquote_close", "blockquote", -1), C.markup = ">", n.lineMax = R, n.parentType = k, d[1] = n.line, a = 0; a < p.length; a++)
       n.bMarks[a + s] = y[a], n.tShift[a + s] = p[a], n.sCount[a + s] = b[a], n.bsCount[a + s] = A[a];
     return n.blkIndent = v, !0;
   }, Kr;
@@ -11723,7 +11755,7 @@ function CV() {
       r.tokens[i].level === a && r.tokens[i].type === "paragraph_open" && (r.tokens[i + 2].hidden = !0, r.tokens[i].hidden = !0, i += 2);
   }
   return Zr = function(o, i, c, a) {
-    var u, l, f, d, h, _, y, A, v, k, b, p, E, w, B, C, S, T, P, I, te, D, oe, Q, le, G, fe, Z = i, Ee = !1, we = !0;
+    var u, l, f, d, h, _, y, A, v, k, b, p, E, w, B, C, S, R, P, I, te, D, oe, Q, le, G, fe, Z = i, Ee = !1, we = !0;
     if (o.sCount[Z] - o.blkIndent >= 4 || o.listIndent >= 0 && o.sCount[Z] - o.listIndent >= 4 && o.sCount[Z] < o.blkIndent)
       return !1;
     if (a && o.parentType === "paragraph" && o.sCount[Z] >= o.blkIndent && (Ee = !0), (D = n(o, Z)) >= 0) {
@@ -11746,7 +11778,7 @@ function CV() {
           break;
         te++;
       }
-      if (l = te, l >= w ? h = 1 : h = B - _, h > 4 && (h = 1), d = _ + h, fe = o.push("list_item_open", "li", 1), fe.markup = String.fromCharCode(p), fe.map = A = [Z, 0], y && (fe.info = o.src.slice(Q, D - 1)), I = o.tight, P = o.tShift[Z], T = o.sCount[Z], C = o.listIndent, o.listIndent = o.blkIndent, o.blkIndent = d, o.tight = !0, o.tShift[Z] = l - o.bMarks[Z], o.sCount[Z] = B, l >= w && o.isEmpty(Z + 1) ? o.line = Math.min(o.line + 2, c) : o.md.block.tokenize(o, Z, c, !0), (!o.tight || oe) && (we = !1), oe = o.line - Z > 1 && o.isEmpty(o.line - 1), o.blkIndent = o.listIndent, o.listIndent = C, o.tShift[Z] = P, o.sCount[Z] = T, o.tight = I, fe = o.push("list_item_close", "li", -1), fe.markup = String.fromCharCode(p), Z = o.line, A[1] = Z, Z >= c || o.sCount[Z] < o.blkIndent || o.sCount[Z] - o.blkIndent >= 4)
+      if (l = te, l >= w ? h = 1 : h = B - _, h > 4 && (h = 1), d = _ + h, fe = o.push("list_item_open", "li", 1), fe.markup = String.fromCharCode(p), fe.map = A = [Z, 0], y && (fe.info = o.src.slice(Q, D - 1)), I = o.tight, P = o.tShift[Z], R = o.sCount[Z], C = o.listIndent, o.listIndent = o.blkIndent, o.blkIndent = d, o.tight = !0, o.tShift[Z] = l - o.bMarks[Z], o.sCount[Z] = B, l >= w && o.isEmpty(Z + 1) ? o.line = Math.min(o.line + 2, c) : o.md.block.tokenize(o, Z, c, !0), (!o.tight || oe) && (we = !1), oe = o.line - Z > 1 && o.isEmpty(o.line - 1), o.blkIndent = o.listIndent, o.listIndent = C, o.tShift[Z] = P, o.sCount[Z] = R, o.tight = I, fe = o.push("list_item_close", "li", -1), fe.markup = String.fromCharCode(p), Z = o.line, A[1] = Z, Z >= c || o.sCount[Z] < o.blkIndent || o.sCount[Z] - o.blkIndent >= 4)
         break;
       for (le = !1, f = 0, v = G.length; f < v; f++)
         if (G[f](o, Z, c, !0)) {
@@ -11773,7 +11805,7 @@ function AV() {
   Yc = 1;
   var e = ye().normalizeReference, t = ye().isSpace;
   return Wr = function(s, r, o, i) {
-    var c, a, u, l, f, d, h, _, y, A, v, k, b, p, E, w, B = 0, C = s.bMarks[r] + s.tShift[r], S = s.eMarks[r], T = r + 1;
+    var c, a, u, l, f, d, h, _, y, A, v, k, b, p, E, w, B = 0, C = s.bMarks[r] + s.tShift[r], S = s.eMarks[r], R = r + 1;
     if (s.sCount[r] - s.blkIndent >= 4 || s.src.charCodeAt(C) !== 91)
       return !1;
     for (; ++C < S; )
@@ -11782,17 +11814,17 @@ function AV() {
           return !1;
         break;
       }
-    for (l = s.lineMax, E = s.md.block.ruler.getRules("reference"), A = s.parentType, s.parentType = "reference"; T < l && !s.isEmpty(T); T++)
-      if (!(s.sCount[T] - s.blkIndent > 3) && !(s.sCount[T] < 0)) {
+    for (l = s.lineMax, E = s.md.block.ruler.getRules("reference"), A = s.parentType, s.parentType = "reference"; R < l && !s.isEmpty(R); R++)
+      if (!(s.sCount[R] - s.blkIndent > 3) && !(s.sCount[R] < 0)) {
         for (p = !1, d = 0, h = E.length; d < h; d++)
-          if (E[d](s, T, l, !0)) {
+          if (E[d](s, R, l, !0)) {
             p = !0;
             break;
           }
         if (p)
           break;
       }
-    for (b = s.getLines(r, T, s.blkIndent, !1).trim(), S = b.length, C = 1; C < S; C++) {
+    for (b = s.getLines(r, R, s.blkIndent, !1).trim(), S = b.length, C = 1; C < S; C++) {
       if (c = b.charCodeAt(C), c === 91)
         return !1;
       if (c === 93) {
@@ -11895,7 +11927,7 @@ function gu() {
   return ps.HTML_TAG_RE = d, ps.HTML_OPEN_CLOSE_TAG_RE = h, ps;
 }
 var Yr, ea;
-function RV() {
+function TV() {
   if (ea) return Yr;
   ea = 1;
   var e = SV(), t = gu().HTML_OPEN_CLOSE_TAG_RE, n = [
@@ -11928,7 +11960,7 @@ function RV() {
   }, Yr;
 }
 var Xr, ta;
-function TV() {
+function RV() {
   if (ta) return Xr;
   ta = 1;
   var e = ye().isSpace;
@@ -12065,8 +12097,8 @@ function NV() {
     ["hr", wV(), ["paragraph", "reference", "blockquote", "list"]],
     ["list", CV(), ["paragraph", "reference", "blockquote"]],
     ["reference", AV()],
-    ["html_block", RV(), ["paragraph", "reference", "blockquote"]],
-    ["heading", TV(), ["paragraph", "reference", "blockquote"]],
+    ["html_block", TV(), ["paragraph", "reference", "blockquote"]],
+    ["heading", RV(), ["paragraph", "reference", "blockquote"]],
     ["lheading", DV()],
     ["paragraph", MV()]
   ];
@@ -12645,34 +12677,34 @@ function WV() {
   function y(b) {
     var p = b.re = ZV()(b.__opts__), E = b.__tlds__.slice();
     b.onCompile(), b.__tlds_replaced__ || E.push(l), E.push(p.src_xn), p.src_tlds = E.join("|");
-    function w(T) {
-      return T.replace("%TLDS%", p.src_tlds);
+    function w(R) {
+      return R.replace("%TLDS%", p.src_tlds);
     }
     p.email_fuzzy = RegExp(w(p.tpl_email_fuzzy), "i"), p.link_fuzzy = RegExp(w(p.tpl_link_fuzzy), "i"), p.link_no_ip_fuzzy = RegExp(w(p.tpl_link_no_ip_fuzzy), "i"), p.host_fuzzy_test = RegExp(w(p.tpl_host_fuzzy_test), "i");
     var B = [];
     b.__compiled__ = {};
-    function C(T, P) {
-      throw new Error('(LinkifyIt) Invalid schema "' + T + '": ' + P);
+    function C(R, P) {
+      throw new Error('(LinkifyIt) Invalid schema "' + R + '": ' + P);
     }
-    Object.keys(b.__schemas__).forEach(function(T) {
-      var P = b.__schemas__[T];
+    Object.keys(b.__schemas__).forEach(function(R) {
+      var P = b.__schemas__[R];
       if (P !== null) {
         var I = { validate: null, link: null };
-        if (b.__compiled__[T] = I, s(P)) {
-          r(P.validate) ? I.validate = h(P.validate) : o(P.validate) ? I.validate = P.validate : C(T, P), o(P.normalize) ? I.normalize = P.normalize : P.normalize ? C(T, P) : I.normalize = _();
+        if (b.__compiled__[R] = I, s(P)) {
+          r(P.validate) ? I.validate = h(P.validate) : o(P.validate) ? I.validate = P.validate : C(R, P), o(P.normalize) ? I.normalize = P.normalize : P.normalize ? C(R, P) : I.normalize = _();
           return;
         }
         if (n(P)) {
-          B.push(T);
+          B.push(R);
           return;
         }
-        C(T, P);
+        C(R, P);
       }
-    }), B.forEach(function(T) {
-      b.__compiled__[b.__schemas__[T]] && (b.__compiled__[T].validate = b.__compiled__[b.__schemas__[T]].validate, b.__compiled__[T].normalize = b.__compiled__[b.__schemas__[T]].normalize);
+    }), B.forEach(function(R) {
+      b.__compiled__[b.__schemas__[R]] && (b.__compiled__[R].validate = b.__compiled__[b.__schemas__[R]].validate, b.__compiled__[R].normalize = b.__compiled__[b.__schemas__[R]].normalize);
     }), b.__compiled__[""] = { validate: null, normalize: _() };
-    var S = Object.keys(b.__compiled__).filter(function(T) {
-      return T.length > 0 && b.__compiled__[T];
+    var S = Object.keys(b.__compiled__).filter(function(R) {
+      return R.length > 0 && b.__compiled__[R];
     }).map(i).join("|");
     b.re.schema_test = RegExp("(^|(?!_)(?:[><｜]|" + p.src_ZPCc + "))(" + S + ")", "i"), b.re.schema_search = RegExp("(^|(?!_)(?:[><｜]|" + p.src_ZPCc + "))(" + S + ")", "ig"), b.re.schema_at_start = RegExp("^" + b.re.schema_search.source, "i"), b.re.pretest = RegExp(
       "(" + b.re.schema_test.source + ")|(" + b.re.host_fuzzy_test.source + ")|@",
@@ -12699,7 +12731,7 @@ function WV() {
   }, k.prototype.test = function(p) {
     if (this.__text_cache__ = p, this.__index__ = -1, !p.length)
       return !1;
-    var E, w, B, C, S, T, P, I, te;
+    var E, w, B, C, S, R, P, I, te;
     if (this.re.schema_test.test(p)) {
       for (P = this.re.schema_search, P.lastIndex = 0; (E = P.exec(p)) !== null; )
         if (C = this.testSchemaAt(p, E[2], P.lastIndex), C) {
@@ -12707,7 +12739,7 @@ function WV() {
           break;
         }
     }
-    return this.__opts__.fuzzyLink && this.__compiled__["http:"] && (I = p.search(this.re.host_fuzzy_test), I >= 0 && (this.__index__ < 0 || I < this.__index__) && (w = p.match(this.__opts__.fuzzyIP ? this.re.link_fuzzy : this.re.link_no_ip_fuzzy)) !== null && (S = w.index + w[1].length, (this.__index__ < 0 || S < this.__index__) && (this.__schema__ = "", this.__index__ = S, this.__last_index__ = w.index + w[0].length))), this.__opts__.fuzzyEmail && this.__compiled__["mailto:"] && (te = p.indexOf("@"), te >= 0 && (B = p.match(this.re.email_fuzzy)) !== null && (S = B.index + B[1].length, T = B.index + B[0].length, (this.__index__ < 0 || S < this.__index__ || S === this.__index__ && T > this.__last_index__) && (this.__schema__ = "mailto:", this.__index__ = S, this.__last_index__ = T))), this.__index__ >= 0;
+    return this.__opts__.fuzzyLink && this.__compiled__["http:"] && (I = p.search(this.re.host_fuzzy_test), I >= 0 && (this.__index__ < 0 || I < this.__index__) && (w = p.match(this.__opts__.fuzzyIP ? this.re.link_fuzzy : this.re.link_no_ip_fuzzy)) !== null && (S = w.index + w[1].length, (this.__index__ < 0 || S < this.__index__) && (this.__schema__ = "", this.__index__ = S, this.__last_index__ = w.index + w[0].length))), this.__opts__.fuzzyEmail && this.__compiled__["mailto:"] && (te = p.indexOf("@"), te >= 0 && (B = p.match(this.re.email_fuzzy)) !== null && (S = B.index + B[1].length, R = B.index + B[0].length, (this.__index__ < 0 || S < this.__index__ || S === this.__index__ && R > this.__last_index__) && (this.__schema__ = "mailto:", this.__index__ = S, this.__last_index__ = R))), this.__index__ >= 0;
   }, k.prototype.pretest = function(p) {
     return this.re.pretest.test(p);
   }, k.prototype.testSchemaAt = function(p, E, w) {
@@ -12912,9 +12944,9 @@ function c7() {
     }
   }), ko;
 }
-var Eo, Ra;
+var Eo, Ta;
 function a7() {
-  return Ra || (Ra = 1, Eo = {
+  return Ta || (Ta = 1, Eo = {
     options: {
       html: !1,
       // Enable HTML tags in source
@@ -12971,9 +13003,9 @@ function a7() {
     }
   }), Eo;
 }
-var wo, Ta;
+var wo, Ra;
 function l7() {
-  return Ta || (Ta = 1, wo = {
+  return Ra || (Ra = 1, wo = {
     options: {
       html: !0,
       // Enable HTML tags in source
@@ -13177,8 +13209,8 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
   },
   setup(e, { expose: t }) {
     const n = e;
-    It.registerLanguage("javascript", Ql), It.registerLanguage("typescript", Ip), It.registerLanguage("python", Dp), It.registerLanguage("xml", eu), It.registerLanguage("bash", Tp);
-    const { message: s } = If(n), { options: r } = Tn(), o = tt(null), i = at(() => r == null ? void 0 : r.showAvatar), c = at(() => {
+    It.registerLanguage("javascript", Ql), It.registerLanguage("typescript", Ip), It.registerLanguage("python", Dp), It.registerLanguage("xml", eu), It.registerLanguage("bash", Rp);
+    const { message: s } = If(n), { options: r } = Rn(), o = tt(null), i = at(() => r == null ? void 0 : r.showAvatar), c = at(() => {
       var _, y;
       return ((y = (_ = r == null ? void 0 : r.i18n) == null ? void 0 : _.en) == null ? void 0 : y.title) || "";
     }), a = at(() => r == null ? void 0 : r.showBotInfoMessage), u = at(() => s.value.text || "&lt;Empty response&gt;"), l = (_) => {
@@ -13203,7 +13235,7 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
         return "";
       }
     }, h = { ...(r == null ? void 0 : r.messageComponents) ?? {} };
-    return t({ scrollToView: f }), (_, y) => xe(s).sender === "user" ? (ce(), Te("div", {
+    return t({ scrollToView: f }), (_, y) => xe(s).sender === "user" ? (ce(), Re("div", {
       key: 0,
       ref_key: "messageContainer",
       ref: o,
@@ -13211,7 +13243,7 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
     }, [
       be("div", p7, [
         Kt(_.$slots, "default", {}, () => [
-          xe(s).type === "component" && h[xe(s).key] ? (ce(), Pe(Di(h[xe(s).key]), Ci(Rs({ key: 0 }, xe(s).arguments)), null, 16)) : (ce(), Pe(xe(Ia), {
+          xe(s).type === "component" && h[xe(s).key] ? (ce(), Pe(Di(h[xe(s).key]), Ci(Ts({ key: 0 }, xe(s).arguments)), null, 16)) : (ce(), Pe(xe(Ia), {
             key: 1,
             class: "chat-message-markdown",
             source: u.value,
@@ -13220,16 +13252,16 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
           }, null, 8, ["source", "plugins"]))
         ], !0)
       ])
-    ], 512)) : (ce(), Te("div", {
+    ], 512)) : (ce(), Re("div", {
       key: 1,
       ref_key: "messageContainer",
       ref: o,
       class: "relative flex w-full max-w-full flex-col items-baseline gap-1"
     }, [
       be("div", g7, [
-        a.value && (i.value || c.value) ? (ce(), Te("div", m7, [
+        a.value && (i.value || c.value) ? (ce(), Re("div", m7, [
           be("div", _7, [
-            i.value ? (ce(), Te("img", {
+            i.value ? (ce(), Re("img", {
               key: 0,
               src: i.value,
               alt: c.value || "Bot",
@@ -13241,10 +13273,10 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
               class: "text-black"
             }))
           ]),
-          c.value ? (ce(), Te("span", v7, ys(c.value), 1)) : wt("", !0)
+          c.value ? (ce(), Re("span", v7, ys(c.value), 1)) : wt("", !0)
         ])) : wt("", !0),
         Kt(_.$slots, "default", {}, () => [
-          xe(s).type === "component" && h[xe(s).key] ? (ce(), Pe(Di(h[xe(s).key]), Ci(Rs({ key: 0 }, xe(s).arguments)), null, 16)) : (ce(), Pe(xe(Ia), {
+          xe(s).type === "component" && h[xe(s).key] ? (ce(), Pe(Di(h[xe(s).key]), Ci(Ts({ key: 0 }, xe(s).arguments)), null, 16)) : (ce(), Pe(xe(Ia), {
             key: 1,
             class: "chat-message-markdown",
             source: u.value,
@@ -13260,7 +13292,7 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
   for (const [s, r] of t)
     n[s] = r;
   return n;
-}, Na = /* @__PURE__ */ wu(x7, [["__scopeId", "data-v-dfae27d7"]]), y7 = /* @__PURE__ */ Ft({
+}, Na = /* @__PURE__ */ wu(x7, [["__scopeId", "data-v-60c3ca3f"]]), y7 = /* @__PURE__ */ Ft({
   __name: "MessageTyping",
   props: {
     animation: { default: "bouncing" }
@@ -13276,7 +13308,7 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
     };
     return dn(() => {
       o();
-    }), t({ scrollToView: o }), (i, c) => (ce(), Te("div", {
+    }), t({ scrollToView: o }), (i, c) => (ce(), Re("div", {
       ref_key: "messageContainer",
       ref: s,
       class: "relative flex w-full max-w-full flex-col items-baseline gap-1",
@@ -13293,7 +13325,7 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
       ]), 2)
     ], 512));
   }
-}), k7 = /* @__PURE__ */ wu(y7, [["__scopeId", "data-v-3ecd184e"]]), E7 = { class: "scrollbar-minimal flex w-full flex-1 flex-col overflow-y-auto px-5 pt-5 sm:overscroll-contain" }, w7 = { class: "flex flex-1 flex-col gap-1" }, C7 = /* @__PURE__ */ Ft({
+}), k7 = /* @__PURE__ */ wu(y7, [["__scopeId", "data-v-a40fdf19"]]), E7 = { class: "scrollbar-minimal flex w-full flex-1 flex-col overflow-y-auto px-5 pt-5 sm:overscroll-contain" }, w7 = { class: "flex flex-1 flex-col gap-1" }, C7 = /* @__PURE__ */ Ft({
   __name: "MessagesList",
   props: {
     messages: {}
@@ -13306,13 +13338,13 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
         const o = n.value[n.value.length - 1];
         o && o.scrollToView();
       }
-    ), (o, i) => (ce(), Te("div", E7, [
+    ), (o, i) => (ce(), Re("div", E7, [
       be("div", w7, [
-        (ce(!0), Te(We, null, Ii(xe(s), (c) => (ce(), Pe(Na, {
+        (ce(!0), Re(We, null, Ii(xe(s), (c) => (ce(), Pe(Na, {
           key: c.id,
           message: c
         }, null, 8, ["message"]))), 128)),
-        (ce(!0), Te(We, null, Ii(o.messages, (c) => (ce(), Pe(Na, {
+        (ce(!0), Re(We, null, Ii(o.messages, (c) => (ce(), Pe(Na, {
           key: c.id,
           ref_for: !0,
           ref_key: "messageComponents",
@@ -13320,7 +13352,7 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
           message: c
         }, {
           beforeMessage: Vt(({ message: a }) => [
-            Kt(o.$slots, "beforeMessage", Rs({ ref_for: !0 }, { message: a }))
+            Kt(o.$slots, "beforeMessage", Ts({ ref_for: !0 }, { message: a }))
           ]),
           _: 2
         }, 1032, ["message"]))), 128)),
@@ -13329,10 +13361,10 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
       ])
     ]));
   }
-}), A7 = { class: "my-4 flex h-10 items-center" }, S7 = { class: "relative flex shrink-0 overflow-hidden rounded-full mr-2 size-10 border border-white/[0.10] items-center justify-center" }, R7 = ["src", "alt"], T7 = { class: "flex flex-col" }, D7 = { class: "font-medium text-sm tracking-tight" }, M7 = { class: "flex items-center" }, I7 = ["title"], N7 = { class: "w-full overflow-x-hidden whitespace-pre-wrap break-words text-center" }, O7 = { class: "mb-1" }, Cu = /* @__PURE__ */ Ft({
+}), A7 = { class: "my-4 flex h-10 items-center" }, S7 = { class: "relative flex shrink-0 overflow-hidden rounded-full mr-2 size-10 border border-white/[0.10] items-center justify-center" }, T7 = ["src", "alt"], R7 = { class: "flex flex-col" }, D7 = { class: "font-medium text-sm tracking-tight" }, M7 = { class: "flex items-center" }, I7 = ["title"], N7 = { class: "w-full overflow-x-hidden whitespace-pre-wrap break-words text-center" }, O7 = { class: "mb-1" }, Cu = /* @__PURE__ */ Ft({
   __name: "Chat",
   setup(e) {
-    const { t } = nu(), n = ri(), { messages: s, currentSessionId: r } = n, { options: o } = Tn(), i = at(() => o.mode === "window" && o.showWindowResetButton);
+    const { t } = nu(), n = ri(), { messages: s, currentSessionId: r } = n, { options: o } = Rn(), i = at(() => o.mode === "window" && o.showWindowResetButton);
     async function c() {
       n.loadPreviousSession && (await n.loadPreviousSession(), Zt(() => {
         et.emit("scrollToBottom");
@@ -13347,28 +13379,28 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
       await c(), r.value || n.startNewSession && (await n.startNewSession(), Zt(() => {
         et.emit("scrollToBottom");
       }));
-    }), (u, l) => (ce(), Pe(Rp, { class: "chat-wrapper" }, {
+    }), (u, l) => (ce(), Pe(Tp, { class: "chat-wrapper" }, {
       header: Vt(() => [
         be("div", A7, [
           be("span", S7, [
-            xe(o).showAvatar ? (ce(), Te("img", {
+            xe(o).showAvatar ? (ce(), Re("img", {
               key: 0,
               src: xe(o).showAvatar,
               alt: xe(t)("title"),
               class: "w-full h-full object-cover"
-            }, null, 8, R7)) : (ce(), Pe(xe(tu), {
+            }, null, 8, T7)) : (ce(), Pe(xe(tu), {
               key: 1,
               height: "24",
               width: "24",
               class: "text-black"
             }))
           ]),
-          be("div", T7, [
+          be("div", R7, [
             be("h1", D7, ys(xe(t)("title")), 1)
           ])
         ]),
         be("div", M7, [
-          i.value ? (ce(), Te("button", {
+          i.value ? (ce(), Re("button", {
             key: 0,
             class: "flex border-none bg-transparent cursor-pointer transition-colors hover:animate-spin",
             title: xe(t)("resetButtonTooltip"),
@@ -13409,7 +13441,7 @@ const d7 = /* @__PURE__ */ si(h7), Ia = /* @__PURE__ */ Ft({
   height: "1.2em"
 };
 function F7(e, t) {
-  return ce(), Te("svg", L7, t[0] || (t[0] = [
+  return ce(), Re("svg", L7, t[0] || (t[0] = [
     be("path", {
       fill: "currentColor",
       d: "M12 3c5.5 0 10 3.58 10 8s-4.5 8-10 8c-1.24 0-2.43-.18-3.53-.5C5.55 21 2 21 2 21c2.33-2.33 2.7-3.9 2.75-4.5C3.05 15.07 2 13.13 2 11c0-4.42 4.5-8 10-8"
@@ -13422,7 +13454,7 @@ const q7 = { name: "mdi-chat", render: F7 }, P7 = {
   height: "1.2em"
 };
 function B7(e, t) {
-  return ce(), Te("svg", P7, t[0] || (t[0] = [
+  return ce(), Re("svg", P7, t[0] || (t[0] = [
     be("path", {
       fill: "currentColor",
       d: "M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6l-6-6z"
@@ -13432,13 +13464,13 @@ function B7(e, t) {
 const $7 = { name: "mdi-chevron-down", render: B7 }, z7 = { class: "absolute z-50 bottom-4 right-4 h-full w-full flex flex-col items-end justify-end gap-4 md:mx-auto md:my-auto md:max-h-[52rem] md:max-w-[28rem]" }, U7 = { class: "h-full w-full overflow-hidden border-[1px] border-zinc-100 md:rounded-[20px]" }, H7 = ["src"], j7 = /* @__PURE__ */ Ft({
   __name: "ChatWindow",
   setup(e) {
-    const t = tt(!1), { options: n } = Tn(), s = at(() => n != null && n.showAvatar && typeof n.showAvatar == "string" && n.showAvatar.trim() !== "" ? n.showAvatar : null);
+    const t = tt(!1), { options: n } = Rn(), s = at(() => n != null && n.showAvatar && typeof n.showAvatar == "string" && n.showAvatar.trim() !== "" ? n.showAvatar : null);
     function r() {
       t.value = !t.value, t.value && Zt(() => {
         et.emit("scrollToBottom");
       });
     }
-    return (o, i) => (ce(), Te("div", z7, [
+    return (o, i) => (ce(), Re("div", z7, [
       Le(Ki, {
         "enter-active-class": "transition-all duration-150 ease-in-out",
         "leave-active-class": "transition-all duration-150 ease-in-out",
@@ -13470,12 +13502,12 @@ const $7 = { name: "mdi-chevron-down", render: B7 }, z7 = { class: "absolute z-5
           "leave-to-class": "opacity-0"
         }, {
           default: Vt(() => [
-            s.value ? (ce(), Te("img", {
+            s.value ? (ce(), Re("img", {
               key: 0,
               src: s.value,
               alt: "Chat Avatar",
               class: "w-full h-full rounded-full object-cover"
-            }, null, 8, H7)) : (ce(), Te(We, { key: 1 }, [
+            }, null, 8, H7)) : (ce(), Re(We, { key: 1 }, [
               t.value ? (ce(), Pe(xe($7), {
                 key: 1,
                 height: "32",
@@ -13496,7 +13528,7 @@ const $7 = { name: "mdi-chevron-down", render: B7 }, z7 = { class: "absolute z-5
   __name: "App",
   props: {},
   setup(e) {
-    const { options: t } = Tn(), n = at(() => t.mode === "fullscreen");
+    const { options: t } = Rn(), n = at(() => t.mode === "fullscreen");
     return dn(() => {
       It.registerLanguage("xml", eu), It.registerLanguage("javascript", Ql);
     }), (s, r) => n.value ? (ce(), Pe(Cu, {
