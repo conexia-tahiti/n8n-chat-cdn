@@ -13512,7 +13512,7 @@ function z7(e, t) {
     }, null, -1)
   ]));
 }
-const U7 = { name: "mdi-chevron-down", render: z7 }, H7 = { class: "relative bg-white border border-zinc-200 rounded-2xl shadow-lg p-4 max-w-80 mb-2 mr-2 md:mr-0" }, j7 = { class: "pr-6 space-y-2" }, V7 = { class: "fixed inset-0 md:relative md:inset-auto h-full w-full md:h-[52rem] md:w-[42rem] overflow-hidden border-0 md:border-[1px] md:border-zinc-100 md:rounded-[20px] md:shadow-2xl bg-white" }, K7 = ["src"], G7 = /* @__PURE__ */ Bt({
+const U7 = { name: "mdi-chevron-down", render: z7 }, H7 = { class: "relative bg-white border border-zinc-200 rounded-2xl shadow-lg p-4 max-w-80 mb-2 mr-2 md:mr-0" }, j7 = { class: "pr-6 space-y-2" }, V7 = { class: "fixed inset-0 md:relative md:inset-auto h-full w-full md:h-[52rem] md:w-[42rem] overflow-hidden border-0 md:border-[1px] md:border-zinc-100 md:rounded-[20px] md:shadow-lg bg-white" }, K7 = ["src"], G7 = /* @__PURE__ */ Bt({
   __name: "ChatWindow",
   setup(e) {
     const t = Be(!1), n = Be(!1), s = Be(0), r = Be(!0), { options: o } = Mn(), i = Se(() => o == null ? void 0 : o.primaryColor), c = Se(() => o == null ? void 0 : o.secondaryColor), a = Se(() => {
@@ -13597,7 +13597,7 @@ const U7 = { name: "mdi-chevron-down", render: z7 }, H7 = { class: "relative bg-
         _: 1
       }),
       ys(pe("div", {
-        class: mt(["flex-none cursor-pointer w-14 h-14 rounded-full inline-flex items-center justify-center ml-auto mb-2 mr-2 md:mb-0 md:mr-0 transition-all duration-150 ease-in-out hover:scale-105 active:scale-95 shadow-lg", u.value ? "" : "bg-black text-white"]),
+        class: mt(["flex-none cursor-pointer w-14 h-14 rounded-full inline-flex items-center justify-center ml-auto mb-2 mr-2 md:mb-0 md:mr-0 transition-all duration-150 ease-in-out hover:scale-105 active:scale-95 shadow-xl", u.value ? "" : "bg-black text-white"]),
         style: Rt(u.value ? {} : a.value),
         onClick: v
       }, [
